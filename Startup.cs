@@ -13,6 +13,7 @@ namespace D_D_Backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            dungeons.Javabog.Login();
         }
 
         public IConfiguration Configuration { get; }
