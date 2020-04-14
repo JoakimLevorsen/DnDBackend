@@ -13,7 +13,8 @@ namespace D_D_Backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            dungeons.Javabog.Login();
+            BrugeradminImplService login = new BrugeradminImplService();
+            login.hentBruger("s185027", "1234");
         }
 
         public IConfiguration Configuration { get; }
