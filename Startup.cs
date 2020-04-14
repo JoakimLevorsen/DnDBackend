@@ -13,8 +13,10 @@ namespace D_D_Backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            BrugeradminImplService login = new BrugeradminImplService();
-            login.hentBruger("s185027", "1234");
+            // System.Console.WriteLine("TEST_START");
+            // System.Console.WriteLine(dungeons.Javabog.Login("s185027", "1234"));
+            // System.Console.WriteLine("TEST_END");
+
         }
 
         public IConfiguration Configuration { get; }
