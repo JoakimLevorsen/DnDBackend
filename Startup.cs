@@ -10,7 +10,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System; 
+using System;
 
 namespace D_D_Backend
 {
@@ -19,10 +19,7 @@ namespace D_D_Backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            // System.Console.WriteLine("TEST_START");
-            // System.Console.WriteLine(dungeons.Javabog.Login("s185027", "1234"));
-            // System.Console.WriteLine("TEST_END");
-
+            dungeons.Javabog.Login("s185027", "1234"); //Fix: Move somewhere
         }
 
         public IConfiguration Configuration { get; }
