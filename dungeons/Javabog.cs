@@ -11,19 +11,14 @@ namespace dungeons
     public class Javabog
     {
         /*
-        TODO Set path variable (clint.GetAsync): "http://localhost:8080" OR SOMETHING GOD DAMN ELSE
-                BTW, path to AWS is: http://ec2-3-21-41-28.us-east-2.compute.amazonaws.com:8080
-        TODO REMEMBER to change "hostname" variable in RestfulGalgeleg (jar files)
-        TODO Actaully call Login method somewhere
-                CURRENLT GIVES Wierd output: 
-                
-                    System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[System.String,dungeons.Javabog+<Login>d__2]
-
-                    ... Fix later
+        NOTE PLEASE:
+        Set path variable (baseUri + queryToAppend): "http://localhost:8080" or the appropriate PATH
+                Path to AWS is: http://ec2-3-21-41-28.us-east-2.compute.amazonaws.com:8080
+        REMEMBER to change "hostname" variable in RestfulGalgeleg (jar files) if we move it from AWS
         */
         static HttpClient client = new HttpClient();
         static UriBuilder baseUri = new UriBuilder("http://ec2-3-21-41-28.us-east-2.compute.amazonaws.com:8080/login?");
-        public static async Task<string> Login(string username, string password)
+        public static async Task<Boolean> Login(string username, string password)
         {
             string queryToAppend = "username=" + username + "&password=" + password;
             baseUri.Query = queryToAppend;
@@ -31,7 +26,8 @@ namespace dungeons
             var response = await client.GetAsync(baseUri.Uri);
 
             string result = await response.Content.ReadAsStringAsync();
-            return result;
+            Console.WriteLine("Login result: " + result);
+            return result == "true";
         }
     }
 }
