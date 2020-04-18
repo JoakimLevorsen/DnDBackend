@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class WebSocketService {
   private socket: WebSocket
   announcement$: BehaviorSubject<string> = new BehaviorSubject("")
-  constructor() { }
 
   startSocket() {
     this.socket = new WebSocket('wss://localhost:5001/ws');

@@ -6,8 +6,11 @@ namespace dungeons {
         public static async Task<LoginManagerReturn> login(string payload) {
             try {
                 var loginInfo = JsonConvert.DeserializeObject<LoginClientPayload>(payload);
-                await Task.Delay(100);
-                return loginInfo.toReturn();
+                var response = await Javabog.Login(loginInfo.username, loginInfo.password);
+                if (response) {
+                    return loginInfo.toReturn();
+                }
+                return null;
             } catch {
                 return null;
             }

@@ -11,6 +11,24 @@ namespace dungeons {
     class ClientManager {
         private ConcurrentDictionary<int, WebSocket> connections = new ConcurrentDictionary<int, WebSocket>();
         private ConcurrentDictionary<int, Client> clients = new ConcurrentDictionary<int, Client>();
+        private static ClientManager sharedManager;
+
+        private ClientManager() {
+
+        }
+
+        private static readonly object instanceLock = new object();
+
+        public static ClientManager GetInstance() {
+            if (sharedManager == null) {
+                lock(instanceLock) {
+                    if (sharedManager == null) {
+                        sharedManager = new ClientManager();
+                    }
+                }
+            }
+            return sharedManager;
+        }
 
         public async Task addConnection(WebSocket socket) {
             try {
@@ -34,7 +52,7 @@ namespace dungeons {
                 Client outClient = null;
                 clients.Remove(socketId, out outClient);
             } catch {
-
+                // Fix
             }
         }
 
@@ -52,6 +70,7 @@ namespace dungeons {
                     client.id = newStatus.username;
                     clients[id] = client;
                 }
+                return;
                 // We check if this user is signed in
             } else if (client != null) {
                 switch(message.type) {

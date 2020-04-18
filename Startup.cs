@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System;
 
 namespace D_D_Backend
@@ -19,7 +17,6 @@ namespace D_D_Backend
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            dungeons.Javabog.Login("s185027", "1234"); //Fix: Move somewhere
         }
 
         public IConfiguration Configuration { get; }
@@ -72,7 +69,7 @@ namespace D_D_Backend
                     if (context.WebSockets.IsWebSocketRequest)
                     {
                         WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                        await Echo(context, webSocket);
+                        await dungeons.ClientManager.GetInstance().addConnection(webSocket);
                     }
                     else
                     {
