@@ -144,7 +144,10 @@ namespace dungeons
     enum MessagePayloadType
     {
         Login,
-        Error
+        Error,
+        Character,
+        Campaign,
+        DiceRoll
     }
 
     class Client
