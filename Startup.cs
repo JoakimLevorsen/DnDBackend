@@ -6,9 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.WebSockets;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
+using dungeons.database;
 
 namespace D_D_Backend
 {
@@ -25,6 +27,7 @@ namespace D_D_Backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // services.AddDbContext<GameContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -69,6 +72,26 @@ namespace D_D_Backend
                     if (context.WebSockets.IsWebSocketRequest)
                     {
                         WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+
+                        /*
+                        var host = CreateWebHostBuilder(args).Build();
+
+                        using (var scope = host.Services.CreateScope()) {
+                            var services = scope.ServiceProvider;
+                            try {
+                                var context = services.GetRequiredService<SchoolContext>();
+                                DbInitializer.Initialize(context);
+                            }
+                            catch (Exception ex) {
+                                var logger = services.GetRequiredService<ILogger<Program>>();
+                                logger.LogError(ex, "An error occurred while seeding the database.");
+                            }
+                        }
+
+                        host.Run();
+                        */
+                        //var context = services.GetRequiredService<SchoolContext>();
+
                         await dungeons.ClientManager.GetInstance().addConnection(webSocket);
                     }
                     else

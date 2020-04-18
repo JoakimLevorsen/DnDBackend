@@ -6,7 +6,7 @@ namespace dungeons {
             nextId = 0;
         }
 
-        private static ClientIdAssigner sharedInstance;
+        private static ClientIdAssigner? sharedInstance;
         private static readonly object instanceLock = new object();
 
         public static ClientIdAssigner GetInstance() {

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace dungeons {
     public class LoginManager {
-        public static async Task<LoginManagerReturn> login(string payload) {
+        public static async Task<LoginManagerReturn?> login(string payload) {
             try {
                 var loginInfo = JsonConvert.DeserializeObject<LoginClientPayload>(payload);
                 var response = await Javabog.Login(loginInfo.username, loginInfo.password);
