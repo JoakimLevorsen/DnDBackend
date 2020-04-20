@@ -150,7 +150,7 @@ namespace dungeons
         DiceRoll
     }
 
-    class Client
+    public class Client
     {
         public String id;
         public database.User user;
