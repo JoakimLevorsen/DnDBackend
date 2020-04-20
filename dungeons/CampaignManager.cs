@@ -1,13 +1,13 @@
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using dungeons.database;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace dungeons {
     class CampaignManager {
-        public static Task<database.Campaign> accept(string payload, Client client) {
+        public static Task<Campaign> accept(string payload, Client client) {
             var context = DbContextManager.getSharedInstance();
             var message = JsonConvert.DeserializeObject<CampaignMessagePayload>(payload);
             if (message == null) {
@@ -18,25 +18,20 @@ namespace dungeons {
             {
                 case CampaignMessagePayloadType.Create:
                     return create(message.payload, client, context);
-                    break;
                 case CampaignMessagePayloadType.Update:
                     return update(message.payload, client, context);
-                    break;
                 case CampaignMessagePayloadType.Delete:
                     return delete(message.payload, client, context);
-                    break;
                 case CampaignMessagePayloadType.Get:
                     return get(message.payload, client, context);
-                    break;
                 case CampaignMessagePayloadType.GetMy:
                     return getMy(message.payload, client, context);
-                    break;
                 default:
                     break;
             }
         }
 
-        public static Task<database.Campaign> create(string payload, Client client, database.GameContext context) {
+        public static Task<Campaign> create(string payload, Client client, GameContext context) {
             var info = JsonConvert.DeserializeObject<CreateCampaignPayload>(payload);
             var newCampaign = info.toReturn();
             newCampaign.dungeonMaster = client.user;
@@ -45,9 +40,9 @@ namespace dungeons {
             return newCampaign;
         }
 
-        public static async Task<database.Campaign> update(string payload, Client client, database.GameContext context) {
+        public static async Task<Campaign> update(string payload, Client client, GameContext context) {
             var updates = JsonConvert.DeserializeObject<UpdateCampaignPayload>(payload);
-            var campaign = await context.campaigns.SingleAsync(c => c.ID == updates.id);
+            var campaign = await context.campaigns.SingleAsync(c => c.ID == updates.ID);
             if (client.user.ID == campaign.dungeonMaster.ID) {
                 campaign.name = updates.name;
                 campaign.log = updates.log;
@@ -62,21 +57,21 @@ namespace dungeons {
             return campaign;
         }
 
-        public static Task<database.Campaign> delete(string payload, Client client, database.GameContext context) {
+        public static Task<Campaign> delete(string payload, Client client, GameContext context) {
             var info = JsonConvert.DeserializeObject<DeleteCampaignPayload>(payload);
             context.Remove(context.campaigns.Single(c => c.ID == info.ID));
             context.SaveChanges();
         }
 
-        public static async Task<database.Campaign> get(string payload, Client client, database.GameContext context) {
+        public static async Task<Campaign> get(string payload, Client client, GameContext context) {
             var info = JsonConvert.DeserializeObject<GetCampaignPayload>(payload);
-            var campaign = await context.campaigns.SingleAsync(c => c.ID == info.id);
+            var campaign = await context.campaigns.SingleAsync(c => c.ID == info.ID);
             return campaign;
         }
     
-        public static async Task<database.Campaign> getMy(string payload, Client client, database.GameContext context) {
-            var info = JsonConvert.DeserializeObject<GetMyCampaignsPayload>(payload);
-            var myCampaigns = await context.campaigns.Where(c => c.ID == info.id).ToList();
+        public static async Task<Campaign> getMy(string payload, Client client, GameContext context) {
+            //var info = JsonConvert.DeserializeObject<GetMyCampaignsPayload>(payload); //Payload not necessarily needed
+            var myCampaigns = await context.campaigns.Select(c => new {dungeonMaster = client.user});
             return myCampaigns;
         }
     }
@@ -106,8 +101,8 @@ namespace dungeons {
         public int maxPlayers;
         public string? password;
 
-        public database.Campaign toReturn() {
-            var campaign = new database.Campaign();
+        public Campaign toReturn() {
+            var campaign = new Campaign();
             campaign.name = this.name;
             campaign.log = $"Campaign {campaign.name} was created.";
             campaign.turnIndex = 0;
