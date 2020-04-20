@@ -1,3 +1,10 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using dungeons.database;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace dungeons {
     class CampaignManager {
         public static Task<database.Campaign> accept(string payload, Client client) {
@@ -38,7 +45,7 @@ namespace dungeons {
             return newCampaign;
         }
 
-        public static Task<database.Campaign> update(string payload, Client client, database.GameContext context) {
+        public static async Task<database.Campaign> update(string payload, Client client, database.GameContext context) {
             var updates = JsonConvert.DeserializeObject<UpdateCampaignPayload>(payload);
             var campaign = await context.campaigns.SingleAsync(c => c.ID == updates.id);
             if (client.user.ID == campaign.dungeonMaster.ID) {
@@ -48,8 +55,8 @@ namespace dungeons {
                 campaign.joinable = updates.joinable;
                 campaign.maxPlayers = updates.maxPlayers;
                 campaign.password = updates.password;
-                campaign.modificationDate = DateTime.Now
-                context.campaigns.Update(campaign)
+                campaign.modificationDate = DateTime.Now;
+                context.campaigns.Update(campaign);
                 context.SaveChanges();
             }
             return campaign;
@@ -61,13 +68,13 @@ namespace dungeons {
             context.SaveChanges();
         }
 
-        public static Task<database.Campaign> get(string payload, Client client, database.GameContext context) {
+        public static async Task<database.Campaign> get(string payload, Client client, database.GameContext context) {
             var info = JsonConvert.DeserializeObject<GetCampaignPayload>(payload);
             var campaign = await context.campaigns.SingleAsync(c => c.ID == info.id);
             return campaign;
         }
     
-        public static Task<database.Campaign> getMy(string payload, Client client, database.GameContext context) {
+        public static async Task<database.Campaign> getMy(string payload, Client client, database.GameContext context) {
             var info = JsonConvert.DeserializeObject<GetMyCampaignsPayload>(payload);
             var myCampaigns = await context.campaigns.Where(c => c.ID == info.id).ToList();
             return myCampaigns;
@@ -102,7 +109,7 @@ namespace dungeons {
         public database.Campaign toReturn() {
             var campaign = new database.Campaign();
             campaign.name = this.name;
-            campaign.log = $"Campaign {campaign.name} was created."
+            campaign.log = $"Campaign {campaign.name} was created.";
             campaign.turnIndex = 0;
             campaign.joinable = this.joinable;
             campaign.maxPlayers = this.maxPlayers;
