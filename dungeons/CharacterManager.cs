@@ -137,7 +137,7 @@ namespace dungeons
                     .Where(c => c.ID == updatePayload.ID)
                     .SingleAsync();
             } catch {
-                return "CharacterManager update 9: Character for ID " + updatePayload.ID + " does not exist";
+                return $"CharacterManager update 9: Character for ID { updatePayload.ID } does not exist";
             }
             if (updatePayload.name != null) {
                 if (characterToUpdate.owner.ID != client.user.ID)

@@ -47,7 +47,7 @@ namespace dungeons {
             };
             context.campaigns.Add(newCampaign);
             await context.SaveChangesAsync();
-            return JsonConvert.SerializeObject(newCampaign);
+            return await GameState.gameStateFor(client);
         }
 
         private static async Task<string> update(string payload, Client client, GameContext context) {
@@ -67,7 +67,7 @@ namespace dungeons {
                 context.campaigns.Update(campaignToUpdate);
                 await context.SaveChangesAsync();
             } else return "CampaignManager update 5: You are not the Dungeon Master for this campaign.";
-            return JsonConvert.SerializeObject(campaignToUpdate);
+            return await GameState.gameStateFor(client);
         }
 
         private static async Task<string> delete(string ID, Client client, GameContext context) {
@@ -77,7 +77,7 @@ namespace dungeons {
             if (campaignToDelete.dungeonMaster.ID == client.user.ID) {
                 context.campaigns.Remove(campaignToDelete);
                 await context.SaveChangesAsync();
-                return "Campaign deleted.";
+                return await GameState.gameStateFor(client);
             } else return "CampaignManager delete 7: You are not the Dungeon Master for this campaign.";
         }
 
