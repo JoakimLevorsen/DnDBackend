@@ -20,13 +20,13 @@ namespace dungeons
         static UriBuilder baseUri = new UriBuilder("http://ec2-3-21-41-28.us-east-2.compute.amazonaws.com:8080/login?");
         public static async Task<Boolean> Login(string username, string password)
         {
-            string queryToAppend = "username=" + username + "&password=" + password;
+            string queryToAppend = $"username={ username }&password={ password }";
             baseUri.Query = queryToAppend;
 
             var response = await client.GetAsync(baseUri.Uri);
 
             string result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("Login result: " + result);
+            Console.WriteLine($"Login result: { result }");
             return result == "true";
         }
     }
