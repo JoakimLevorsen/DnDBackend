@@ -40,7 +40,7 @@ namespace dungeons
             {
                 // When a new client connects we add them to the connections, though they are not signed in, so we don't add a client
                 int socketId = ClientIdAssigner.GetInstance().GetId();
-                connections[socketId] = socket;
+                connections.Append(new KeyValuePair<int, WebSocket>(socketId, socket));
                 while (socket.State == WebSocketState.Open)
                 {
                     var buffer = new byte[1024 * 4];
@@ -53,16 +53,23 @@ namespace dungeons
                     } while (!socketResponse.EndOfMessage);
                     var stringRecived = System.Text.Encoding.UTF8.GetString(package.ToArray());
                     var payload = JsonConvert.DeserializeObject<MessagePayload>(stringRecived, new StringEnumConverter());
+                    Console.WriteLine($"Type is { payload.type } message is { stringRecived }");
                     await recivedMessage(payload, socket, socketId);
                 }
+                Console.WriteLine("Socket closed");
                 await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
                 connections.Remove(socketId, out socket);
                 Client outClient = null;
                 clients.Remove(socketId, out outClient);
             }
-            catch
+            catch (Exception e)
             {
                 // Fix
+                Console.WriteLine("Socket failed");
+                Console.WriteLine(e.ToString());
+                if (socket != null) {
+                    await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                }
             }
         }
 
@@ -70,7 +77,7 @@ namespace dungeons
         {
             var context = DbContextManager.getSharedInstance();
             // First we check if this is a Login call, since they're always allowed
-            var client = clients[id];
+            var client = clients.ContainsKey(id) ? clients[id] : null;
             if (message.type == MessagePayloadType.Login)
             {
                 var newStatus = await LoginManager.login(message.payload);
@@ -105,6 +112,9 @@ namespace dungeons
                     case MessagePayloadType.Character:
                         await sendPayload(await CampaignManager.accept(message.payload, client), socket);
                         break;
+                    case MessagePayloadType.Update:
+                        await sendPayload(await GameState.gameStateFor(client), socket);
+                        break;
                     default:
                         await sendPayload("ClientManager recivedMessage 0: Invalid message type", socket);
                         break;
@@ -121,6 +131,13 @@ namespace dungeons
             foreach (var r in recivers) {
                 var gameState = await GameState.gameStateFor(r.Value);
                 await sendPayload(gameState, connections[r.Key]);
+            }
+        }
+
+        public async Task sendPayload(string payload, string userID) {
+            var recivers = clients.Where(c => c.Value.user.ID == userID);
+            foreach (var r in recivers) {
+                await sendPayload(payload, connections[r.Key]);
             }
         }
 
@@ -159,6 +176,7 @@ namespace dungeons
         Login,
         Character,
         Campaign,
+        Update,
         DiceRoll
     }
 

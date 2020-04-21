@@ -27,9 +27,12 @@ namespace dungeons
         public static async Task<string> accept(string payload, Client client)
         {
             CharacterMessage? message;
-            try {
+            try
+            {
                 message = JsonConvert.DeserializeObject<CharacterMessage>(payload, new StringEnumConverter());
-            } catch {
+            }
+            catch
+            {
                 return "CharacterManager accept 0: Invalid JSON";
             }
             if (message == null)
@@ -100,13 +103,15 @@ namespace dungeons
                 return "CharacterManager delete 5: Id is not a number";
             }
             var context = DbContextManager.getSharedInstance();
-            var chacterToDelete = await context.characters.Include("owner").SingleAsync(c => c.ID == idToUse);
-            if (chacterToDelete == null)
-            {
+            Character characterToDelete;
+            try {
+                characterToDelete = await context.characters
+                    .Include("owner")
+                    .SingleAsync(c => c.ID == idToUse);
+            } catch {
                 return "CharacterManager delete 6: This character does not exist";
             }
-            
-            context.characters.Remove(chacterToDelete);
+            context.characters.Remove(characterToDelete);
             await context.SaveChangesAsync();
             return await GameState.gameStateFor(client);
         }
@@ -120,26 +125,34 @@ namespace dungeons
             public int? turnIndex;
         }
 
-        private static async Task<string> update(string payload, Client client) {
+        private static async Task<string> update(string payload, Client client)
+        {
             UpdatePayload updatePayload;
-            try {
+            try
+            {
                 updatePayload = JsonConvert.DeserializeObject<UpdatePayload>(payload);
-            } catch {
+            }
+            catch
+            {
                 return "CharacterManager update 8: Non valid JSON";
             }
             var context = DbContextManager.getSharedInstance();
             Character characterToUpdate;
-            try {
+            try
+            {
                 characterToUpdate = await context.characters
                     .Include("owner")
                     .Include("campaign")
                     .Include("dungeonMaster")
                     .Where(c => c.ID == updatePayload.ID)
                     .SingleAsync();
-            } catch {
+            }
+            catch
+            {
                 return $"CharacterManager update 9: Character for ID { updatePayload.ID } does not exist";
             }
-            if (updatePayload.name != null) {
+            if (updatePayload.name != null)
+            {
                 if (characterToUpdate.owner.ID != client.user.ID)
                 {
                     return "CharacterManager update 10: Only the owner can change name";
@@ -147,12 +160,16 @@ namespace dungeons
                 characterToUpdate.name = updatePayload.name;
                 context.characters.Update(characterToUpdate);
                 await context.SaveChangesAsync();
-            } else {
-                if (characterToUpdate.campaign == null) {
+            }
+            else
+            {
+                if (characterToUpdate.campaign == null)
+                {
                     return "CharacterManager update 11: Can't change these things yet man";
                 }
                 var dungeonMasterID = characterToUpdate.campaign.dungeonMaster.ID;
-                if (dungeonMasterID != client.user.ID) {
+                if (dungeonMasterID != client.user.ID)
+                {
                     return "CharacterManager update 12: You have no power here";
                 }
                 characterToUpdate.xp = updatePayload.xp ?? characterToUpdate.xp;
@@ -161,7 +178,8 @@ namespace dungeons
                 context.characters.Update(characterToUpdate);
                 await context.SaveChangesAsync();
             }
-            if (characterToUpdate.campaign != null) {
+            if (characterToUpdate.campaign != null)
+            {
                 List<string> clientIdsToUpdate = new List<string>();
                 clientIdsToUpdate.Add(characterToUpdate.campaign.dungeonMaster.ID);
                 var charactersInCampaign = await context.characters
@@ -171,7 +189,8 @@ namespace dungeons
                     .Select(c => c.owner.ID)
                     .ToListAsync();
                 clientIdsToUpdate.Concat(charactersInCampaign);
-                foreach (var clientID in clientIdsToUpdate) {
+                foreach (var clientID in clientIdsToUpdate)
+                {
                     await ClientManager.GetInstance().sendGameState(clientID);
                 }
             }
