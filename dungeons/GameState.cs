@@ -13,7 +13,7 @@ namespace dungeons
         public static async Task<string> gameStateFor(Client client)
         {
             var context = DbContextManager.getSharedInstance();
-            var me = await context.users.FindAsync(client.id);
+            var me = await context.users.FindAsync(client.user.ID);
 
             var myCharacters = await context.characters
                 .Include("owner")
@@ -23,15 +23,22 @@ namespace dungeons
                 .Where(c => c.owner.ID == me.ID)
                 .ToListAsync();
 
-            List<Campaign> joinedCampaigns = myCharacters.Select(c => c.campaign).Where(c => c != null).ToList();
+            List<Campaign> joinedCampaigns = myCharacters
+                .Select(c => c.campaign)
+                .Where(c => c != null)
+                .ToList();
 
-            var ownedCampaigns = await context.campaigns.Include("dungeonMaster").Where(c => c.dungeonMaster.ID == me.ID).ToListAsync();
+            var ownedCampaigns = await context.campaigns
+                .Include("dungeonMaster")
+                .Where(c => c.dungeonMaster.ID == me.ID)
+                .ToListAsync();
             List<int> campaignIds = new List<int>();
 
             campaignIds.Concat(joinedCampaigns.Select(c => c.ID));
             campaignIds.Concat(ownedCampaigns.Select(c => c.ID));
 
-            var allCharactersEncountered = await context.characters.Include("owner")
+            var allCharactersEncountered = await context.characters
+                .Include("owner")
                 .Include("campaign")
                 .Include("cClass")
                 .Include("cRace")
@@ -41,12 +48,20 @@ namespace dungeons
             Dictionary<int, List<DiceRoll>> rolls = new Dictionary<int, List<DiceRoll>>();
             foreach (var c in ownedCampaigns)
             {
-                rolls[c.ID] = await context.diceRolls.Include("campaign").Where(d => d.campaign.ID == c.ID).Take(5).ToListAsync();
+                rolls[c.ID] = await context.diceRolls
+                    .Include("campaign")
+                    .Where(d => d.campaign.ID == c.ID)
+                    .Take(5)
+                    .ToListAsync();
 
             }
             foreach (var c in joinedCampaigns)
             {
-                rolls[c.ID] = await context.diceRolls.Include("campaign").Where(d => d.campaign.ID == c.ID).Take(5).ToListAsync();
+                rolls[c.ID] = await context.diceRolls
+                    .Include("campaign")
+                    .Where(d => d.campaign.ID == c.ID)
+                    .Take(5)
+                    .ToListAsync();
             }
 
             return JsonConvert.SerializeObject(new { 

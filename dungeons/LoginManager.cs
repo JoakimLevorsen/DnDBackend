@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 
 namespace dungeons {
     public class LoginManager {
-        public static async Task<LoginManagerReturn?> login(string payload) {
+        public static async Task<LoginClientPayload?> login(string payload) {
             try {
                 var loginInfo = JsonConvert.DeserializeObject<LoginClientPayload>(payload);
                 var response = await Javabog.Login(loginInfo.username, loginInfo.password);
                 if (response) {
-                    return loginInfo.toReturn();
+                    return loginInfo;
                 }
                 return null;
             } catch {
@@ -17,19 +17,7 @@ namespace dungeons {
         }
     }
 
-    class LoginClientPayload {
-        public string username;
-        public string password;
-
-        public LoginManagerReturn toReturn() {
-            var r = new LoginManagerReturn();
-            r.username = this.username;
-            r.password = this.password;
-            return r;
-        }
-    }
-
-    public class LoginManagerReturn {
+    public class LoginClientPayload {
         public string username;
         public string password;
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Microsoft.EntityFrameworkCore;
@@ -75,8 +76,7 @@ namespace dungeons
                 var newStatus = await LoginManager.login(message.payload);
                 if (newStatus == null)
                 {
-                    var response = new MessagePayload(MessagePayloadType.Login, "{status: false, message: \"Wrong login info\"}");
-                    await sendPayload(response, socket);
+                    await sendPayload("LoginManager login 0: Wrong login info", socket);
                 }
                 else
                 {
@@ -85,10 +85,9 @@ namespace dungeons
                     if (currentUser == null) {
                         var user = new database.User { ID = newStatus.username };
                         context.users.Add(user);
-                        context.SaveChanges();
+                        await context.SaveChangesAsync();
                         currentUser = user;
-                        var response = new MessagePayload(MessagePayloadType.Login, "{status: true, message: \"Did sign in\"");
-                        await sendPayload(response, socket);
+                        await sendPayload(message.payload, socket);
                     }
                     client = new Client(newStatus.username, currentUser);
                     clients[id] = client;
@@ -100,27 +99,41 @@ namespace dungeons
             {
                 switch (message.type)
                 {
-
+                    case MessagePayloadType.Campaign:
+                        await sendPayload(await CampaignManager.accept(message.payload, client), socket);
+                        break;
+                    case MessagePayloadType.Character:
+                        await sendPayload(await CampaignManager.accept(message.payload, client), socket);
+                        break;
+                    default:
+                        await sendPayload("ClientManager recivedMessage 0: Invalid message type", socket);
+                        break;
                 }
             }
             else
             {
-                await sendPayload(new MessagePayload(MessagePayloadType.Error, "User not signed in"), socket);
+                await sendPayload("ClientManager recivedMessage 0: Invalid message type", socket);
             }
         }
 
-        async Task sendPayload(MessagePayload payload, WebSocket reciver)
+        public async Task sendGameState(string userID) {
+            var recivers = clients.Where(c => c.Value.user.ID == userID);
+            foreach (var r in recivers) {
+                var gameState = await GameState.gameStateFor(r.Value);
+                await sendPayload(gameState, connections[r.Key]);
+            }
+        }
+
+        async Task sendPayload(string payload, WebSocket reciver)
         {
-            var jsonResponse = JsonConvert.SerializeObject(payload, new StringEnumConverter());
-            var byteResponse = System.Text.Encoding.UTF8.GetBytes(jsonResponse);
+            var byteResponse = System.Text.Encoding.UTF8.GetBytes(payload);
             var byteArray = new ArraySegment<byte>(byteResponse, 0, byteResponse.Length);
             await reciver.SendAsync(byteArray, WebSocketMessageType.Text, true, CancellationToken.None);
         }
 
-        async Task sendPayload(MessagePayload payload, WebSocket[] recivers)
+        async Task sendPayload(string payload, WebSocket[] recivers)
         {
-            var jsonResponse = JsonConvert.SerializeObject(payload, new StringEnumConverter());
-            var byteResponse = System.Text.Encoding.UTF8.GetBytes(jsonResponse);
+            var byteResponse = System.Text.Encoding.UTF8.GetBytes(payload);
             var byteArray = new ArraySegment<byte>(byteResponse, 0, byteResponse.Length);
             foreach (var reciver in recivers)
             {
@@ -144,7 +157,6 @@ namespace dungeons
     enum MessagePayloadType
     {
         Login,
-        Error,
         Character,
         Campaign,
         DiceRoll
@@ -152,11 +164,11 @@ namespace dungeons
 
     public class Client
     {
-        public String id;
+        public String socketID;
         public database.User user;
 
-        public Client(string id, database.User user) {
-            this.id = id;
+        public Client(string socketID, database.User user) {
+            this.socketID = socketID;
             this.user = user;
         }
     }

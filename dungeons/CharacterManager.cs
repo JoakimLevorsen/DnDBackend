@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace dungeons
@@ -83,7 +84,7 @@ namespace dungeons
                 owner = client.user
             };
             context.characters.Add(newCharacter);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return await GameState.gameStateFor(client);
         }
 
@@ -106,7 +107,7 @@ namespace dungeons
             }
             
             context.characters.Remove(chacterToDelete);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return await GameState.gameStateFor(client);
         }
 
@@ -159,6 +160,20 @@ namespace dungeons
                 characterToUpdate.turnIndex = updatePayload.turnIndex ?? characterToUpdate.turnIndex;
                 context.characters.Update(characterToUpdate);
                 await context.SaveChangesAsync();
+            }
+            if (characterToUpdate.campaign != null) {
+                List<string> clientIdsToUpdate = new List<string>();
+                clientIdsToUpdate.Add(characterToUpdate.campaign.dungeonMaster.ID);
+                var charactersInCampaign = await context.characters
+                    .Include("campaign")
+                    .Include("owner")
+                    .Where(c => c.campaign != null && c.campaign.ID == characterToUpdate.campaign.ID)
+                    .Select(c => c.owner.ID)
+                    .ToListAsync();
+                clientIdsToUpdate.Concat(charactersInCampaign);
+                foreach (var clientID in clientIdsToUpdate) {
+                    await ClientManager.GetInstance().sendGameState(clientID);
+                }
             }
             return await GameState.gameStateFor(client);
         }
