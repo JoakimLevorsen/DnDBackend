@@ -1,34 +1,25 @@
 using Microsoft.EntityFrameworkCore;
+using dungeons.database;
 
 namespace dungeons
 {
     public class DbContextManager
     {
-        private static string _connectionString = "Server=(localdb)\\mssqllocaldb;Database=Dungeons;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private static string _connectionString = "server=localhost;port=3306;database=DnD;user=root;password=12345678";
 
         private static database.GameContext? context;
 
-        public static database.GameContext getSharedInstance()
-        {
-            if (context == null)
-            {
-                DbContextManager.context = makeContext();
-            }
-            return DbContextManager.context;
-        }
+        private static DbContextOptions<GameContext>? DbContextOptions;
 
-        private static database.GameContext makeContext()
+        public static DbContextOptions<GameContext> getOptions()
         {
-            // In this example, "ApplicationDbContext" is my DbContext class
-            var options = new DbContextOptionsBuilder<database.GameContext>()
-                    .UseSqlServer(_connectionString)
+            if (DbContextOptions == null)
+            {
+                DbContextOptions = new DbContextOptionsBuilder<database.GameContext>()
+                    // .UseSqlServer(_connectionString)
                     .Options;
-
-            // With the options generated above, we can then just construct a new DbContext class
-            using (var ctx = new database.GameContext(options))
-            {
-                return ctx;
             }
+            return DbContextOptions;
         }
     }
 }

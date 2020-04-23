@@ -66,29 +66,31 @@ namespace dungeons
             {
                 return "CharacterManager create 2: Null message";
             }
-            var context = DbContextManager.getSharedInstance();
-            var race = await context.characterRaces.FindAsync(message.race);
-            if (race == null)
+            using (var context = GameContext.getNew())
             {
-                return "CharacterManager create 3: Race not found";
+                var race = await context.characterRaces.FindAsync(message.race);
+                if (race == null)
+                {
+                    return "CharacterManager create 3: Race not found";
+                }
+                var cClass = await context.characterClasses.FindAsync(message.characterClass);
+                if (cClass == null)
+                {
+                    return "CharacterManager create 4: Class not found";
+                }
+                var newCharacter = new Character
+                {
+                    name = message.name,
+                    health = 10,
+                    xp = 0,
+                    cClass = cClass,
+                    cRace = race,
+                    owner = client.user
+                };
+                context.characters.Add(newCharacter);
+                await context.SaveChangesAsync();
+                return await GameState.gameStateFor(client);
             }
-            var cClass = await context.characterClasses.FindAsync(message.characterClass);
-            if (cClass == null)
-            {
-                return "CharacterManager create 4: Class not found";
-            }
-            var newCharacter = new Character
-            {
-                name = message.name,
-                health = 10,
-                xp = 0,
-                cClass = cClass,
-                cRace = race,
-                owner = client.user
-            };
-            context.characters.Add(newCharacter);
-            await context.SaveChangesAsync();
-            return await GameState.gameStateFor(client);
         }
 
         private static async Task<string> delete(string id, Client client)
@@ -102,18 +104,23 @@ namespace dungeons
             {
                 return "CharacterManager delete 5: Id is not a number";
             }
-            var context = DbContextManager.getSharedInstance();
-            Character characterToDelete;
-            try {
-                characterToDelete = await context.characters
-                    .Include("owner")
-                    .SingleAsync(c => c.ID == idToUse);
-            } catch {
-                return "CharacterManager delete 6: This character does not exist";
+            using (var context = GameContext.getNew())
+            {
+                Character characterToDelete;
+                try
+                {
+                    characterToDelete = await context.characters
+                        .Include("owner")
+                        .SingleAsync(c => c.ID == idToUse);
+                }
+                catch
+                {
+                    return "CharacterManager delete 6: This character does not exist";
+                }
+                context.characters.Remove(characterToDelete);
+                await context.SaveChangesAsync();
+                return await GameState.gameStateFor(client);
             }
-            context.characters.Remove(characterToDelete);
-            await context.SaveChangesAsync();
-            return await GameState.gameStateFor(client);
         }
 
         private class UpdatePayload
@@ -136,65 +143,67 @@ namespace dungeons
             {
                 return "CharacterManager update 8: Non valid JSON";
             }
-            var context = DbContextManager.getSharedInstance();
-            Character characterToUpdate;
-            try
+            using (var context = GameContext.getNew())
             {
-                characterToUpdate = await context.characters
-                    .Include("owner")
-                    .Include("campaign")
-                    .Include("dungeonMaster")
-                    .Where(c => c.ID == updatePayload.ID)
-                    .SingleAsync();
-            }
-            catch
-            {
-                return $"CharacterManager update 9: Character for ID { updatePayload.ID } does not exist";
-            }
-            if (updatePayload.name != null)
-            {
-                if (characterToUpdate.owner.ID != client.user.ID)
+                Character characterToUpdate;
+                try
                 {
-                    return "CharacterManager update 10: Only the owner can change name";
+                    characterToUpdate = await context.characters
+                        .Include("owner")
+                        .Include("campaign")
+                        .Include("dungeonMaster")
+                        .Where(c => c.ID == updatePayload.ID)
+                        .SingleAsync();
                 }
-                characterToUpdate.name = updatePayload.name;
-                context.characters.Update(characterToUpdate);
-                await context.SaveChangesAsync();
-            }
-            else
-            {
-                if (characterToUpdate.campaign == null)
+                catch
                 {
-                    return "CharacterManager update 11: Can't change these things yet man";
+                    return $"CharacterManager update 9: Character for ID { updatePayload.ID } does not exist";
                 }
-                var dungeonMasterID = characterToUpdate.campaign.dungeonMaster.ID;
-                if (dungeonMasterID != client.user.ID)
+                if (updatePayload.name != null)
                 {
-                    return "CharacterManager update 12: You have no power here";
+                    if (characterToUpdate.owner.ID != client.user.ID)
+                    {
+                        return "CharacterManager update 10: Only the owner can change name";
+                    }
+                    characterToUpdate.name = updatePayload.name;
+                    context.characters.Update(characterToUpdate);
+                    await context.SaveChangesAsync();
                 }
-                characterToUpdate.xp = updatePayload.xp ?? characterToUpdate.xp;
-                characterToUpdate.health = updatePayload.health ?? characterToUpdate.health;
-                characterToUpdate.turnIndex = updatePayload.turnIndex ?? characterToUpdate.turnIndex;
-                context.characters.Update(characterToUpdate);
-                await context.SaveChangesAsync();
-            }
-            if (characterToUpdate.campaign != null)
-            {
-                List<string> clientIdsToUpdate = new List<string>();
-                clientIdsToUpdate.Add(characterToUpdate.campaign.dungeonMaster.ID);
-                var charactersInCampaign = await context.characters
-                    .Include("campaign")
-                    .Include("owner")
-                    .Where(c => c.campaign != null && c.campaign.ID == characterToUpdate.campaign.ID)
-                    .Select(c => c.owner.ID)
-                    .ToListAsync();
-                clientIdsToUpdate.Concat(charactersInCampaign);
-                foreach (var clientID in clientIdsToUpdate)
+                else
                 {
-                    await ClientManager.GetInstance().sendGameState(clientID);
+                    if (characterToUpdate.campaign == null)
+                    {
+                        return "CharacterManager update 11: Can't change these things yet man";
+                    }
+                    var dungeonMasterID = characterToUpdate.campaign.dungeonMaster.ID;
+                    if (dungeonMasterID != client.user.ID)
+                    {
+                        return "CharacterManager update 12: You have no power here";
+                    }
+                    characterToUpdate.xp = updatePayload.xp ?? characterToUpdate.xp;
+                    characterToUpdate.health = updatePayload.health ?? characterToUpdate.health;
+                    characterToUpdate.turnIndex = updatePayload.turnIndex ?? characterToUpdate.turnIndex;
+                    context.characters.Update(characterToUpdate);
+                    await context.SaveChangesAsync();
                 }
+                if (characterToUpdate.campaign != null)
+                {
+                    List<string> clientIdsToUpdate = new List<string>();
+                    clientIdsToUpdate.Add(characterToUpdate.campaign.dungeonMaster.ID);
+                    var charactersInCampaign = await context.characters
+                        .Include("campaign")
+                        .Include("owner")
+                        .Where(c => c.campaign != null && c.campaign.ID == characterToUpdate.campaign.ID)
+                        .Select(c => c.owner.ID)
+                        .ToListAsync();
+                    clientIdsToUpdate.Concat(charactersInCampaign);
+                    foreach (var clientID in clientIdsToUpdate)
+                    {
+                        await ClientManager.GetInstance().sendGameState(clientID);
+                    }
+                }
+                return await GameState.gameStateFor(client);
             }
-            return await GameState.gameStateFor(client);
         }
     }
 }

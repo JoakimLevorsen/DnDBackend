@@ -4,10 +4,13 @@ namespace dungeons.database
 {
     public class GameContext : DbContext
     {
-        public GameContext(DbContextOptions<GameContext> options) : base(options)
+        public static GameContext getNew()
         {
-
+            return new GameContext();
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+            => options.UseSqlite("Data Source=blogging.db");
 
         public DbSet<Campaign> campaigns { get; set; }
         public DbSet<Character> characters { get; set; }
