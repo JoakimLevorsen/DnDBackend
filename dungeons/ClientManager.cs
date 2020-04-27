@@ -133,6 +133,9 @@ namespace dungeons
                         case MessagePayloadType.Character:
                             await sendPayload(await CharacterManager.accept(message.payload, client), socket);
                             break;
+                        case MessagePayloadType.DiceRoll:
+                            await sendPayload(await DiceRollManager.accept(message.payload, client), socket);
+                            break;
                         case MessagePayloadType.Update:
                             await sendPayload(await GameState.gameStateFor(client), socket);
                             break;

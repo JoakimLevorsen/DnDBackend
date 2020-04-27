@@ -1,7 +1,9 @@
-import { isLoginInfo } from "./types/LoginInfo";
+import { isLoginInfo } from "./responses/LoginInfo";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import requestBuilder from "./requestBuilder";
+import { Campaign, isCampaign, isCampaignArray } from "./responses/Campaigns";
+import { GameState } from "./responses/GameState";
 
 @Injectable({
     providedIn: "root",
@@ -11,6 +13,11 @@ export class WebSocketService {
     private _username?: string;
     announcement$: BehaviorSubject<string> = new BehaviorSubject("");
     auth$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    joinableCampaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
+    fetchedCampaigns$: BehaviorSubject<
+        Map<number, Campaign>
+    > = new BehaviorSubject(new Map());
+    gameState$: BehaviorSubject<GameState | null> = new BehaviorSubject(null);
 
     startSocket() {
         this.socket = new WebSocket("wss://localhost:5001/ws");
@@ -47,7 +54,18 @@ export class WebSocketService {
                 });
                 return;
             }
-            console.log("Got unknown message", msg);
+            if (isCampaign(parsed)) {
+                const fetchedNow = this.fetchedCampaigns$.value;
+                fetchedNow.set(parsed.ID, parsed);
+                this.fetchedCampaigns$.next(fetchedNow);
+                return;
+            }
+            if (isCampaignArray(parsed)) {
+                this.joinableCampaigns$.next(parsed);
+                return;
+            }
+            // Since we've parsed some JSON, and the response was not the other types, this must be a gameState
+            this.gameState$.next(parsed as GameState);
         } catch (e) {
             console.log("Got error from websocket", msg);
         }
