@@ -3,7 +3,6 @@ import { NgModule, Injectable } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, CanActivate, Router } from "@angular/router";
-
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -12,6 +11,9 @@ import { MyCharactersComponent } from "./myCharacters/myCharacters.component";
 import { WebSocketService } from "src/websocket";
 import { LoginComponent } from "./login/login.component";
 import { PlayComponent } from "./play/play.component";
+import {ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material/app-material.module';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -21,7 +23,8 @@ export class AuthGuardService implements CanActivate {
         if (this.socket.auth$.value) {
             return true;
         }
-        this.router.navigate(["login"]);
+        // return true
+        this.router.navigate(["/login"]);
         return false;
     }
 }
@@ -40,6 +43,9 @@ export class AuthGuardService implements CanActivate {
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        AppMaterialModule,
         RouterModule.forRoot([
             {
                 path: "",
@@ -61,7 +67,7 @@ export class AuthGuardService implements CanActivate {
             { path: "play", component: PlayComponent },
         ]),
     ],
-    providers: [WebSocketService],
+    providers: [WebSocketService, AuthGuardService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

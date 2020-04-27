@@ -12,7 +12,7 @@ export class AppComponent {
         this.socketService.announcement$.subscribe(m => {
             console.log("a", m);
             if (m === "Opened") {
-                this.socketService.sendSomething();
+                // this.socketService.sendSomething();
             }
         });
         this.socketService.auth$.subscribe(s => {

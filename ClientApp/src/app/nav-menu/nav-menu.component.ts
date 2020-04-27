@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  navLinks = [
+    {path: "/", label: "Dashboard"},
+    {path: "/my-characters", label: "My Characters"},
+    {path: "/", label: "Dashboard"}
+  ]
 
   collapse() {
     this.isExpanded = false;
