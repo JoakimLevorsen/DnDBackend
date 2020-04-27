@@ -6,27 +6,27 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
-import { HomeComponent } from "./home/home.component";
-import { CounterComponent } from "./counter/counter.component";
-import { FetchDataComponent } from "./fetch-data/fetch-data.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { MyCampaignsComponent } from "./myCampaigns/myCampaigns.component";
+import { MyCharactersComponent } from "./myCharacters/myCharacters.component";
 import { WebSocketService } from "src/websocket";
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        HomeComponent,
-        CounterComponent,
-        FetchDataComponent,
+        DashboardComponent,
+        MyCampaignsComponent,
+        MyCharactersComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: "", component: HomeComponent, pathMatch: "full" },
-            { path: "counter", component: CounterComponent },
-            { path: "fetch-data", component: FetchDataComponent },
+            { path: "", component: DashboardComponent, pathMatch: "full" },
+            { path: "my-campaigns", component: MyCampaignsComponent },
+            { path: "my-characters", component: MyCharactersComponent },
         ]),
     ],
     providers: [WebSocketService],
