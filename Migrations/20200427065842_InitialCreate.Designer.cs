@@ -9,7 +9,7 @@ using dungeons.database;
 namespace D_D_Backend.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20200421110846_InitialCreate")]
+    [Migration("20200427065842_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,11 +64,13 @@ namespace D_D_Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("cClassname")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("cClassname")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("cRacename")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("cRacename")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("campaignID")
                         .HasColumnType("INTEGER");
@@ -105,9 +107,8 @@ namespace D_D_Backend.Migrations
 
             modelBuilder.Entity("dungeons.database.CharacterClass", b =>
                 {
-                    b.Property<int>("name")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("name")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("name");
 
@@ -116,9 +117,8 @@ namespace D_D_Backend.Migrations
 
             modelBuilder.Entity("dungeons.database.CharacterRace", b =>
                 {
-                    b.Property<int>("name")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("name")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("name");
 
