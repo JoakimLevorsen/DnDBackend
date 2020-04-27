@@ -1,6 +1,16 @@
-<div class="basicFlex">
-    <h1>Hello login</h1>
-    <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Username" />
-    </mat-form-field>
+<div class="basicFlex inputWidth">
+    <!-- <mat-card> -->
+    <!-- <mat-card-content> -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h3>Login with Javabog user</h3>
+        <mat-form-field class="basicFlex inputWidth">
+            <input matInput type="text" placeholder="Username" />
+        </mat-form-field>
+        <mat-form-field class="basicFlex inputWidth">
+            <input matInput type="text" placeholder="Password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary">Sign In</button>
+    </form>
+    <!-- </mat-card-content> -->
+    <!-- </mat-card> -->
 </div>

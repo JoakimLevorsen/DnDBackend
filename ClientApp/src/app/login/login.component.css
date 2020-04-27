@@ -1,4 +1,13 @@
-.basicFlex{
+.basicFlex {
+    display: flex;
     flex: 1;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.inputWidth {
+    min-width: 150px;
+    max-width: 500px;
+    width: 50%;
 }
