@@ -115,8 +115,8 @@ namespace dungeons
                             context.users.Add(user);
                             await context.SaveChangesAsync();
                             currentUser = user;
-                            await sendPayload(message.payload, socket);
                         }
+                        await sendPayload(message.payload, socket);
                         client = new Client(newStatus.username, currentUser);
                         clients[id] = client;
                     }
@@ -131,7 +131,7 @@ namespace dungeons
                             await sendPayload(await CampaignManager.accept(message.payload, client), socket);
                             break;
                         case MessagePayloadType.Character:
-                            await sendPayload(await CampaignManager.accept(message.payload, client), socket);
+                            await sendPayload(await CharacterManager.accept(message.payload, client), socket);
                             break;
                         case MessagePayloadType.Update:
                             await sendPayload(await GameState.gameStateFor(client), socket);
