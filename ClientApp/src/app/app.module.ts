@@ -11,9 +11,10 @@ import { MyCharactersComponent } from "./myCharacters/myCharacters.component";
 import { WebSocketService } from "src/websocket";
 import { LoginComponent } from "./login/login.component";
 import { PlayComponent } from "./play/play.component";
-import {ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './app-material/app-material.module';
+import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppMaterialModule } from "./app-material/app-material.module";
+import { MatCardModule } from "@angular/material/card";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -46,6 +47,7 @@ export class AuthGuardService implements CanActivate {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         AppMaterialModule,
+        MatCardModule,
         RouterModule.forRoot([
             {
                 path: "",
