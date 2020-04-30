@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Validators, FormControl } from "@angular/forms";
 
 @Component({
     selector: "Login",
@@ -7,27 +7,17 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
     styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup;
-    private formSubmitAttempt: boolean;
+    usernameControl = new FormControl("", Validators.required);
+    passwordControl = new FormControl("", Validators.required);
 
-    constructor(private fb: FormBuilder) {}
+    constructor() {}
 
-    ngOnInit() {
-        this.form = this.fb.group({
-            userName: ["", Validators.required],
-            password: ["", Validators.required],
-        });
-    }
-    isFieldInvalid(field: string) {
-        return (
-            (!this.form.get(field).valid && this.form.get(field).touched) ||
-            (this.form.get(field).untouched && this.formSubmitAttempt)
-        );
-    }
+    ngOnInit() {}
 
+    // TODO check login with Javabog
     onSubmit() {
-        if (this.form.valid) {
-        }
-        this.formSubmitAttempt = true;
+        if (this.usernameControl.valid && this.passwordControl.valid) {
+            console.log("you are logged in!");
+        } else console.log("Submitted, but not logged in!");
     }
 }
