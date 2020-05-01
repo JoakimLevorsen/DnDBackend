@@ -1,13 +1,18 @@
 import { Component } from "@angular/core";
+import { Campaign } from "./campaign.model";
 
 @Component({
-    selector: "MyCampaigns",
+    selector: "my-campaigns",
     templateUrl: "./myCampaigns.component.html",
+    styleUrls: ["./myCampaigns.component.css"],
 })
 export class MyCampaignsComponent {
-    public currentCount = 0;
-
-    public incrementCounter() {
-        this.currentCount++;
-    }
+    myCampaigns: Campaign[] = [
+        new Campaign("Test Campaign", ["player 1", "player 2"], "My Character"),
+        new Campaign(
+            "Test Campaign2",
+            ["player 3", "player 4"],
+            "My next Character X"
+        ),
+    ];
 }
