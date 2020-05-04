@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormControl } from "@angular/forms";
 import { WebSocketService } from "src/websocket";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "Login",
@@ -8,7 +9,7 @@ import { WebSocketService } from "src/websocket";
     styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-    constructor(private socket: WebSocketService) {}
+    constructor(private socket: WebSocketService, private router: Router) {}
     usernameControl = new FormControl("", Validators.required);
     passwordControl = new FormControl("", Validators.required);
 
@@ -22,8 +23,8 @@ export class LoginComponent implements OnInit {
 
         this.socket.auth$.subscribe(s => {
             if (s) {
-                console.log("We're signed in");
-            } else console.log("Not signed in");
+                this.router.navigate(["/"]);
+            }
         });
     }
 }
