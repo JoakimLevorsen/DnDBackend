@@ -1,18 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
-
-/* Provide sufficient contrast against white background */
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+@font-face {
+  font-family: critical-role-play;
+  src: url(assets/font/CriticalRolePlay-7BByA.ttf) format("truetype");
+}
+
+:root,
+body {
+  background-color: #EDE7D9;
+}
+
+p {
+  color: #000000;
+}
+
 a {
-    color: #0366d6;
+  color: #C9962F;
+}
+
+a:hover {
+  color: #8B9556;
+}
+
+nav {
+  margin-left: 25px;
+}
+
+.title {
+  font-family: critical-role-play;
+  font-size: xx-large;
+}
+
+.btn-primary:hover {
+  color: #000000;
+  text-align: center;
+  background-color: #D0E5C9;
+  border-color: #8EBD7F;
 }
 
 code {
-    color: #e01a76;
+  color: #FF811E;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+  color: #000000;
+  text-align: center;
+  background-color: #A0CA92;
+  border-color: #8EBD7F;
+  margin-top: 20px;
 }

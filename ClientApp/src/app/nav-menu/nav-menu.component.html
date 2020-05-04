@@ -1,17 +1,11 @@
 <header>
-    <mat-toolbar>
-        <a class="navbar-brand headline" [routerLink]="['/']"
-            >Dungeons & Draggins</a
-        >
-        <nav mat-tab-nav-bar>
-          <a mat-tab-link
-            *ngFor="let link of navLinks"
-            [routerLink]="link.path"
-            routerLinkActive #rla="routerLinkActive"
-            [routerLinkActiveOptions]="{exact:true}"
-            [active]="rla.isActive">
-          {{link.label}}
-        </a>
-        </nav>
-    </mat-toolbar>
+  <mat-toolbar>
+    <a class="navbar-brand headline" class="title" [routerLink]="['/']">Dungeons & Draggins</a>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive"
+        [routerLinkActiveOptions]="{exact:true}" [active]="rla.isActive">
+        {{link.label}}
+      </a>
+    </nav>
+  </mat-toolbar>
 </header>
