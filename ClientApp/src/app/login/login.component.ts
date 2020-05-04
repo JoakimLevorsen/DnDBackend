@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormControl } from "@angular/forms";
+import { WebSocketService } from "src/websocket";
 
 @Component({
     selector: "Login",
@@ -7,17 +8,19 @@ import { Validators, FormControl } from "@angular/forms";
     styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+    constructor(private socket: WebSocketService) {}
     usernameControl = new FormControl("", Validators.required);
     passwordControl = new FormControl("", Validators.required);
 
-    constructor() {}
-
     ngOnInit() {}
 
-    // TODO check login with Javabog
+    // TODO Login with Javabog
     onSubmit() {
-        if (this.usernameControl.valid && this.passwordControl.valid) {
-            console.log("you are logged in!");
-        } else console.log("Submitted, but not logged in!");
+        this.socket.requestBuilders.login({
+            username: this.usernameControl.value,
+            password: this.passwordControl.value,
+        });
+
+        // this.socket.auth$.subscribe ::: DO SOMETHING WITH THIS!
     }
 }
