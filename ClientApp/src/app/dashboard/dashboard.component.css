@@ -1,0 +1,17 @@
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flexItem {
+    flex: 1;
+}
+
+.customMatCard {
+    margin: 6em auto;
+    text-align: center;
+    align-items: baseline;
+    padding: 28px;
+    max-width: 350px;
+}

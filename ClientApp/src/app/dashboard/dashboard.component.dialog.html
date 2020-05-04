@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Join campaign</h1>
+<div mat-dialog-content>
+    <p>Enter ID and password below</p>
+    <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput [(ngModel)]="data.joinByIDNumber" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="data.joinByIDPassword" />
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button
+        mat-button
+        [mat-dialog-close]="[data.joinByIDNumber, data.joinByIDPassword]"
+        cdkFocusInitial
+    >
+        Ok
+    </button>
+</div>
