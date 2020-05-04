@@ -1,18 +1,26 @@
-import { Component } from "@angular/core";
-import { Campaign } from "./campaign.model";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Campaign } from "../models/campaign.model";
+import { CampaignService } from "../create-campaign/campaign.service";
 
 @Component({
     selector: "my-campaigns",
     templateUrl: "./myCampaigns.component.html",
     styleUrls: ["./myCampaigns.component.css"],
 })
-export class MyCampaignsComponent {
-    myCampaigns: Campaign[] = [
-        new Campaign("Test Campaign", ["player 1", "player 2"], "My Character"),
-        new Campaign(
-            "Test Campaign2",
-            ["player 3", "player 4"],
-            "My next Character X"
-        ),
-    ];
+export class MyCampaignsComponent implements OnInit {
+    myCampaigns: Campaign[];
+
+    constructor(
+        private router: Router,
+        private campaignService: CampaignService
+    ) {}
+
+    ngOnInit() {
+        this.myCampaigns = this.campaignService.getCampaigns();
+    }
+
+    onCreateNewCampaign() {
+        this.router.navigate(["new"]);
+    }
 }

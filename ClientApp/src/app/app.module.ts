@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppMaterialModule } from "./app-material/app-material.module";
 import { MatCardModule } from "@angular/material/card";
+import { CreateCampaignComponent } from "./create-campaign/create-campaign.component";
+import { CampaignService } from "./create-campaign/campaign.service";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -24,7 +26,7 @@ export class AuthGuardService implements CanActivate {
         if (this.socket.auth$.value) {
             return true;
         }
-        // return true
+        // return true;
         this.router.navigate(["/login"]);
         return false;
     }
@@ -39,6 +41,7 @@ export class AuthGuardService implements CanActivate {
         MyCharactersComponent,
         LoginComponent,
         PlayComponent,
+        CreateCampaignComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -67,9 +70,10 @@ export class AuthGuardService implements CanActivate {
             },
             { path: "login", component: LoginComponent },
             { path: "play", component: PlayComponent },
+            { path: "new", component: CreateCampaignComponent },
         ]),
     ],
-    providers: [WebSocketService, AuthGuardService],
+    providers: [WebSocketService, AuthGuardService, CampaignService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
