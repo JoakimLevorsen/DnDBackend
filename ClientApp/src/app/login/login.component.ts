@@ -14,13 +14,16 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-    // TODO Login with Javabog
     onSubmit() {
         this.socket.requestBuilders.login({
             username: this.usernameControl.value,
             password: this.passwordControl.value,
         });
 
-        // this.socket.auth$.subscribe ::: DO SOMETHING WITH THIS!
+        this.socket.auth$.subscribe(s => {
+            if (s) {
+                console.log("We're signed in");
+            } else console.log("Not signed in");
+        });
     }
 }

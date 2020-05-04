@@ -11,7 +11,9 @@ namespace dungeons
     public class Javabog
     {
         static HttpClient client = new HttpClient();
-        static UriBuilder baseUri = new UriBuilder("http://localhost:8080/login?");
+        // NOTE: "http://localhost:8080/login?"
+        // NOTE: "130.225.170.238:8080/login?"
+        static UriBuilder baseUri = new UriBuilder("130.225.170.238:8080/login?");
         public static async Task<Boolean> Login(string username, string password)
         {
             string queryToAppend = $"username={ username }&password={ password }";
