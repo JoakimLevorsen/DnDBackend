@@ -1,5 +1,7 @@
 import { Campaign } from "../models/campaign.model";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class CampaignService {
     myCampaigns: Campaign[] = [
         new Campaign(
