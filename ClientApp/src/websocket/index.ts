@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import requestBuilder from "./requestBuilder";
 import { Campaign, isCampaign, isCampaignArray } from "./responses/Campaigns";
-import { GameState } from "./responses/GameState";
+import { GameState, GameStateCampaign } from "./responses/GameState";
 
 @Injectable({
     providedIn: "root",
@@ -17,6 +17,7 @@ export class WebSocketService {
     fetchedCampaigns$: BehaviorSubject<
         Map<number, Campaign>
     > = new BehaviorSubject(new Map());
+    private _newestCampaign?: GameStateCampaign;
     gameState$: BehaviorSubject<GameState | null> = new BehaviorSubject(null);
 
     startSocket() {
@@ -65,7 +66,16 @@ export class WebSocketService {
                 return;
             }
             // Since we've parsed some JSON, and the response was not the other types, this must be a gameState
-            this.gameState$.next(parsed as GameState);
+            const gameState = parsed as GameState;
+            // We also check if we got a new campaign
+            const newCampaigns = gameState.ownedCampaigns ?? [];
+            const oldCampaigns = this.gameState$.value?.ownedCampaigns ?? [];
+            // If there is a new element, we set that as the _newestCampaign property
+            const added = newCampaigns.filter(c =>
+                oldCampaigns.some(oC => oC.ID === c.ID)
+            );
+            if (added.length > 0) this._newestCampaign = added[0];
+            this.gameState$.next(parsed);
         } catch (e) {
             console.log("Got error from websocket", msg);
         }
@@ -73,6 +83,10 @@ export class WebSocketService {
 
     get requestBuilders() {
         return requestBuilder(this.socket);
+    }
+
+    get newestCampaign() {
+        return this._newestCampaign;
     }
 
     sendSomething() {

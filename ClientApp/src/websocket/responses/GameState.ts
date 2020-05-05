@@ -1,6 +1,6 @@
 import { Campaign } from "./Campaigns";
 
-interface GameStateCampaign extends Campaign {
+export interface GameStateCampaign extends Campaign {
     dungeonMaster: string;
 }
 

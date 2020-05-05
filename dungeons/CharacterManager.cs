@@ -76,7 +76,7 @@ namespace dungeons
                 var cClass = await context.characterClasses.FindAsync(message.characterClass);
                 if (cClass == null)
                 {
-                    return "CharacterManager create 4: Class not found";
+                    return "CharacterManager create 4: Class not found, valid options are " + string.Join(',', (await context.characterClasses.ToListAsync()).Select(c => c.name).ToArray());
                 }
                 var newCharacter = new Character
                 {
