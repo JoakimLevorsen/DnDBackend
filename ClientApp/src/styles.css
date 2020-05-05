@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
-
 @font-face {
   font-family: critical-role-play;
   src: url(assets/font/CriticalRolePlay-7BByA.ttf) format("truetype");
@@ -8,7 +6,7 @@
 
 :root,
 body {
-  background-color: #EDE7D9;
+  background-color: #ede7d9;
 }
 
 p {
@@ -16,11 +14,12 @@ p {
 }
 
 a {
-  color: #C9962F;
+  color: #c9962f;
 }
 
 a:hover {
-  color: #8B9556;
+  color: #8b9556;
+  text-decoration: none;
 }
 
 nav {
@@ -32,21 +31,25 @@ nav {
   font-size: xx-large;
 }
 
-.btn-primary:hover {
-  color: #000000;
-  text-align: center;
-  background-color: #D0E5C9;
-  border-color: #8EBD7F;
-}
-
 code {
-  color: #FF811E;
+  color: #ff811e;
 }
 
 .btn-primary {
   color: #000000;
   text-align: center;
-  background-color: #A0CA92;
-  border-color: #8EBD7F;
+  background-color: #a0ca92;
+  border-color: #8ebd7f;
   margin-top: 20px;
+}
+
+.btn-primary:hover {
+  color: #000000;
+  text-align: center;
+  background-color: #d0e5c9;
+  border-color: #8ebd7f;
+}
+
+#toolbar {
+  background-color: #FDFCFA;
 }
