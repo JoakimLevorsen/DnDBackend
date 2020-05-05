@@ -1,30 +1,36 @@
-import { CampaignService } from "./campaign.service";
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormControlName } from "@angular/forms";
 import { Router } from "@angular/router";
+import { WebSocketService } from "src/websocket";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
     selector: "CreateCampaign",
     templateUrl: "./create-campaign.component.html",
 })
 export class CreateCampaignComponent implements OnInit {
-    campaignForm: FormGroup;
+    campaignName = new FormControl();
+    joinable = new FormControl();
+    maxPlayers = new FormControl();
+    password = new FormControl();
 
-    constructor(
-        private campaignService: CampaignService,
-        private router: Router
-    ) {}
+    constructor(private router: Router, private socket: WebSocketService) {}
 
-    ngOnInit() {
-        this.campaignForm = new FormGroup({
-            campaignName: new FormControl(),
-            players: new FormControl(),
-            maxPlayers: new FormControl(),
-        });
-    }
+    ngOnInit() {}
 
     onSubmit() {
-        this.campaignService.addCampaign(this.campaignForm.value);
+        this.socket.requestBuilders.campaign.create({
+            name: this.campaignName.value,
+            joinable: this.joinable.value,
+            maxPlayers: this.maxPlayers.value,
+            password: this.password.value,
+        });
+
         this.router.navigate(["my-campaigns"]);
+        console.log(
+            this.campaignName.value,
+            this.password.value,
+            this.joinable.value,
+            this.maxPlayers.value
+        );
     }
 }

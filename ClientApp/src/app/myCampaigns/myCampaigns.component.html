@@ -4,16 +4,16 @@
         <h2>Campaigns you are playing in:</h2>
         <mat-card *ngFor="let campaign of myCampaigns">
             <mat-card-header>
-                <mat-card-title> {{ campaign.campaignName }}</mat-card-title>
+                <mat-card-title> {{ campaign.name }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <p>Participants:</p>
                 <mat-card-subtitle>
-                    {{ campaign.players }}
+                    <p>players:</p>
                 </mat-card-subtitle>
                 <p>You are playing with:</p>
                 <mat-card-subtitle>
-                    {{ campaign.characterName }}
+                    <p>characterName</p>
                 </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
@@ -24,15 +24,19 @@
 
     <div class="col-lg-3">
         <h2>Campaigns where you are the DM:</h2>
-        <mat-card *ngFor="let dmCampaign of myCampaigns">
+        <mat-card *ngFor="let dmCampaign of myDmCampaigns">
             <mat-card-header>
-                <mat-card-title> {{ dmCampaign.campaignName }}</mat-card-title>
+                <mat-card-title> {{ dmCampaign.name }}</mat-card-title>
+                <mat-card-subtitle>
+                    {{ dmCampaign.password }}
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <p>Participants:</p>
                 <mat-card-subtitle>
-                    {{ dmCampaign.players }}
+                    <p>dmCampaign.players</p>
                 </mat-card-subtitle>
+                <p>Max players: {{ dmCampaign.maxPlayers }}</p>
             </mat-card-content>
         </mat-card>
         <br />

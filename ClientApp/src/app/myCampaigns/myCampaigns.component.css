@@ -1,5 +1,13 @@
 mat-card {
     margin-top: 15px;
+    min-width: 200px;
+    width: max-content;
+}
+mat-card-subtitle {
+    padding-left: 10px;
+}
+mat-card-content {
+    margin-left: 17.5px;
 }
 .row {
     margin-left: 40px;

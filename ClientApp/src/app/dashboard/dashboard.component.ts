@@ -1,19 +1,19 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject } from '@angular/core';
 import {
     MatDialog,
     MAT_DIALOG_DATA,
     MatDialogConfig,
     MatDialogRef,
-} from "@angular/material/dialog";
+} from '@angular/material/dialog';
 
 export interface DialogData {
     joinByIDNumber: number;
     joinByIDPassword: string;
 }
 @Component({
-    selector: "dashboard",
-    templateUrl: "./dashboard.component.html",
-    styleUrls: ["./dashboard.component.css"],
+    selector: 'dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
     joinByIDNumber: number;
@@ -25,7 +25,7 @@ export class DashboardComponent {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.width = "250px";
+        dialogConfig.width = '250px';
 
         const dialogRef = this.dialog.open(
             DashboardComponentDialog,
@@ -33,7 +33,7 @@ export class DashboardComponent {
         );
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log("The dialog was closed");
+            console.log('The dialog was closed');
             console.log(this.joinByIDNumber);
             console.log(this.joinByIDPassword);
         });
@@ -41,8 +41,8 @@ export class DashboardComponent {
 }
 
 @Component({
-    selector: "dashboard-dialog",
-    templateUrl: "./dashboard.component.dialog.html",
+    selector: 'dashboard-dialog',
+    templateUrl: './dashboard.component.dialog.html',
 })
 export class DashboardComponentDialog {
     constructor(
