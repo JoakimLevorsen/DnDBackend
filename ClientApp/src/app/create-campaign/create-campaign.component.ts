@@ -8,10 +8,10 @@ import { FormGroup, FormControl } from '@angular/forms';
     templateUrl: './create-campaign.component.html',
 })
 export class CreateCampaignComponent implements OnInit {
-    campaignName: string;
+    campaignName = new FormControl();
     joinable: boolean = true;
-    maxPlayers: number = 5;
-    password: string;
+    maxPlayers = new FormControl();
+    password = new FormControl();
 
     constructor(private router: Router, private socket: WebSocketService) {}
 
@@ -19,19 +19,19 @@ export class CreateCampaignComponent implements OnInit {
 
     onSubmit() {
         this.socket.requestBuilders.campaign.create({
-            name: this.campaignName,
+            name: this.campaignName.value,
             joinable: this.joinable,
-            maxPlayers: this.maxPlayers,
-            password: this.password,
+            maxPlayers: this.maxPlayers.value,
+            password: this.password.value,
         });
         // this.socket.requestBuilders.update;
 
         this.router.navigate(['my-campaigns']);
         console.log(
-            this.campaignName,
+            this.campaignName.value,
             this.joinable,
-            this.password,
-            this.maxPlayers
+            this.password.value,
+            this.maxPlayers.value
         );
     }
 }
