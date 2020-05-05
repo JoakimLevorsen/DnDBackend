@@ -10,8 +10,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$dnd-primary: mat-palette($dnd-alabaster, 500, 50, 900);
-$dnd-accent: mat-palette($dnd-darkseagreen, 500, A400, 800);
+$dnd-primary: mat-palette($dnd-darkseagreen, 500, A400, 800);
+$dnd-accent: mat-palette($dnd-satinsheengold);
 
 // The warn palette is optional (defaults to red).
 $dnd-warn: mat-palette($dnd-umber, A400, A100, A700);
