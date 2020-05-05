@@ -7,10 +7,12 @@ import {
 } from '@angular/material/dialog';
 import { WebSocketService } from 'src/websocket';
 import { Router } from '@angular/router';
+import { GameState } from 'src/websocket/responses/GameState';
 
 export interface DialogData {
     campaignToJoinID: number;
-    campaignPassword: string;
+    password: string;
+    charactersOwnedByMe: GameState['characters'];
     joiningCharacterID: number;
 }
 @Component({
@@ -19,17 +21,20 @@ export interface DialogData {
     styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-    campaignToJoinID: number;
-    campaignPassword: string;
-    joiningCharacterID: number;
-
     constructor(
         private socket: WebSocketService,
         private router: Router,
         public dialog: MatDialog
     ) {}
 
-    //TODO GET THAT CHARACTERID SOMEHOW
+    charactersOwnedByMe: GameState['characters'];
+    ngOnInit() {
+        this.socket.gameState$.subscribe(s => {
+            this.charactersOwnedByMe = s.characters.filter(
+                c => c.owner === s.me
+            );
+        });
+    }
 
     openDialog() {
         const dialogConfig = new MatDialogConfig();
@@ -45,21 +50,30 @@ export class DashboardComponent {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result);
-            this.campaignToJoinID = result[0];
-            this.campaignPassword = result[1];
-            if (result != undefined) {
-                //TODO Call function to join a campaign
+            const campaignToJoinID = result[0];
+            const password = result[1];
+            const joiningCharacterID = result[2];
+
+            if (result.length === 3 && result.every(r => r != null)) {
+                this.joinCampaign(
+                    campaignToJoinID,
+                    password,
+                    joiningCharacterID
+                );
             }
         });
     }
-    //TODO Make function that uses campaignID ,Password and CharacterID or something, to join a campaign.
+
     joinCampaign(
         campaignToJoinID: number,
-        campaignPassword: string,
+        password: string,
         joiningCharacterID: number
     ) {
-        // this.socket.requestBuilders.campaign.join({
-        // })
+        this.socket.requestBuilders.campaign.join({
+            campaignToJoinID,
+            joiningCharacterID,
+            password: password,
+        });
     }
 }
 
