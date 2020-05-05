@@ -61,8 +61,12 @@ namespace dungeons
 
         private static async Task<string> create(string payload, Client client)
         {
-            var message = JsonConvert.DeserializeObject<CreatePayload>(payload);
-            if (message == null)
+            CreatePayload message;
+            try
+            {
+                message = JsonConvert.DeserializeObject<CreatePayload>(payload);
+            }
+            catch
             {
                 return "CharacterManager create 2: Null message";
             }
@@ -78,6 +82,8 @@ namespace dungeons
                 {
                     return "CharacterManager create 4: Class not found, valid options are " + string.Join(',', (await context.characterClasses.ToListAsync()).Select(c => c.name).ToArray());
                 }
+                // We get the client user again because it is from another context
+                var user = await context.users.FindAsync(client.user.ID);
                 var newCharacter = new Character
                 {
                     name = message.name,
@@ -85,7 +91,7 @@ namespace dungeons
                     xp = 0,
                     cClass = cClass,
                     cRace = race,
-                    owner = client.user
+                    owner = user
                 };
                 context.characters.Add(newCharacter);
                 await context.SaveChangesAsync();

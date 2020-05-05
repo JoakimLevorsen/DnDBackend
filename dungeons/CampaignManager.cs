@@ -62,6 +62,8 @@ namespace dungeons
             {
                 return "CampaignManager create 4: Null message.";
             }
+            // We get the client user again because it is from another context
+            var user = await context.users.FindAsync(client.user.ID);
             var newCampaign = new Campaign
             {
                 name = message.name,
@@ -71,7 +73,7 @@ namespace dungeons
                 maxPlayers = message.maxPlayers,
                 password = message.password,
                 modificationDate = DateTime.Now,
-                dungeonMaster = client.user
+                dungeonMaster = user
             };
             context.campaigns.Add(newCampaign);
             await context.SaveChangesAsync();
