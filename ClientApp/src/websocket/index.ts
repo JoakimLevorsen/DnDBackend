@@ -1,17 +1,17 @@
-import { isLoginInfo } from "./responses/LoginInfo";
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-import requestBuilder from "./requestBuilder";
-import { Campaign, isCampaign, isCampaignArray } from "./responses/Campaigns";
-import { GameState, GameStateCampaign } from "./responses/GameState";
+import { isLoginInfo } from './responses/LoginInfo';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import requestBuilder from './requestBuilder';
+import { Campaign, isCampaign, isCampaignArray } from './responses/Campaigns';
+import { GameState, GameStateCampaign } from './responses/GameState';
 
 @Injectable({
-    providedIn: "root",
+    providedIn: 'root',
 })
 export class WebSocketService {
     private socket: WebSocket;
     private _username?: string;
-    announcement$: BehaviorSubject<string> = new BehaviorSubject("");
+    announcement$: BehaviorSubject<string> = new BehaviorSubject('');
     auth$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     joinableCampaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
     fetchedCampaigns$: BehaviorSubject<
@@ -21,15 +21,15 @@ export class WebSocketService {
     gameState$: BehaviorSubject<GameState | null> = new BehaviorSubject(null);
 
     startSocket() {
-        this.socket = new WebSocket("wss://localhost:5001/ws");
-        this.socket.addEventListener("open", o => {
-            console.log("did open", o);
-            this.announcement$.next("Opened");
+        this.socket = new WebSocket('wss://localhost:5001/ws');
+        this.socket.addEventListener('open', o => {
+            console.log('did open', o);
+            this.announcement$.next('Opened');
         });
-        this.socket.addEventListener("message", r => this.onMessage(r));
-        this.socket.addEventListener("error", o => console.log("e", o));
-        this.socket.addEventListener("close", o =>
-            console.log("server closed", o)
+        this.socket.addEventListener('message', r => this.onMessage(r));
+        this.socket.addEventListener('error', o => console.log('e', o));
+        this.socket.addEventListener('close', o =>
+            console.log('server closed', o)
         );
     }
 
@@ -40,7 +40,7 @@ export class WebSocketService {
     }
 
     private onMessage(msg: MessageEvent) {
-        console.log("Got message", msg);
+        console.log('Got message', msg);
         try {
             const parsed = JSON.parse(msg.data);
             if (isLoginInfo(parsed)) {
@@ -49,9 +49,9 @@ export class WebSocketService {
                 // Now we try to create a character
 
                 this.requestBuilders.character.create({
-                    name: "hey",
-                    class: "gey",
-                    race: "bey",
+                    name: 'hey',
+                    class: 'gey',
+                    race: 'bey',
                 });
                 return;
             }
@@ -77,7 +77,7 @@ export class WebSocketService {
             if (added.length > 0) this._newestCampaign = added[0];
             this.gameState$.next(parsed);
         } catch (e) {
-            console.log("Got error from websocket", msg);
+            console.log('Got error from websocket', msg);
         }
     }
 
@@ -92,13 +92,13 @@ export class WebSocketService {
     sendSomething() {
         this.socket.send(
             JSON.stringify({
-                type: "Login",
+                type: 'Login',
                 payload: JSON.stringify({
-                    username: "s185023",
-                    password: "12345678",
+                    username: 's185023',
+                    password: '12345678',
                 }),
             })
         );
-        console.log("did send something");
+        console.log('did send something');
     }
 }

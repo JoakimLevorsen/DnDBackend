@@ -1,26 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Campaign } from "../models/campaign.model";
-import { CampaignService } from "../create-campaign/campaign.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Campaign } from 'src/websocket/responses/Campaigns';
+import { WebSocketService } from 'src/websocket';
 
 @Component({
-    selector: "my-campaigns",
-    templateUrl: "./myCampaigns.component.html",
-    styleUrls: ["./myCampaigns.component.css"],
+    selector: 'my-campaigns',
+    templateUrl: './myCampaigns.component.html',
+    styleUrls: ['./myCampaigns.component.css'],
 })
 export class MyCampaignsComponent implements OnInit {
     myCampaigns: Campaign[];
+    myDmCampaigns: Campaign[];
 
-    constructor(
-        private router: Router,
-        private campaignService: CampaignService
-    ) {}
+    constructor(private router: Router, private socket: WebSocketService) {}
 
-    ngOnInit() {
-        this.myCampaigns = this.campaignService.getCampaigns();
-    }
+    ngOnInit() {}
 
     onCreateNewCampaign() {
-        this.router.navigate(["new"]);
+        this.router.navigate(['new']);
     }
 }
