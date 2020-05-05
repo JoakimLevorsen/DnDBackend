@@ -5,10 +5,13 @@ import {
     MatDialogConfig,
     MatDialogRef,
 } from '@angular/material/dialog';
+import { WebSocketService } from 'src/websocket';
+import { Router } from '@angular/router';
 
 export interface DialogData {
-    joinByIDNumber: string;
-    joinByIDPassword: string;
+    campaignToJoinID: number;
+    campaignPassword: string;
+    joiningCharacterID: number;
 }
 @Component({
     selector: 'dashboard',
@@ -16,10 +19,17 @@ export interface DialogData {
     styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-    joinByIDNumber: string;
-    joinByIDPassword: string;
+    campaignToJoinID: number;
+    campaignPassword: string;
+    joiningCharacterID: number;
 
-    constructor(public dialog: MatDialog) {}
+    constructor(
+        private socket: WebSocketService,
+        private router: Router,
+        public dialog: MatDialog
+    ) {}
+
+    //TODO GET THAT CHARACTERID SOMEHOW
 
     openDialog() {
         const dialogConfig = new MatDialogConfig();
@@ -35,17 +45,22 @@ export class DashboardComponent {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result);
-            this.joinByIDNumber = result[0];
-            this.joinByIDPassword = result[1];
+            this.campaignToJoinID = result[0];
+            this.campaignPassword = result[1];
             if (result != undefined) {
                 //TODO Call function to join a campaign
-            } else {
-                //Do nothing
             }
         });
     }
-
-    //TODO Make function that actually uses ID and Pass to join a campaign
+    //TODO Make function that uses campaignID ,Password and CharacterID or something, to join a campaign.
+    joinCampaign(
+        campaignToJoinID: number,
+        campaignPassword: string,
+        joiningCharacterID: number
+    ) {
+        // this.socket.requestBuilders.campaign.join({
+        // })
+    }
 }
 
 @Component({

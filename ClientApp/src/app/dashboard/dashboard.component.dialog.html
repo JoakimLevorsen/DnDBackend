@@ -6,8 +6,8 @@
             matInput
             type="text"
             placeholder="Enter ID"
-            name="joinByIDNumber"
-            [(ngModel)]="joinByIDNumber"
+            name="campaignToJoinID"
+            [(ngModel)]="campaignToJoinID"
         />
     </mat-form-field>
     <mat-form-field>
@@ -16,8 +16,8 @@
             matInput
             type="text"
             placeholder="Enter Password"
-            name="joinByIDPassword"
-            [(ngModel)]="joinByIDPassword"
+            name="campaignPassword"
+            [(ngModel)]="campaignPassword"
         />
     </mat-form-field>
 </div>
@@ -25,7 +25,7 @@
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button
         mat-button
-        [mat-dialog-close]="[joinByIDNumber, joinByIDPassword]"
+        [mat-dialog-close]="[campaignToJoinID, campaignPassword]"
         cdkFocusInitial
     >
         Ok

@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Validators, FormControl } from "@angular/forms";
-import { WebSocketService } from "src/websocket";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormControl } from '@angular/forms';
+import { WebSocketService } from 'src/websocket';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: "Login",
-    templateUrl: "./login.component.html",
-    styleUrls: ["./login.component.css"],
+    selector: 'Login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
     constructor(private socket: WebSocketService, private router: Router) {}
-    usernameControl = new FormControl("", Validators.required);
-    passwordControl = new FormControl("", Validators.required);
+    usernameControl = new FormControl('', Validators.required);
+    passwordControl = new FormControl('', Validators.required);
 
     ngOnInit() {}
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
         this.socket.auth$.subscribe(s => {
             if (s) {
-                this.router.navigate(["/"]);
+                this.router.navigate(['/']);
             }
         });
     }
