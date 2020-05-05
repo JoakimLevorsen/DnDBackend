@@ -7,7 +7,7 @@ import {
 } from '@angular/material/dialog';
 
 export interface DialogData {
-    joinByIDNumber: number;
+    joinByIDNumber: string;
     joinByIDPassword: string;
 }
 @Component({
@@ -16,7 +16,7 @@ export interface DialogData {
     styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-    joinByIDNumber: number;
+    joinByIDNumber: string;
     joinByIDPassword: string;
 
     constructor(public dialog: MatDialog) {}
@@ -34,10 +34,18 @@ export class DashboardComponent {
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
-            console.log(this.joinByIDNumber);
-            console.log(this.joinByIDPassword);
+            console.log(result);
+            this.joinByIDNumber = result[0];
+            this.joinByIDPassword = result[1];
+            if (result != undefined) {
+                //TODO Call function to join a campaign
+            } else {
+                //Do nothing
+            }
         });
     }
+
+    //TODO Make function that actually uses ID and Pass to join a campaign
 }
 
 @Component({
