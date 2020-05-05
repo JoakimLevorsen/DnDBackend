@@ -1,4 +1,4 @@
-const type = "Campaign";
+const type = 'Campaign';
 
 const wrapPayload = (payload: object) =>
     JSON.stringify({ type, payload: JSON.stringify(payload) });
@@ -12,7 +12,7 @@ interface createCampaignProps {
 
 const create = (socket: WebSocket) => (payload: createCampaignProps) =>
     socket.send(
-        wrapPayload({ type: "Create", payload: JSON.stringify(payload) })
+        wrapPayload({ type: 'Create', payload: JSON.stringify(payload) })
     );
 
 interface updateCampaignProps {
@@ -27,17 +27,18 @@ interface updateCampaignProps {
 
 const update = (socket: WebSocket) => (payload: updateCampaignProps) =>
     socket.send(
-        wrapPayload({ type: "Update", payload: JSON.stringify(payload) })
+        wrapPayload({ type: 'Update', payload: JSON.stringify(payload) })
     );
 
 interface JoinCampaignPayload {
     campaignToJoinID: number;
     joiningCharacterID: number;
+    password?: string;
 }
 
 const join = (socket: WebSocket) => (payload: JoinCampaignPayload) =>
     socket.send(
-        wrapPayload({ type: "JoinCampaign", payload: JSON.stringify(payload) })
+        wrapPayload({ type: 'JoinCampaign', payload: JSON.stringify(payload) })
     );
 
 export default (socket: WebSocket) => ({
