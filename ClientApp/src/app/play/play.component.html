@@ -1,0 +1,64 @@
+<div>
+    <h1>Campaign Name</h1>
+    <h2>ID/Password</h2>
+
+    <div class="flexContainer">
+        <mat-card>
+            <div class="flexItem">
+                <h5>Other players in the Campaign:</h5>
+                <mat-expansion-panel>
+                    <!--*ngFor="let player of cPlayers" Only need one expansion-panel, when using *ngFor-->
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Player1 name
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Level: XP:
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-subtitle>
+                        Health: 50
+                    </mat-subtitle>
+                    <mat-subtitle>
+                        Turn: 20
+                    </mat-subtitle>
+                    <mat-subtitle>
+                        Race:
+                    </mat-subtitle>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Player2 name
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Level: XP:
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-subtitle>
+                        Health: 100
+                    </mat-subtitle>
+                    <mat-subtitle>
+                        Turn: 15
+                    </mat-subtitle>
+                    <mat-subtitle>
+                        Race:
+                    </mat-subtitle>
+                </mat-expansion-panel>
+            </div>
+        </mat-card>
+
+        <mat-card class="customMatCard">
+            <!--*ngFor="let character of myCharacter"-->
+            <div class="flexItem">
+                <mat-card-title> Character name </mat-card-title>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div class="flexItem">
+                <h3>Dice roll</h3>
+            </div>
+        </mat-card>
+    </div>
+</div>
