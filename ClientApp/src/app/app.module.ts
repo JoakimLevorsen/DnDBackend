@@ -5,7 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, CanActivate, Router } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import {
+    DashboardComponent,
+    DashboardComponentDialog,
+} from "./dashboard/dashboard.component";
 import { MyCampaignsComponent } from "./myCampaigns/myCampaigns.component";
 import { MyCharactersComponent } from "./myCharacters/myCharacters.component";
 import { WebSocketService } from "src/websocket";
@@ -37,6 +40,7 @@ export class AuthGuardService implements CanActivate {
         AppComponent,
         NavMenuComponent,
         DashboardComponent,
+        DashboardComponentDialog,
         MyCampaignsComponent,
         MyCharactersComponent,
         LoginComponent,
@@ -73,6 +77,7 @@ export class AuthGuardService implements CanActivate {
             { path: "new", component: CreateCampaignComponent },
         ]),
     ],
+    entryComponents: [DashboardComponentDialog],
     providers: [WebSocketService, AuthGuardService, CampaignService],
     bootstrap: [AppComponent],
 })
