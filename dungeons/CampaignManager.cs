@@ -205,6 +205,14 @@ namespace dungeons
             }
             if (!campaignToJoin.joinable) return "CampaignManager joinCampaign 19: This campaign is not joinable.";
 
+            if (campaignToJoin.password != null)
+            {
+                if (campaignToJoin.password != message.password)
+                {
+                    return "CampaignManager joinCampaign 20: Wrong password.";
+                }
+            }
+
             joiningCharacter.campaign = campaignToJoin;
             context.characters.Update(joiningCharacter);
             await context.SaveChangesAsync();
@@ -265,5 +273,6 @@ namespace dungeons
     {
         public int campaignToJoinID;
         public int joiningCharacterID;
+        public string? password;
     }
 }
