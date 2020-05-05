@@ -46,13 +46,7 @@ export class WebSocketService {
             if (isLoginInfo(parsed)) {
                 this._username = parsed.username;
                 this.auth$.next(true);
-                // Now we try to create a character
-
-                this.requestBuilders.character.create({
-                    name: 'hey',
-                    class: 'gey',
-                    race: 'bey',
-                });
+                this.requestBuilders.update();
                 return;
             }
             if (isCampaign(parsed)) {
