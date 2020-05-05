@@ -3,9 +3,6 @@ mat-card {
     min-width: 200px;
     width: max-content;
 }
-mat-card-subtitle {
-    padding-left: 10px;
-}
 mat-card-content {
     margin-left: 17.5px;
 }
@@ -15,6 +12,7 @@ mat-card-content {
 }
 .col-lg-3 {
     margin-top: 50px;
+    margin-bottom: 10px;
 }
 h1 {
     margin-top: 20px;
@@ -28,4 +26,9 @@ h2 {
     height: auto;
     margin-top: 40px;
     margin-right: 20px;
+}
+button {
+    margin-bottom: 10px;
+    padding: 4px;
+    width: max-content;
 }
