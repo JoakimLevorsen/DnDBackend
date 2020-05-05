@@ -1,25 +1,24 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, Injectable } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RouterModule, CanActivate, Router } from "@angular/router";
-import { AppComponent } from "./app.component";
-import { NavMenuComponent } from "./nav-menu/nav-menu.component";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Injectable } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, CanActivate, Router } from '@angular/router';
+import { AppComponent } from './app.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import {
     DashboardComponent,
     DashboardComponentDialog,
-} from "./dashboard/dashboard.component";
-import { MyCampaignsComponent } from "./myCampaigns/myCampaigns.component";
-import { MyCharactersComponent } from "./myCharacters/myCharacters.component";
-import { WebSocketService } from "src/websocket";
-import { LoginComponent } from "./login/login.component";
-import { PlayComponent } from "./play/play.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AppMaterialModule } from "./app-material/app-material.module";
-import { MatCardModule } from "@angular/material/card";
-import { CreateCampaignComponent } from "./create-campaign/create-campaign.component";
-import { CampaignService } from "./create-campaign/campaign.service";
+} from './dashboard/dashboard.component';
+import { MyCampaignsComponent } from './myCampaigns/myCampaigns.component';
+import { MyCharactersComponent } from './myCharacters/myCharacters.component';
+import { WebSocketService } from 'src/websocket';
+import { LoginComponent } from './login/login.component';
+import { PlayComponent } from './play/play.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material/app-material.module';
+import { MatCardModule } from '@angular/material/card';
+import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -30,7 +29,7 @@ export class AuthGuardService implements CanActivate {
             return true;
         }
         return true;
-        this.router.navigate(["/login"]);
+        this.router.navigate(['/login']);
         return false;
     }
 }
@@ -48,7 +47,7 @@ export class AuthGuardService implements CanActivate {
         CreateCampaignComponent,
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
@@ -57,28 +56,28 @@ export class AuthGuardService implements CanActivate {
         MatCardModule,
         RouterModule.forRoot([
             {
-                path: "",
+                path: '',
                 component: DashboardComponent,
-                pathMatch: "full",
+                pathMatch: 'full',
                 canActivate: [AuthGuardService],
             },
             {
-                path: "my-campaigns",
+                path: 'my-campaigns',
                 component: MyCampaignsComponent,
                 canActivate: [AuthGuardService],
             },
             {
-                path: "my-characters",
+                path: 'my-characters',
                 component: MyCharactersComponent,
                 canActivate: [AuthGuardService],
             },
-            { path: "login", component: LoginComponent },
-            { path: "play", component: PlayComponent },
-            { path: "new", component: CreateCampaignComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'play', component: PlayComponent },
+            { path: 'new', component: CreateCampaignComponent },
         ]),
     ],
     entryComponents: [DashboardComponentDialog],
-    providers: [WebSocketService, AuthGuardService, CampaignService],
+    providers: [WebSocketService, AuthGuardService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
