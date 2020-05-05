@@ -1,1 +1,31 @@
-
+<div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let character of myCharacters">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ character.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          ID: {{ character.ID }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+        Health: {{ character.health }}<br>
+        XP: {{ character.xp }}<br>
+        Race: {{ character.race }}<br>
+        Class: {{ character.class }}<br>
+        {{character.campaign != null ? 'Campaign: {{ character.campaign }}' : ''}}
+      </p>
+      <mat-action-row>
+        <button mat-button color="accent" (click)="editCharacter()">
+          Edit
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="wrapper">
+    <button class="btn-primary" (click)="createNewCharacter()">
+      Create New Character
+    </button>
+  </div>
+</div>

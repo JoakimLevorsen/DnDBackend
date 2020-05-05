@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { MatCardModule } from '@angular/material/card';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -54,6 +55,7 @@ export class AuthGuardService implements CanActivate {
         BrowserAnimationsModule,
         AppMaterialModule,
         MatCardModule,
+        MatExpansionModule,
         RouterModule.forRoot([
             {
                 path: '',
