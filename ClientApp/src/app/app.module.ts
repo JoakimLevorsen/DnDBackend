@@ -29,7 +29,7 @@ export class AuthGuardService implements CanActivate {
         if (this.socket.auth$.value) {
             return true;
         }
-        return true;
+        //return true;
         this.router.navigate(['/login']);
         return false;
     }
