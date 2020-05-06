@@ -34,6 +34,7 @@ export class DashboardComponent {
         this.socket.requestBuilders.campaign.getJoinable();
         this.socket.joinableCampaigns$.subscribe(c => {
             this.joinableCampaigns = c;
+            console.log('joinableCampaigns:', this.joinableCampaigns); //FIX: Length 0
         });
     }
 
@@ -51,11 +52,10 @@ export class DashboardComponent {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result);
-            console.log(this.joinableCampaigns); //FIX: Length 0
 
             const campaignToJoinID = result[0];
             const password = result[1];
-            const joiningCharacterID = result[2];
+            const joiningCharacterID = result[2]; //FIX: Undefined
 
             if (result.length === 3 && result.every(r => r != null)) {
                 this.joinCampaign(
@@ -97,6 +97,7 @@ export class DashboardComponentDialog {
         this.socket.gameState$.subscribe(s => {
             this.charactersOwnedByMe =
                 s?.characters?.filter(c => c.owner === s.me) ?? [];
+            console.log('charactersOwnedByMe:', this.charactersOwnedByMe);
         });
     }
 
