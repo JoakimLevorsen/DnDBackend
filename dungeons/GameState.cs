@@ -97,7 +97,7 @@ namespace dungeons
                             .ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
                         dungeonMaster = c.dungeonMaster.ID
                     }),
-                    joinedCampaigns = joinedCampaigns.Select(c => new
+                    joinedCampaigns = joinedCampaigns.Where(c => c.dungeonMaster != null).Select(c => new
                     {
                         ID = c.ID,
                         name = c.name,
@@ -107,8 +107,8 @@ namespace dungeons
                         maxPlayers = c.maxPlayers,
                         password = c.password,
                         modificationDate = c.modificationDate
-                            .ToUniversalTime()
-                            .ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
+                         .ToUniversalTime()
+                         .ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
                         dungeonMaster = c.dungeonMaster.ID
                     }),
                 });
