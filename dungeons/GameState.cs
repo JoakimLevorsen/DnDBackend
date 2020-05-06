@@ -15,7 +15,7 @@ namespace dungeons
             using (var context = GameContext.getNew())
             {
                 var me = await context.users.FindAsync(client.user.ID);
-
+                Console.Write("Getting characters for id " + client.user.ID);
                 var myCharacters = await context.characters
                     .Include("owner")
                     .Include("campaign")
@@ -23,11 +23,11 @@ namespace dungeons
                     .Include("cRace")
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
-
+                Console.WriteLine("Got characters: " + myCharacters.Count);
                 List<Campaign> joinedCampaigns = myCharacters
                     .Select(c => c.campaign)
                     .Where(c => c != null)
-                    .ToList();
+                    .ToList() ?? new List<Campaign>()!;
 
                 var ownedCampaigns = await context.campaigns
                     .Include("dungeonMaster")
@@ -71,17 +71,17 @@ namespace dungeons
                     characters = allCharactersEncountered
                         .Concat(myCharacters.Where(c => c.campaign == null))
                         .Select(c => new
-                    {
-                        owner = c.owner.ID,
-                        campaign = c.campaign == null ? -1 : c.campaign.ID,
-                        cRace = c.cRace.name,
-                        cClass = c.cClass.name,
-                        name = c.name,
-                        ID = c.ID,
-                        xp = c.xp,
-                        level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
-                        turnIndex = c.turnIndex
-                    }),
+                        {
+                            owner = c.owner.ID,
+                            campaign = c.campaign == null ? -1 : c.campaign.ID,
+                            cRace = c.cRace.name,
+                            cClass = c.cClass.name,
+                            name = c.name,
+                            ID = c.ID,
+                            xp = c.xp,
+                            level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
+                            turnIndex = c.turnIndex
+                        }),
                     diceRolls = rolls,
                     me = me.ID,
                     ownedCampaigns = ownedCampaigns.Select(c => new
