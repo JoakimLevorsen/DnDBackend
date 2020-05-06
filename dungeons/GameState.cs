@@ -20,7 +20,6 @@ namespace dungeons
                     .Include("campaign")
                     .Include("cClass")
                     .Include("cRace")
-                    .Include("dungeonMaster")
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
                 List<Campaign> joinedCampaigns = myCharacters
