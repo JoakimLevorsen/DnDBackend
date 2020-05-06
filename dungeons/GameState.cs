@@ -67,7 +67,10 @@ namespace dungeons
 
                 return JsonConvert.SerializeObject(new
                 {
-                    characters = allCharactersEncountered.Select(c => new
+                    // We add the remaining characters that were not part of a campaign
+                    characters = allCharactersEncountered
+                        .Concat(myCharacters.Where(c => c.campaign == null))
+                        .Select(c => new
                     {
                         owner = c.owner.ID,
                         campaign = c.campaign == null ? -1 : c.campaign.ID,
