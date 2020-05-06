@@ -21,7 +21,7 @@ namespace D_D_Backend
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls("http://localhost:5000", "http://localhost:5001", "http://130.225.170.238:5000", "http://130.225.170.238:5001")
+                    // .UseUrls("http://localhost:5000", "http://localhost:5001", "http://130.225.170.238:5000", "http://130.225.170.238:5001")
                     .UseStartup<Startup>();
                 });
     }
