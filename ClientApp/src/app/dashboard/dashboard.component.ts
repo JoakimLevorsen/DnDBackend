@@ -30,9 +30,8 @@ export class DashboardComponent {
     charactersOwnedByMe: GameState['characters'];
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
-            this.charactersOwnedByMe = s.characters.filter(
-                c => c.owner === s.me
-            );
+            this.charactersOwnedByMe =
+                s?.characters?.filter(c => c.owner === s.me) ?? [];
         });
     }
 
