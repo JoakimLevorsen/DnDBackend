@@ -9,11 +9,11 @@
             <mat-card-content>
                 <p>Participants:</p>
                 <mat-card-subtitle>
-                    <p>players:</p>
+                    <p>{{ campaign.players }</p>
                 </mat-card-subtitle>
                 <p>You are playing with:</p>
                 <mat-card-subtitle>
-                    <p>characterName</p>
+                    <p>{{ characterName }}</p>
                 </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
@@ -28,22 +28,23 @@
             <mat-card-header>
                 <mat-card-title> {{ dmCampaign.name }}</mat-card-title>
                 <mat-card-subtitle>
+                    ID: {{ dmCampaign.ID }} / Password:
                     {{ dmCampaign.password }}
                 </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <p>Participants:</p>
                 <mat-card-subtitle>
-                    <p>dmCampaign.players</p>
+                    <p>{{ dmCampaign.players }}</p>
                 </mat-card-subtitle>
                 <p>Max players: {{ dmCampaign.maxPlayers }}</p>
             </mat-card-content>
         </mat-card>
-        <br />
+
         <div class="row">
             <div class="col-xs-12">
                 <button class="btn-primary" (click)="onCreateNewCampaign()">
-                    New Campaign
+                    Create New Campaign
                 </button>
             </div>
         </div>

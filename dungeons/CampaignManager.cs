@@ -23,10 +23,6 @@ namespace dungeons
                 {
                     return "CampaignManager accept 0: Invalid JSON.";
                 }
-                if (message == null)
-                {
-                    return "CampaignManager accept 1: Null message.";
-                }
                 switch (message.type)
                 {
                     case CampaignMessagePayloadType.Create:
@@ -49,18 +45,18 @@ namespace dungeons
 
         private static async Task<string> create(string payload, Client client, GameContext context)
         {
-            CreateCampaignPayload? message;
+            CreateCampaignPayload message;
             try
             {
-                message = JsonConvert.DeserializeObject<CreateCampaignPayload>(payload, new StringEnumConverter());
+                message = JsonConvert.DeserializeObject<CreateCampaignPayload>(payload, new StringEnumConverter())!;
             }
             catch
             {
                 return "CampaignManager create 3: Invalid JSON.";
             }
-            if (message == null)
+            if (message.name == null)
             {
-                return "CampaignManager create 4: Null message.";
+                return "CampaignManager create 4: Must include a name";
             }
             // We get the client user again because it is from another context
             var user = await context.users.FindAsync(client.user.ID);

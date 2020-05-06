@@ -14,7 +14,13 @@ export class MyCampaignsComponent implements OnInit {
 
     constructor(private router: Router, private socket: WebSocketService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.socket.gameState$.subscribe(g => {
+            if (g) {
+                this.myDmCampaigns = g.ownedCampaigns;
+            }
+        });
+    }
 
     onCreateNewCampaign() {
         this.router.navigate(['new']);
