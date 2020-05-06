@@ -23,7 +23,6 @@ export interface DialogData {
 })
 export class DashboardComponent {
     joinableCampaigns: Campaign[];
-    charactersOwnedByMe: GameState['characters'];
 
     constructor(
         private socket: WebSocketService,
@@ -35,10 +34,6 @@ export class DashboardComponent {
         this.socket.requestBuilders.campaign.getJoinable();
         this.socket.joinableCampaigns$.subscribe(c => {
             this.joinableCampaigns = c;
-        });
-        this.socket.gameState$.subscribe(s => {
-            this.charactersOwnedByMe =
-                s?.characters?.filter(c => c.owner === s.me) ?? [];
         });
     }
 
@@ -56,7 +51,6 @@ export class DashboardComponent {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result);
-            console.log(this.charactersOwnedByMe); //FIX: Undefined
             console.log(this.joinableCampaigns); //FIX: Length 0
 
             const campaignToJoinID = result[0];
@@ -93,8 +87,18 @@ export class DashboardComponent {
 export class DashboardComponentDialog {
     constructor(
         public dialogRef: MatDialogRef<DashboardComponentDialog>,
+        private socket: WebSocketService,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {}
+
+    charactersOwnedByMe: GameState['characters'];
+
+    ngOnInit() {
+        this.socket.gameState$.subscribe(s => {
+            this.charactersOwnedByMe =
+                s?.characters?.filter(c => c.owner === s.me) ?? [];
+        });
+    }
 
     onNoClick(): void {
         this.dialogRef.close();
