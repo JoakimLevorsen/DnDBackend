@@ -18,20 +18,27 @@
             [(ngModel)]="password"
         />
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Character</mat-label>
-        <mat-select [(ngModel)]="joiningCharacterID">
-            <mat-option *ngFor="let c of charactersOwnedByMe" [ngValue]="c.ID">
-                {{c.name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <mat-label>Character</mat-label>
+    <mat-radio-group
+        matInput
+        aria-label="Select character"
+        [(ngModel)]="selectedCharacterID"
+        class="radioContainer"
+    >
+        <mat-radio-button
+            class="example-radio-button"
+            *ngFor="let character of charactersOwnedByMe"
+            [value]="character.ID"
+        >
+            {{character.name}}
+        </mat-radio-button>
+    </mat-radio-group>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button
         mat-button
-        [mat-dialog-close]="[campaignToJoinID, password, joiningCharacterID]"
+        [mat-dialog-close]="[campaignToJoinID, password, selectedCharacterID]"
         cdkFocusInitial
     >
         Ok

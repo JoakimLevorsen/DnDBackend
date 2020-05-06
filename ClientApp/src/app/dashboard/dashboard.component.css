@@ -16,3 +16,8 @@
     padding: 28px;
     max-width: 350px;
 }
+
+.radioContainer {
+    display: flex;
+    flex-direction: column;
+}

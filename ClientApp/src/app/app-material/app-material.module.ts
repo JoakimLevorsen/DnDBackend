@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
         MatTabsModule,
         MatCardModule,
         FormsModule,
+        MatRadioModule,
     ],
     exports: [
         MatButtonModule,
@@ -48,6 +50,7 @@ import { FormsModule } from '@angular/forms';
         MatToolbarModule,
         MatTabsModule,
         MatCardModule,
+        MatRadioModule,
     ],
 })
 export class AppMaterialModule {}

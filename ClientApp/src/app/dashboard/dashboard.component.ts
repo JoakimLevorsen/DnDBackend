@@ -83,6 +83,7 @@ export class DashboardComponent {
 @Component({
     selector: 'dashboard-dialog',
     templateUrl: './dashboard.component.dialog.html',
+    styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponentDialog {
     constructor(
@@ -96,7 +97,9 @@ export class DashboardComponentDialog {
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
             this.charactersOwnedByMe =
-                s?.characters?.filter(c => c.owner === s.me) ?? [];
+                s?.characters?.filter(
+                    c => c.owner === s.me && c.campaign === -1
+                ) ?? [];
         });
     }
 
