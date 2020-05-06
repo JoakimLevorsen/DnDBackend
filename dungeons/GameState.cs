@@ -15,6 +15,7 @@ namespace dungeons
             using (var context = GameContext.getNew())
             {
                 var me = await context.users.FindAsync(client.user.ID);
+
                 var myCharacters = await context.characters
                     .Include("owner")
                     .Include("campaign")
@@ -22,15 +23,17 @@ namespace dungeons
                     .Include("cRace")
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
+
                 List<Campaign> joinedCampaigns = myCharacters
                     .Select(c => c.campaign)
                     .Where(c => c != null)
-                    .ToList() ?? new List<Campaign>()!;
+                    .ToList()!;
 
                 var ownedCampaigns = await context.campaigns
                     .Include("dungeonMaster")
                     .Where(c => c.dungeonMaster.ID == me.ID)
                     .ToListAsync();
+
                 List<int> campaignIds = new List<int>();
 
                 campaignIds.Concat(joinedCampaigns.Select(c => c.ID));
