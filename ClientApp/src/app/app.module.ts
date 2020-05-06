@@ -10,7 +10,7 @@ import {
     DashboardComponentDialog,
 } from './dashboard/dashboard.component';
 import { MyCampaignsComponent } from './myCampaigns/myCampaigns.component';
-import { MyCharactersComponent } from './myCharacters/myCharacters.component';
+import { MyCharactersComponent } from './my-characters/my-characters.component';
 import { WebSocketService } from 'src/websocket';
 import { LoginComponent } from './login/login.component';
 import { PlayComponent } from './play/play.component';
