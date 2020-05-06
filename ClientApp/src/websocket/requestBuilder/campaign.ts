@@ -41,8 +41,11 @@ const join = (socket: WebSocket) => (payload: JoinCampaignPayload) =>
         wrapPayload({ type: 'JoinCampaign', payload: JSON.stringify(payload) })
     );
 
+const getJoinable = (socket: WebSocket) => () => socket.send(wrapPayload({}));
+
 export default (socket: WebSocket) => ({
     create: create(socket),
     update: update(socket),
     join: join(socket),
+    getJoinable: getJoinable(socket),
 });
