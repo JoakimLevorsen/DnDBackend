@@ -53,16 +53,8 @@ export class DashboardComponent {
             console.log('The dialog was closed');
             console.log(result);
 
-            const campaignToJoinID = result[0];
-            const password = result[1];
-            const joiningCharacterID = result[2]; //FIX: Undefined
-
             if (result.length === 3 && result.every(r => r != null)) {
-                this.joinCampaign(
-                    campaignToJoinID,
-                    password,
-                    joiningCharacterID
-                );
+                this.joinCampaign(result[0], result[1], result[2]);
             }
         });
     }
