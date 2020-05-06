@@ -23,8 +23,8 @@ class Character {
 
 @Component({
     selector: 'my-characters',
-    templateUrl: './myCharacters.component.html',
-    styleUrls: ['./myCharacters.component.css'],
+    templateUrl: './my-characters.component.html',
+    styleUrls: ['./my-characters.component.css'],
 })
 export class MyCharactersComponent implements OnInit {
     panelOpenState = false;
@@ -34,19 +34,20 @@ export class MyCharactersComponent implements OnInit {
 
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
-            this.myCharacters =
-                s?.characters
-                    ?.filter(c => c.owner === s.me)
-                    .map(
-                        character =>
-                            new Character(
-                                character,
-                                s?.joinedCampaigns.find(
-                                    c => c.ID === character.campaign
-                                )?.name
-                            )
-                    ) ?? [];
-            console.log('myCharacters:', this.myCharacters); // TODO: undefined - gør måske noget med databasen forkert
+            if (s) {
+                this.myCharacters =
+                    s?.characters
+                        ?.filter(c => c.owner === s.me)
+                        .map(
+                            character =>
+                                new Character(
+                                    character,
+                                    s?.joinedCampaigns.find(
+                                        c => c.ID === character.campaign
+                                    )?.name
+                                )
+                        ) ?? [];
+            }
         });
     }
 
@@ -55,6 +56,6 @@ export class MyCharactersComponent implements OnInit {
     }
 
     createNewCharacter() {
-        this.router.navigate(['new']);
+        this.router.navigate(['new-character']);
     }
 }

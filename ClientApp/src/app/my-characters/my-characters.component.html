@@ -1,12 +1,12 @@
 <div>
-  <mat-accordion>
+  <mat-accordion class="headers-align">
     <mat-expansion-panel *ngFor="let character of myCharacters">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ character.name }} | Level {{ character.level }}
+          {{ character.name }}
         </mat-panel-title>
         <mat-panel-description>
-          ID: {{ character.ID }}
+          Level {{ character.level }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>
