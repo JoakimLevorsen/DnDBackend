@@ -37,9 +37,8 @@ export class DashboardComponent {
             this.joinableCampaigns = c;
         });
         this.socket.gameState$.subscribe(s => {
-            this.charactersOwnedByMe = s.characters.filter(
-                c => c.owner === s.me
-            );
+            this.charactersOwnedByMe =
+                s?.characters?.filter(c => c.owner === s.me) ?? [];
         });
     }
 

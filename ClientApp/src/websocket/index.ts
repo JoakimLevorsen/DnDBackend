@@ -69,6 +69,7 @@ export class WebSocketService {
                 oldCampaigns.some(oC => oC.ID === c.ID)
             );
             if (added.length > 0) this._newestCampaign = added[0];
+            console.log('Got game state', parsed);
             this.gameState$.next(parsed);
         } catch (e) {
             console.log('Got error from websocket', msg);
