@@ -12,10 +12,10 @@ export interface GameState {
         cClass: string;
         name: string;
         ID: number;
+        health: number;
         xp: number;
         level: number;
         turnIndex: number;
-        health: number;
     }>;
     diceRolls: {
         [index: number]: Array<{

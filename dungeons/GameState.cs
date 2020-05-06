@@ -78,6 +78,7 @@ namespace dungeons
                             cClass = c.cClass.name,
                             name = c.name,
                             ID = c.ID,
+                            health = c.health,
                             xp = c.xp,
                             level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
                             turnIndex = c.turnIndex
