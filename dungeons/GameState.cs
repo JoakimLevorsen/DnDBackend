@@ -71,17 +71,18 @@ namespace dungeons
                     characters = allCharactersEncountered
                         .Concat(myCharacters.Where(c => c.campaign == null))
                         .Select(c => new
-                    {
-                        owner = c.owner.ID,
-                        campaign = c.campaign == null ? -1 : c.campaign.ID,
-                        cRace = c.cRace.name,
-                        cClass = c.cClass.name,
-                        name = c.name,
-                        ID = c.ID,
-                        xp = c.xp,
-                        level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
-                        turnIndex = c.turnIndex
-                    }),
+                        {
+                            owner = c.owner.ID,
+                            campaign = c.campaign == null ? -1 : c.campaign.ID,
+                            cRace = c.cRace.name,
+                            cClass = c.cClass.name,
+                            name = c.name,
+                            ID = c.ID,
+                            health = c.health,
+                            xp = c.xp,
+                            level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
+                            turnIndex = c.turnIndex
+                        }),
                     diceRolls = rolls,
                     me = me.ID,
                     ownedCampaigns = ownedCampaigns.Select(c => new

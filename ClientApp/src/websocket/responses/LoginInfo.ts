@@ -4,7 +4,7 @@ export interface LoginInfo {
 }
 
 export const isLoginInfo = (input: any): input is LoginInfo =>
-    typeof input === "object" &&
+    typeof input === 'object' &&
     Object.keys(input).length === 2 &&
-    typeof input.username === "string" &&
-    typeof input.password === "string";
+    typeof input.username === 'string' &&
+    typeof input.password === 'string';
