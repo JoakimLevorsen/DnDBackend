@@ -1,7 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Character } from 'src/websocket/responses/Characters';
+import { GameState } from 'src/websocket/responses/GameState';
 import { WebSocketService } from 'src/websocket';
+
+class Character {
+    public name: string;
+    public ID: number;
+    public level: number;
+    public health: number;
+    public xp: number;
+    public cRace: string;
+    public cClass: string;
+    public campaignName?: string;
+    constructor(
+        character: GameState['characters'][number],
+        campaignName: string
+    ) {
+        Object.assign(this, character);
+        this.campaignName = campaignName;
+    }
+}
 
 @Component({
     selector: 'my-characters',
@@ -14,10 +32,22 @@ export class MyCharactersComponent implements OnInit {
 
     constructor(private router: Router, private socket: WebSocketService) {}
 
-    ngOnInit() {}
-
-    onCreateNewCampaign() {
-        this.router.navigate(['new']);
+    ngOnInit() {
+        this.socket.gameState$.subscribe(s => {
+            this.myCharacters =
+                s?.characters
+                    ?.filter(c => c.owner === s.me)
+                    .map(
+                        character =>
+                            new Character(
+                                character,
+                                s?.joinedCampaigns.find(
+                                    c => c.ID === character.campaign
+                                )?.name
+                            )
+                    ) ?? [];
+            console.log('myCharacters:', this.myCharacters); // TODO: undefined - gør måske noget med databasen forkert
+        });
     }
 
     editCharacter() {
@@ -25,6 +55,6 @@ export class MyCharactersComponent implements OnInit {
     }
 
     createNewCharacter() {
-        // TODO
+        this.router.navigate(['new']);
     }
 }

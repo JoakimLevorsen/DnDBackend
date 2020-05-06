@@ -53,16 +53,8 @@ export class DashboardComponent {
             console.log('The dialog was closed');
             console.log(result);
 
-            const campaignToJoinID = result[0];
-            const password = result[1];
-            const joiningCharacterID = result[2]; //FIX: Undefined
-
             if (result.length === 3 && result.every(r => r != null)) {
-                this.joinCampaign(
-                    campaignToJoinID,
-                    password,
-                    joiningCharacterID
-                );
+                this.joinCampaign(result[0], result[1], result[2]);
             }
         });
     }
@@ -83,6 +75,7 @@ export class DashboardComponent {
 @Component({
     selector: 'dashboard-dialog',
     templateUrl: './dashboard.component.dialog.html',
+    styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponentDialog {
     constructor(
@@ -96,8 +89,9 @@ export class DashboardComponentDialog {
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
             this.charactersOwnedByMe =
-                s?.characters?.filter(c => c.owner === s.me) ?? [];
-            console.log('charactersOwnedByMe:', this.charactersOwnedByMe);
+                s?.characters?.filter(
+                    c => c.owner === s.me && c.campaign === -1
+                ) ?? [];
         });
     }
 
