@@ -1,4 +1,4 @@
-import { Campaign } from "./Campaigns";
+import { Campaign } from './Campaigns';
 
 export interface GameStateCampaign extends Campaign {
     dungeonMaster: string;
@@ -15,6 +15,7 @@ export interface GameState {
         xp: number;
         level: number;
         turnIndex: number;
+        health: number;
     }>;
     diceRolls: {
         [index: number]: Array<{
