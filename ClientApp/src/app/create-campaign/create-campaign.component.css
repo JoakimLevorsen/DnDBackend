@@ -11,8 +11,8 @@ input[type='text'] {
 input[type='number'] {
     margin: 8px;
 }
-button {
-    margin-left: 150px;
+.mat-raised-button {
+    margin-top: 5px;
 }
 h2 {
     text-align: center;

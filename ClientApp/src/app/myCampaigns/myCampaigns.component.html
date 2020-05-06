@@ -9,12 +9,15 @@
             <mat-card-content>
                 <p>Participants:</p>
                 <mat-card-subtitle>
-                    <p>{{ campaign.players }</p>
+                    <p>{{ campaign.players }}</p>
                 </mat-card-subtitle>
                 <p>You are playing with:</p>
                 <mat-card-subtitle>
-                    <p>{{ characterName }}</p>
+                    <p>{{ campaign.characterName }}</p>
                 </mat-card-subtitle>
+                <button mat-raised-button color="primary" (click)="onPlay()">
+                    Play
+                </button>
             </mat-card-content>
         </mat-card>
     </div>
@@ -38,12 +41,19 @@
                     <p>{{ dmCampaign.players }}</p>
                 </mat-card-subtitle>
                 <p>Max players: {{ dmCampaign.maxPlayers }}</p>
+                <button mat-raised-button color="primary" (click)="onPlay()">
+                    Play
+                </button>
             </mat-card-content>
         </mat-card>
 
         <div class="row">
             <div class="col-xs-12">
-                <button class="btn-primary" (click)="onCreateNewCampaign()">
+                <button
+                    mat-flat-button
+                    color="primary"
+                    (click)="onCreateNewCampaign()"
+                >
                     Create New Campaign
                 </button>
             </div>

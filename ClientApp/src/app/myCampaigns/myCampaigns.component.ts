@@ -18,11 +18,16 @@ export class MyCampaignsComponent implements OnInit {
         this.socket.gameState$.subscribe(g => {
             if (g) {
                 this.myDmCampaigns = g.ownedCampaigns;
+                this.myCampaigns = g.joinedCampaigns;
             }
         });
     }
 
     onCreateNewCampaign() {
         this.router.navigate(['new']);
+    }
+
+    onPlay() {
+        this.router.navigate(['play']);
     }
 }
