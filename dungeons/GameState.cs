@@ -20,6 +20,7 @@ namespace dungeons
                     .Include("campaign")
                     .Include("cClass")
                     .Include("cRace")
+                    .Include("dungeonMaster")
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
                 List<Campaign> joinedCampaigns = myCharacters
@@ -105,7 +106,7 @@ namespace dungeons
                         turnIndex = c.turnIndex,
                         joinable = c.joinable,
                         maxPlayers = c.maxPlayers,
-                        password = c.password,
+                        password = c.password ?? null,
                         modificationDate = c.modificationDate
                          .ToUniversalTime()
                          .ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
