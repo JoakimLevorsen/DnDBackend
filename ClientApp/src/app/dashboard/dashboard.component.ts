@@ -33,8 +33,9 @@ export class DashboardComponent {
     ngOnInit() {
         this.socket.requestBuilders.campaign.getJoinable();
         this.socket.joinableCampaigns$.subscribe(c => {
+            //Fix: joinableCampaigns: Length 0...
             this.joinableCampaigns = c;
-            console.log('joinableCampaigns:', this.joinableCampaigns); //FIX: Length 0
+            console.log('joinableCampaigns:', this.joinableCampaigns);
         });
     }
 

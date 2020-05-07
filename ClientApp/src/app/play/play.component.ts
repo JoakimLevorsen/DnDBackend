@@ -18,7 +18,7 @@ export class PlayComponent implements OnInit {
     isDungeonMaster: boolean;
     charactersInCampaign: GameState['encounteredCharacters'];
     yourOwnCharacter: GameState['myCharacters'][number];
-    diceType: number = 20; //Hardcoded Dicetype
+    diceType: number = 20; //Note: Hardcoded Dicetype
     diceRollArray: GameState['diceRolls'][number];
     diceRollResult: number;
 
@@ -48,8 +48,7 @@ export class PlayComponent implements OnInit {
                     c => c.owner === s.me && c.campaign === this.campaignID
                 );
                 /* FIX
-                GameState: Characters assigned to campaigns, no joinableCampaigns
-                CurrentCampaign: undefined
+                GameState: no joinableCampaigns --> currentCampaign = undefined
                 DiceRollResult: Returns same result every time )=
                 */
                 this.diceRollArray = s.diceRolls[this.campaignID];

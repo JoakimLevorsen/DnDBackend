@@ -71,6 +71,9 @@
             <mat-card>
                 <h3>Dice roll</h3>
                 <button mat-fab color="primary" (click)="onRoll()">Roll</button>
+                <p *ngIf="diceRollResult != null">
+                    Latest roll: {{ diceRollResult }}
+                </p>
             </mat-card>
         </div>
     </div>
