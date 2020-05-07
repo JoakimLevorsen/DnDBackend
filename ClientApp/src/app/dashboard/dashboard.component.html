@@ -1,11 +1,11 @@
 <div class="flexContainer">
     <mat-card>
-        <div class="flexItem">
+        <div class="flexColoumn">
             <h3>Your last played campaign</h3>
         </div>
     </mat-card>
-    <mat-card class="customMatCard">
-        <div class="flexItem">
+    <mat-card>
+        <div class="flexColoumn">
             <h3>Join new campaign</h3>
             <p>
                 Join a campaign by entering an ID and password below and choose
@@ -17,7 +17,7 @@
         </div>
     </mat-card>
     <mat-card>
-        <div class="flexItem">
+        <div class="flexColoumn">
             <h3>Joinable campaigns</h3>
             <mat-card *ngFor="let c of joinableCampaigns">
                 <mat-card-header>

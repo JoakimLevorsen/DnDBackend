@@ -5,16 +5,10 @@
     align-items: center;
 }
 
-.flexItem {
+.flexColoumn {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-}
-
-.customMatCard {
-    margin: 6em auto;
-    text-align: center;
-    align-items: baseline;
-    padding: 28px;
-    max-width: 350px;
 }
 
 .radioContainer {
