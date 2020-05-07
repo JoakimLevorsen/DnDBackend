@@ -5,34 +5,68 @@
     <div class="flexContainer">
         <mat-card>
             <div class="flexColumn">
-                <h5>Other players in the Campaign:</h5>
+                <mat-card-title>
+                    Other players
+                </mat-card-title>
                 <mat-expansion-panel>
                     <!-- *ngFor="let player of charactersInCampaign" -->
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Player1 name
+                            Name:
                         </mat-panel-title>
-                        <mat-panel-description>
-                            Level: XP:
-                        </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-card-subtitle>
-                        Health: 50
+                        Health:
                     </mat-card-subtitle>
                     <mat-card-subtitle>
-                        Turn: 20
+                        Turn Index:
                     </mat-card-subtitle>
                     <mat-card-subtitle>
                         Race:
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Class:
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Level:
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        XP:
                     </mat-card-subtitle>
                 </mat-expansion-panel>
             </div>
         </mat-card>
 
         <mat-card>
-            <!--*ngFor="let character of myCharacter"-->
             <div class="flexColumn">
-                <mat-card-title> Your character </mat-card-title>
+                <mat-card-title>
+                    Your character
+                </mat-card-title>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ yourOwnCharacter.name }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-card-subtitle>
+                        Health: {{ yourOwnCharacter.health }}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Turn Index: {{ yourOwnCharacter.turnIndex }}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Race: {{ yourOwnCharacter.cRace }}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Class: {{ yourOwnCharacter.cClass }}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        Level: {{ yourOwnCharacter.level }}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        XP: {{ yourOwnCharacter.xp }}
+                    </mat-card-subtitle>
+                </mat-expansion-panel>
             </div>
         </mat-card>
 
