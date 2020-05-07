@@ -41,7 +41,7 @@ namespace dungeons
             {
                 // When a new client connects we add them to the connections, though they are not signed in, so we don't add a client
                 int socketId = ClientIdAssigner.GetInstance().GetId();
-                connections.Append(new KeyValuePair<int, WebSocket>(socketId, socket));
+                connections.AddOrUpdate(socketId, socket, (_, newSocket) => newSocket);
                 while (socket.State == WebSocketState.Open)
                 {
                     var buffer = new byte[1024 * 4];
@@ -164,9 +164,19 @@ namespace dungeons
         public async Task sendPayload(string payload, string userID)
         {
             var recivers = clients.Where(c => c.Value.user.ID == userID);
-            foreach (var r in recivers)
+            foreach (var (key, client) in recivers)
             {
-                await sendPayload(payload, connections[r.Key]);
+                WebSocket? target;
+                if (connections.TryGetValue(key, out target) && target != null)
+                {
+                    await sendPayload(payload, target);
+                }
+                else
+                {
+                    // This means this connection likely does not exist anymore, so we remove it
+                    Client? client1;
+                    clients.TryRemove(key, out client1);
+                }
             }
         }
 
@@ -174,7 +184,11 @@ namespace dungeons
         {
             var byteResponse = System.Text.Encoding.UTF8.GetBytes(payload);
             var byteArray = new ArraySegment<byte>(byteResponse, 0, byteResponse.Length);
-            await reciver.SendAsync(byteArray, WebSocketMessageType.Text, true, CancellationToken.None);
+            // We make sure this reciver is still open
+            if (reciver.State != WebSocketState.Aborted)
+            {
+                await reciver.SendAsync(byteArray, WebSocketMessageType.Text, true, CancellationToken.None);
+            }
         }
 
         async Task sendPayload(string payload, WebSocket[] recivers)
@@ -183,7 +197,10 @@ namespace dungeons
             var byteArray = new ArraySegment<byte>(byteResponse, 0, byteResponse.Length);
             foreach (var reciver in recivers)
             {
-                await reciver.SendAsync(byteArray, WebSocketMessageType.Text, true, CancellationToken.None);
+                if (reciver.State != WebSocketState.Aborted)
+                {
+                    await reciver.SendAsync(byteArray, WebSocketMessageType.Text, true, CancellationToken.None);
+                }
             }
         }
     }
