@@ -13,7 +13,7 @@ class Character {
     public cClass: string;
     public campaignName?: string;
     constructor(
-        character: GameState['characters'][number],
+        character: GameState['myCharacters'][number],
         campaignName: string
     ) {
         Object.assign(this, character);
@@ -36,7 +36,7 @@ export class MyCharactersComponent implements OnInit {
         this.socket.gameState$.subscribe(s => {
             if (s) {
                 this.myCharacters =
-                    s?.characters
+                    s?.myCharacters
                         ?.filter(c => c.owner === s.me)
                         .map(
                             character =>

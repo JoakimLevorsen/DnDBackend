@@ -16,8 +16,8 @@ export class PlayComponent implements OnInit {
     campaignID: number;
     currentCampaign: GameStateCampaign;
     isDungeonMaster: boolean;
-    charactersInCampaign: GameState['characters'];
-    yourOwnCharacter: GameState['characters'][number];
+    charactersInCampaign: GameState['encounteredCharacters'];
+    yourOwnCharacter: GameState['myCharacters'][number];
 
     constructor(
         private router: ActivatedRoute,
@@ -40,10 +40,10 @@ export class PlayComponent implements OnInit {
                 this.isDungeonMaster =
                     this.currentCampaign &&
                     (this.currentCampaign?.dungeonMaster == s.me ?? false);
-                this.charactersInCampaign = s.characters?.filter(
+                this.charactersInCampaign = s.encounteredCharacters?.filter(
                     c => c.campaign === this.campaignID && c.owner != s.me
                 );
-                this.yourOwnCharacter = s.characters?.find(
+                this.yourOwnCharacter = s.myCharacters?.find(
                     c => c.owner === s.me && c.campaign === this.campaignID
                 );
                 console.log('CURRENT CAMPAIGN OBJECT:::', this.currentCampaign);
