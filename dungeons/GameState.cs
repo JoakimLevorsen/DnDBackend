@@ -68,22 +68,32 @@ namespace dungeons
 
                 return JsonConvert.SerializeObject(new
                 {
-                    // We add the remaining characters that were not part of a campaign
-                    characters = allCharactersEncountered
-                        .Concat(myCharacters.Where(c => c.campaign == null))
-                        .Select(c => new
-                        {
-                            owner = c.owner.ID,
-                            campaign = c.campaign == null ? -1 : c.campaign.ID,
-                            cRace = c.cRace.name,
-                            cClass = c.cClass.name,
-                            name = c.name,
-                            ID = c.ID,
-                            health = c.health,
-                            xp = c.xp,
-                            level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
-                            turnIndex = c.turnIndex
-                        }),
+                    myCharacters = myCharacters.Select(c => new
+                    {
+                        owner = c.owner.ID,
+                        campaign = c.campaign == null ? -1 : c.campaign.ID,
+                        cRace = c.cRace.name,
+                        cClass = c.cClass.name,
+                        name = c.name,
+                        ID = c.ID,
+                        health = c.health,
+                        xp = c.xp,
+                        level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
+                        turnIndex = c.turnIndex
+                    }),
+                    encounteredCharacters = allCharactersEncountered.Select(c => new
+                    {
+                        owner = c.owner.ID,
+                        campaign = c.campaign == null ? -1 : c.campaign.ID,
+                        cRace = c.cRace.name,
+                        cClass = c.cClass.name,
+                        name = c.name,
+                        ID = c.ID,
+                        health = c.health,
+                        xp = c.xp,
+                        level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
+                        turnIndex = c.turnIndex
+                    }),
                     diceRolls = rolls,
                     me = me.ID,
                     ownedCampaigns = ownedCampaigns.Select(c => new

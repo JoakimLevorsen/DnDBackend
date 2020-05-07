@@ -13,7 +13,7 @@ import { Campaign } from 'src/websocket/responses/Campaigns';
 export interface DialogData {
     campaignToJoinID: number;
     password: string;
-    charactersOwnedByMe: GameState['characters'];
+    charactersOwnedByMe: GameState['myCharacters'];
     joiningCharacterID: number;
 }
 @Component({
@@ -82,12 +82,12 @@ export class DashboardComponentDialog {
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {}
 
-    charactersOwnedByMe: GameState['characters'];
+    charactersOwnedByMe: GameState['myCharacters'];
 
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
             this.charactersOwnedByMe =
-                s?.characters?.filter(
+                s?.myCharacters?.filter(
                     c => c.owner === s.me && c.campaign === -1
                 ) ?? [];
         });
