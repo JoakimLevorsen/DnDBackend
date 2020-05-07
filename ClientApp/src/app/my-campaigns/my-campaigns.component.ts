@@ -6,13 +6,12 @@ import { GameState } from 'src/websocket/responses/GameState';
 
 @Component({
     selector: 'my-campaigns',
-    templateUrl: './myCampaigns.component.html',
-    styleUrls: ['./myCampaigns.component.css'],
+    templateUrl: './my-campaigns.component.html',
+    styleUrls: ['./my-campaigns.component.css'],
 })
 export class MyCampaignsComponent implements OnInit {
     myCampaigns: Campaign[];
     myDmCampaigns: Campaign[];
-
 
     constructor(private router: Router, private socket: WebSocketService) {}
 
