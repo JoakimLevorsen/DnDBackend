@@ -1,6 +1,11 @@
 <div>
-    <h1>Campaign Name</h1>
-    <h3>Campaign ID: {{ campaignID }} & Password...</h3>
+    <h1>{{ currentCampaign.name }}</h1>
+    <h3>
+        Campaign ID: {{ campaignID }} & Password: {{ currentCampaign.password }}
+    </h3>
+    <h3 *ngIf="currentCampaign.password == null">
+        Campaign ID: {{ campaignID }}
+    </h3>
 
     <div class="flexContainer">
         <div class="flexColumn">
@@ -8,31 +13,30 @@
                 <mat-card-title>
                     Other players
                 </mat-card-title>
-                <mat-expansion-panel>
-                    <!-- *ngFor="let player of charactersInCampaign" -->
+                <mat-expansion-panel
+                    *ngFor="let player of charactersInCampaign"
+                >
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Name:
+                            Name: {{ player.name }}
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-card-subtitle>
-                        Health:
+                        Health: {{ player.health }}
                     </mat-card-subtitle>
                     <mat-card-subtitle>
-                        Turn Index:
+                        Turn Index: {{ player.turnIndex }}
                     </mat-card-subtitle>
                     <mat-card-subtitle>
-                        Race:
+                        Race: {{ player.cRace }}
                     </mat-card-subtitle>
                     <mat-card-subtitle>
-                        Class:
+                        Class: {{ player.cClass }}
                     </mat-card-subtitle>
                     <mat-card-subtitle>
-                        Level:
+                        Level: {{ player.level }}
                     </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        XP:
-                    </mat-card-subtitle>
+                    <mat-card-subtitle> XP: {{ player.xp }} </mat-card-subtitle>
                 </mat-expansion-panel>
             </mat-card>
         </div>

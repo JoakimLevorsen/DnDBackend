@@ -35,7 +35,6 @@ export class DashboardComponent {
         this.socket.joinableCampaigns$.subscribe(c => {
             //Fix: joinableCampaigns: Length 0...
             this.joinableCampaigns = c;
-            console.log('joinableCampaigns:', this.joinableCampaigns);
         });
     }
 

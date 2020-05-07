@@ -48,7 +48,6 @@ export class PlayComponent implements OnInit {
                     c => c.owner === s.me && c.campaign === this.campaignID
                 );
                 /* FIX
-                GameState: no joinableCampaigns --> currentCampaign = undefined
                 DiceRollResult: Returns same result every time )=
                 */
                 this.diceRollArray = s.diceRolls[this.campaignID];
