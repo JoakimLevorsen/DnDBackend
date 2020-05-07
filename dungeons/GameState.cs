@@ -24,27 +24,28 @@ namespace dungeons
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
 
-                List<Campaign> joinedCampaigns = myCharacters
-                    .Select(c => c.campaign)
-                    .Where(c => c != null)
-                    .ToList()!;
+                List<int> campaignIDs = myCharacters
+                    .Where(c => c.campaign != null)
+                    .Select(c => c.campaign!.ID)
+                    .ToList();
+
+                var joinedCampaigns = await context.campaigns
+                    .Where(c => campaignIDs.Contains(c.ID))
+                    .ToListAsync();
 
                 var ownedCampaigns = await context.campaigns
                     .Include("dungeonMaster")
                     .Where(c => c.dungeonMaster.ID == me.ID)
                     .ToListAsync();
 
-                List<int> campaignIds = new List<int>();
-
-                campaignIds.Concat(joinedCampaigns.Select(c => c.ID));
-                campaignIds.Concat(ownedCampaigns.Select(c => c.ID));
+                campaignIDs.AddRange(ownedCampaigns.Select(c => c.ID));
 
                 var allCharactersEncountered = await context.characters
                     .Include("owner")
                     .Include("campaign")
                     .Include("cClass")
                     .Include("cRace")
-                    .Where(c => campaignIds.Contains(c.campaign == null ? -1 : c.campaign.ID))
+                    .Where(c => campaignIDs.Contains(c.campaign == null ? -1 : c.campaign.ID))
                     .ToListAsync();
 
                 Dictionary<int, List<DiceRoll>> rolls = new Dictionary<int, List<DiceRoll>>();
@@ -81,19 +82,22 @@ namespace dungeons
                         level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
                         turnIndex = c.turnIndex
                     }),
-                    encounteredCharacters = allCharactersEncountered.Select(c => new
-                    {
-                        owner = c.owner.ID,
-                        campaign = c.campaign == null ? -1 : c.campaign.ID,
-                        cRace = c.cRace.name,
-                        cClass = c.cClass.name,
-                        name = c.name,
-                        ID = c.ID,
-                        health = c.health,
-                        xp = c.xp,
-                        level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
-                        turnIndex = c.turnIndex
-                    }),
+                    // Where-clause ensures list of encountered characters doesn't include ones own characters
+                    encounteredCharacters = allCharactersEncountered
+                        .Where(c => c.owner.ID != me.ID)
+                        .Select(c => new
+                        {
+                            owner = c.owner.ID,
+                            campaign = c.campaign == null ? -1 : c.campaign.ID,
+                            cRace = c.cRace.name,
+                            cClass = c.cClass.name,
+                            name = c.name,
+                            ID = c.ID,
+                            health = c.health,
+                            xp = c.xp,
+                            level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
+                            turnIndex = c.turnIndex
+                        }),
                     diceRolls = rolls,
                     me = me.ID,
                     ownedCampaigns = ownedCampaigns.Select(c => new
