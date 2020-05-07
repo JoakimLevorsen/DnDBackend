@@ -82,7 +82,7 @@ namespace dungeons
                         level = Math.Floor(Convert.ToDouble(c.xp) / 1000),
                         turnIndex = c.turnIndex
                     }),
-                    // Where-clause ensures list of encountered characters doesn't include ones own characters
+                    // Where-clause ensures list of encountered characters doesn't include one's own characters
                     encounteredCharacters = allCharactersEncountered
                         .Where(c => c.owner.ID != me.ID)
                         .Select(c => new

@@ -37,7 +37,7 @@ export class MyCharactersComponent implements OnInit {
             if (s) {
                 this.myCharacters =
                     s?.myCharacters
-                        ?.filter(c => c.owner === s.me)
+                        ?.filter(c => c.owner === s.me) // Maybe delete?
                         .map(
                             character =>
                                 new Character(

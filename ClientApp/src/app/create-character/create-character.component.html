@@ -1,0 +1,60 @@
+  <div id="top-div">
+    <h2>Create a new character</h2>
+    <form [formGroup]="createCharacterFormGroup" (ngSubmit)="onSubmit(createCharacterFormGroup)">
+      <mat-vertical-stepper linear="false" #stepper>
+        <ng-template matStepperIcon="edit">
+          <mat-icon>done</mat-icon>
+        </ng-template>
+        <mat-step formGroupName="name" [stepControl]="name">
+          <ng-template matStepLabel>Fill out your character's name</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="nameCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step formGroupName="race" [stepControl]="race">
+          <ng-template matStepLabel>Choose your character's race</ng-template>
+          <mat-form-field>
+            <mat-select matInput placeholder="Race" (change)="onSelectClass($event.target.value)"
+              formControlName="raceCtrl" required>
+              <mat-option *ngFor="let race of races" value="race">{{ race }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step formGroupName="class" [stepControl]="class">
+          <ng-template matStepLabel>Choose your character's class</ng-template>
+          <mat-form-field>
+            <mat-select matInput placeholder="Class" (change)="onSelectClass($event.target.value)"
+              formControlName="classCtrl" required>
+              <mat-option *ngFor="let class of classes" value="class">{{ class }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Save Character</ng-template>
+          Your character will have the following custom attributes:<br /><br />
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button type="submit" [disabled]="createCharacterFormGroup.invalid">Save</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </form>
+    <div>
+      <p>Form values: {{ createCharacterFormGroup.value | json }}</p>
+      <p>Character Info: {{ getCharacterInfo() }}</p>
+    </div>
+  </div>
