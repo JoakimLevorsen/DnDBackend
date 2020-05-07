@@ -30,6 +30,7 @@ namespace dungeons
                     .ToList();
 
                 var joinedCampaigns = await context.campaigns
+                    .Include("dungeonMaster")
                     .Where(c => campaignIDs.Contains(c.ID))
                     .ToListAsync();
 
@@ -66,6 +67,8 @@ namespace dungeons
                         .Take(5)
                         .ToListAsync();
                 }
+
+                var joinedCampaignsToInclude = joinedCampaigns.Where(c => c.dungeonMaster != null).ToList();
 
                 return JsonConvert.SerializeObject(new
                 {
