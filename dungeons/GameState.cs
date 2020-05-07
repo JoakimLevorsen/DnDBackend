@@ -55,6 +55,7 @@ namespace dungeons
                     rolls[c.ID] = await context.diceRolls
                         .Include("campaign")
                         .Where(d => d.campaign.ID == c.ID)
+                        .OrderByDescending(d => d.date)
                         .Take(5)
                         .ToListAsync();
 
@@ -64,6 +65,7 @@ namespace dungeons
                     rolls[c.ID] = await context.diceRolls
                         .Include("campaign")
                         .Where(d => d.campaign.ID == c.ID)
+                        .OrderByDescending(d => d.date)
                         .Take(5)
                         .ToListAsync();
                 }
