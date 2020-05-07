@@ -3,8 +3,8 @@
     <h3>Campaign ID: {{ campaignID }} & Password...</h3>
 
     <div class="flexContainer">
-        <mat-card>
-            <div class="flexColumn">
+        <div class="flexColumn">
+            <mat-card>
                 <mat-card-title>
                     Other players
                 </mat-card-title>
@@ -34,20 +34,17 @@
                         XP:
                     </mat-card-subtitle>
                 </mat-expansion-panel>
-            </div>
-        </mat-card>
+            </mat-card>
+        </div>
 
-        <mat-card>
-            <div class="flexColumn">
-                <mat-card-title>
-                    Your character
-                </mat-card-title>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{ yourOwnCharacter.name }}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
+        <div class="flexColumn">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        Your character: {{ yourOwnCharacter.name }}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
                     <mat-card-subtitle>
                         Health: {{ yourOwnCharacter.health }}
                     </mat-card-subtitle>
@@ -66,15 +63,15 @@
                     <mat-card-subtitle>
                         XP: {{ yourOwnCharacter.xp }}
                     </mat-card-subtitle>
-                </mat-expansion-panel>
-            </div>
-        </mat-card>
+                </mat-card-content>
+            </mat-card>
+        </div>
 
-        <mat-card>
-            <div class="flexColumn">
+        <div class="flexColumn">
+            <mat-card>
                 <h3>Dice roll</h3>
                 <button mat-fab color="primary" (click)="onRoll()">Roll</button>
-            </div>
-        </mat-card>
+            </mat-card>
+        </div>
     </div>
 </div>
