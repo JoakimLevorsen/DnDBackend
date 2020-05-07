@@ -18,12 +18,15 @@ export class PlayComponent implements OnInit {
     isDungeonMaster: boolean;
     charactersInCampaign: GameState['characters'];
     yourOwnCharacter: GameState['characters'][number];
+    diceType: number = 20; //Hardcoded Dicetype
+    diceRollArray: GameState['diceRolls'][number];
+    diceRollResult: number;
 
     constructor(
         private router: ActivatedRoute,
         private socket: WebSocketService
     ) {}
-
+    //TODO Find out who's the DM!
     ngOnInit() {
         this.campaignID = Number(
             this.router.snapshot.queryParamMap.get('campaignID')
@@ -32,8 +35,6 @@ export class PlayComponent implements OnInit {
 
         this.socket.gameState$.subscribe(s => {
             if (s) {
-                console.log('Gamestate:::', s);
-
                 this.currentCampaign =
                     s.ownedCampaigns?.find(c => c.ID === this.campaignID) ??
                     s.joinedCampaigns?.find(c => c.ID === this.campaignID);
@@ -46,8 +47,24 @@ export class PlayComponent implements OnInit {
                 this.yourOwnCharacter = s.characters?.find(
                     c => c.owner === s.me && c.campaign === this.campaignID
                 );
-                console.log('CURRENT CAMPAIGN OBJECT:::', this.currentCampaign);
+                /* FIX
+                GameState: Characters assigned to campaigns, no joinableCampaigns
+                CurrentCampaign: undefined
+                DiceRollResult: Returns same result every time )=
+                */
+                this.diceRollArray = s.diceRolls[this.campaignID];
+                this.diceRollResult = this.diceRollArray[
+                    this.diceRollArray.length - 1
+                ].roll;
             }
         });
+    }
+
+    onRoll() {
+        this.socket.requestBuilders.diceRoll({
+            diceType: this.diceType,
+            campaignID: this.campaignID,
+        });
+        console.log('DiceRollTest, Result:::', this.diceRollResult);
     }
 }
