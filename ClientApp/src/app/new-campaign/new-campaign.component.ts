@@ -4,11 +4,11 @@ import { WebSocketService } from 'src/websocket';
 import { FormControl } from '@angular/forms';
 
 @Component({
-    selector: 'CreateCampaign',
-    templateUrl: './create-campaign.component.html',
-    styleUrls: ['./create-campaign.component.css'],
+    selector: 'NewCampaign',
+    templateUrl: './new-campaign.component.html',
+    styleUrls: ['./new-campaign.component.css'],
 })
-export class CreateCampaignComponent implements OnInit {
+export class NewCampaignComponent implements OnInit {
     campaignName = new FormControl();
     joinable = new FormControl();
     maxPlayers = new FormControl();
