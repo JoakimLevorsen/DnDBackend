@@ -50,9 +50,7 @@ export class DashboardComponent {
         );
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result);
-
+            console.log('Dialog Results: ', result);
             if (result.length === 3 && result.every(r => r != null)) {
                 this.joinCampaign(result[0], result[1], result[2]);
             }
