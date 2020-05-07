@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Campaign } from 'src/websocket/responses/Campaigns';
 import { WebSocketService } from 'src/websocket';
+import { GameState } from 'src/websocket/responses/GameState';
 
 @Component({
     selector: 'my-campaigns',
@@ -12,6 +13,7 @@ export class MyCampaignsComponent implements OnInit {
     myCampaigns: Campaign[];
     myDmCampaigns: Campaign[];
 
+
     constructor(private router: Router, private socket: WebSocketService) {}
 
     ngOnInit() {
@@ -19,6 +21,7 @@ export class MyCampaignsComponent implements OnInit {
             if (g) {
                 this.myDmCampaigns = g.ownedCampaigns;
                 this.myCampaigns = g.joinedCampaigns;
+
             }
         });
     }
@@ -27,7 +30,9 @@ export class MyCampaignsComponent implements OnInit {
         this.router.navigate(['new']);
     }
 
-    onPlay() {
-        this.router.navigate(['play']);
+    onPlay(id: number) {
+        this.router.navigate(['play'], {
+            queryParams: { campaignID: id },
+        });
     }
 }

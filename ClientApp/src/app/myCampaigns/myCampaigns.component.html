@@ -4,18 +4,20 @@
         <h2>Campaigns you are playing in:</h2>
         <mat-card *ngFor="let campaign of myCampaigns">
             <mat-card-header>
-                <mat-card-title> {{ campaign.name }}</mat-card-title>
+                <mat-card-title>{{ campaign.name }}</mat-card-title>
+                <mat-card-subtitle>
+                    ID: {{ campaign.ID }} / Password:
+                    {{ campaign.password }}
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p>Participants:</p>
-                <mat-card-subtitle>
-                    <p>{{ campaign.players }}</p>
-                </mat-card-subtitle>
                 <p>You are playing with:</p>
-                <mat-card-subtitle>
-                    <p>{{ campaign.characterName }}</p>
-                </mat-card-subtitle>
-                <button mat-raised-button color="primary" (click)="onPlay()">
+                <mat-card-subtitle> </mat-card-subtitle>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="onPlay(campaign.ID)"
+                >
                     Play
                 </button>
             </mat-card-content>
@@ -36,12 +38,15 @@
                 </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p>Participants:</p>
-                <mat-card-subtitle>
-                    <p>{{ dmCampaign.players }}</p>
-                </mat-card-subtitle>
-                <p>Max players: {{ dmCampaign.maxPlayers }}</p>
-                <button mat-raised-button color="primary" (click)="onPlay()">
+                <p>
+                    Max players:
+                    {{ dmCampaign.maxPlayers }}
+                </p>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="onPlay(dmCampaign.ID)"
+                >
                     Play
                 </button>
             </mat-card-content>
