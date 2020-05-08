@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import requestBuilder from './requestBuilder';
 import { Campaign, isCampaign, isCampaignArray } from './responses/Campaigns';
 import { GameState, GameStateCampaign } from './responses/GameState';
+import { isDiceRoll } from './responses/DiceRoll';
 
 @Injectable({
     providedIn: 'root',
@@ -57,6 +58,31 @@ export class WebSocketService {
             }
             if (isCampaignArray(parsed)) {
                 this.joinableCampaigns$.next(parsed);
+                return;
+            }
+            if (isDiceRoll(parsed)) {
+                // Then we modidy the current gameState to fit
+                const gotGameState = this.gameState$.value;
+                if (gotGameState) {
+                    const currentRolls =
+                        gotGameState.diceRolls?.[parsed.campaign] ?? [];
+                    if (currentRolls.length !== 0) {
+                        const newRolls = [...currentRolls, parsed]
+                            .sort(
+                                (a, b) =>
+                                    new Date(b.date).getTime() -
+                                    new Date(a.date).getTime()
+                            )
+                            .slice(0, 5);
+                        this.gameState$.next({
+                            ...gotGameState,
+                            diceRolls: {
+                                ...gotGameState.diceRolls,
+                                [parsed.campaign]: newRolls,
+                            },
+                        });
+                    }
+                }
                 return;
             }
             // Since we've parsed some JSON, and the response was not the other types, this must be a gameState

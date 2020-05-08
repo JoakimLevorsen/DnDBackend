@@ -31,7 +31,7 @@ export interface GameState {
     }>;
     diceRolls: {
         [index: number]: Array<{
-            ID: number;
+            ID?: number;
             diceType: number;
             roll: number;
             date: string;
