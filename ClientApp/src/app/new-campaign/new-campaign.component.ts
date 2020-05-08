@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebSocketService } from 'src/websocket';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'NewCampaign',
@@ -9,10 +9,10 @@ import { FormControl } from '@angular/forms';
     styleUrls: ['./new-campaign.component.css'],
 })
 export class NewCampaignComponent implements OnInit {
-    campaignName = new FormControl();
+    campaignName = new FormControl('', Validators.required);
     joinable = new FormControl();
-    maxPlayers = new FormControl();
-    password = new FormControl();
+    maxPlayers = new FormControl('', Validators.required);
+    password = new FormControl('', Validators.required);
 
     constructor(private router: Router, private socket: WebSocketService) {}
 

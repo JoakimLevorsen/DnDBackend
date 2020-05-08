@@ -1,20 +1,39 @@
-form {
-    margin-left: 20em;
-}
-input[type='radio'] {
-    margin: 8px;
-    margin-left: 10px;
-}
-input[type='text'] {
-    margin: 8px;
-}
-input[type='number'] {
-    margin: 8px;
-}
 .mat-raised-button {
     margin-top: 5px;
 }
 h2 {
     text-align: center;
     margin-top: 20px;
+}
+mat-card {
+    margin: 6em auto;
+    text-align: center;
+    align-items: baseline;
+    padding: 28px;
+    max-width: 350px;
+}
+
+.basicFlex {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.inputWidth {
+    min-width: 150px;
+    max-width: 500px;
+    width: 90%;
+    padding-bottom: 6px;
+}
+
+mat-radio-button {
+    margin-left: 15px;
+    padding-top: 6px;
+}
+mat-label {
+    margin-right: 20px;
+    margin-left: -34px;
+    font-size: 15px;
 }

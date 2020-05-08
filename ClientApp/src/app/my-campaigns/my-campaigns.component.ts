@@ -20,7 +20,6 @@ export class MyCampaignsComponent implements OnInit {
             if (g) {
                 this.myDmCampaigns = g.ownedCampaigns;
                 this.myCampaigns = g.joinedCampaigns;
-
             }
         });
     }
