@@ -224,18 +224,18 @@ namespace dungeons
                     return "CampaignManager joinCampaign 20: Wrong password.";
                 }
             }
+            var numOfCharactersInCampaign = await context.characters.Include("campaign").Where(c => c.campaign != null && c.campaign.ID == campaignToJoin.ID).CountAsync();
+            // If we were to join, would there be too many?
+            if (numOfCharactersInCampaign + 1 > campaignToJoin.maxPlayers)
+            {
+                return "CampaignManager joinCampaign 21: Already full";
+            }
 
             joiningCharacter.campaign = campaignToJoin;
+            joiningCharacter.turnIndex = numOfCharactersInCampaign;
             context.characters.Update(joiningCharacter);
+            context.campaigns.Update(campaignToJoin);
             await context.SaveChangesAsync();
-
-            var numOfCharactersInCampaign = await context.characters.Include("campaign").Where(c => c.campaign != null && c.campaign.ID == campaignToJoin.ID).CountAsync();
-            if (numOfCharactersInCampaign >= campaignToJoin.maxPlayers)
-            {
-                campaignToJoin.joinable = false;
-                context.campaigns.Update(campaignToJoin);
-                await context.SaveChangesAsync();
-            }
             return await GameState.gameStateFor(client);
         }
     }
