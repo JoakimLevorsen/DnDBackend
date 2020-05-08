@@ -26,3 +26,7 @@ html {
     display: flex;
     align-items: center;
 }
+
+.title {
+    margin-bottom: 13px;
+}

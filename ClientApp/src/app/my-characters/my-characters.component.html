@@ -1,40 +1,58 @@
 <div id="top-div">
-  <mat-accordion class="headers-align">
-    <mat-expansion-panel #thisPanel *ngFor="let character of myCharacters">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ character.name }}
-        </mat-panel-title>
-        <mat-panel-description>
-          Level {{ character.level }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>
-        Health: {{ character.health }}<br />
-        XP: {{ character.xp }}<br />
-        Race: {{ character.cRace }}<br />
-        Class: {{ character.cClass }}
-      </p>
-      <p *ngIf="character.campaignName">Campaign: {{ character.campaignName }}</p>
-      <mat-action-row>
-        <div class="nameInput">
-          <mat-form-field>
-            <mat-label>Fill in your character's new name</mat-label>
-            <input matInput placeholder="{{ character.name }}" [formControl]="name" />
-          </mat-form-field>
-          <button mat-button color="accent" (click)="updateName(character)">
-            Update Name
-          </button>
-        </div>
-        <button mat-button color="primary" (click)="deleteCharacter(character.ID)">
-          Delete Character
+    <mat-accordion class="headers-align">
+        <mat-expansion-panel #thisPanel *ngFor="let character of myCharacters">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ character.name }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Level {{ character.level }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>
+                Health: {{ character.health }}<br />
+                XP: {{ character.xp }}<br />
+                Race: {{ character.cRace }}<br />
+                Class: {{ character.cClass }}
+            </p>
+            <p *ngIf="character.campaignName">
+                Campaign: {{ character.campaignName }}
+            </p>
+            <mat-action-row>
+                <div class="nameInput">
+                    <mat-form-field>
+                        <mat-label>Fill in your character's new name</mat-label>
+                        <input
+                            matInput
+                            placeholder="{{ character.name }}"
+                            [formControl]="name"
+                        />
+                    </mat-form-field>
+                    <button
+                        mat-button
+                        color="accent"
+                        (click)="updateName(character)"
+                    >
+                        Update Name
+                    </button>
+                </div>
+                <button
+                    mat-button
+                    color="primary"
+                    (click)="deleteCharacter(character.ID)"
+                >
+                    Delete Character
+                </button>
+            </mat-action-row>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="wrapper">
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="createNewCharacter()"
+        >
+            Create New Character
         </button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <div class="wrapper">
-    <button mat-flat-button color="primary" (click)="createNewCharacter()">
-      Create New Character
-    </button>
-  </div>
+    </div>
 </div>
