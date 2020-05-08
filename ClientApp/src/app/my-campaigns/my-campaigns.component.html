@@ -11,8 +11,12 @@
                 </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p>You are playing with:</p>
-                <mat-card-subtitle> No one I can find!!</mat-card-subtitle>
+                <p>
+                    Joinable:
+
+                    {{ campaign.joinable }}
+                </p>
+
                 <button
                     mat-raised-button
                     color="primary"
@@ -42,6 +46,8 @@
                     Max players:
                     {{ dmCampaign.maxPlayers }}
                 </p>
+                <p>Joinable: {{ dmCampaign.joinable }}</p>
+
                 <button
                     mat-raised-button
                     color="primary"
