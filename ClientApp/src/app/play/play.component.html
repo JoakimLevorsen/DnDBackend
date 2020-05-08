@@ -78,17 +78,21 @@
             </div>
 
             <div class="flexColumn">
-                <mat-card>
+                <mat-card class="diceContainer">
                     <h3>Dice roll</h3>
-                    <button mat-button color="primary" (click)="onRoll()">
-                        Roll
-                    </button>
                     <b>Previous</b>
                     <p *ngFor="let diceRoll of diceRolls">
                         {{ diceRoll.stringDate }}
                         {{ diceRoll.roll }} rolled on a
                         {{ diceRoll.diceType }} sided die
                     </p>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="onRoll()"
+                    >
+                        Roll
+                    </button>
                 </mat-card>
             </div>
         </div>
