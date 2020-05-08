@@ -154,9 +154,10 @@ namespace dungeons
                 try
                 {
                     characterToUpdate = await context.characters
+                        .Where(c => c.ID == updatePayload.ID)
                         .Include("owner")
                         .Include("campaign")
-                        .Where(c => c.ID == updatePayload.ID)
+                        .Include("dungeonMaster")
                         .SingleAsync();
                 }
                 catch

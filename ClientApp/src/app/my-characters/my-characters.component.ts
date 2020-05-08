@@ -63,13 +63,11 @@ export class MyCharactersComponent implements OnInit {
     }
 
     updateName(character: Character) {
-        console.log(`New name: ${this.name.value}`);
         if (this.name.value !== null) {
             this.socket.requestBuilders.character.updateName({
                 ID: character.ID,
                 name: this.name.value,
             });
-            console.log('Sent to database');
         }
         this.name.reset();
     }

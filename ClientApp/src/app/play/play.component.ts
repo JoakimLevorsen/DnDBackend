@@ -6,6 +6,14 @@ import {
     GameStateCampaign,
     GameState,
 } from 'src/websocket/responses/GameState';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
+
+class Editable {
+    public name: string;
+    public ID: number;
+    public XP: number;
+    public health: number;
+}
 
 @Component({
     selector: 'play',
@@ -18,14 +26,19 @@ export class PlayComponent implements OnInit {
     isDungeonMaster: boolean;
     charactersInCampaign: GameState['encounteredCharacters'] = [];
     player: GameState['myCharacters'][number];
-    diceType: number = 20; //Note: Hardcoded Dicetype
+    diceType = 20; // Note: Hardcoded Dicetype
     diceRolls: GameState['diceRolls'][number] = [];
     diceRollResult: number;
     log = '';
+    characterToEdit: Editable;
+
+    xpCtrl: FormControl;
+    healthCtrl: FormControl;
 
     constructor(
         private router: ActivatedRoute,
-        private socket: WebSocketService
+        private socket: WebSocketService,
+        private formBuilder: FormBuilder
     ) {}
     //TODO Find out who's the DM!
     ngOnInit() {
@@ -62,6 +75,28 @@ export class PlayComponent implements OnInit {
                 ].roll;
             }
         });
+    }
+
+    editCharacterStats(toEdit) {
+        this.characterToEdit = {
+            name: toEdit.name,
+            ID: toEdit.ID,
+            XP: toEdit.xp,
+            health: toEdit.health,
+        };
+
+        this.xpCtrl = new FormControl(toEdit.xp, Validators.min(0));
+        this.healthCtrl = new FormControl(toEdit.health, Validators.min(0));
+    }
+
+    saveNewStats() {
+        if (this.xpCtrl.value !== null && this.healthCtrl.value !== null) {
+            this.socket.requestBuilders.character.updateStats({
+                ID: this.characterToEdit.ID,
+                xp: this.xpCtrl.value,
+                health: this.healthCtrl.value,
+            });
+        }
     }
 
     logChanged(e: any) {
