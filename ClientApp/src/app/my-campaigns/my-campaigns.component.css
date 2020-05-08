@@ -4,12 +4,15 @@ mat-card {
     min-width: 200px;
     width: max-content;
 }
+
 mat-card-content {
     padding: 16px;
 }
 h1 {
     text-align: center;
+    margin-left: 17.5px;
 }
+
 .row {
     margin-left: 22px;
     margin-right: 40px;
@@ -32,12 +35,15 @@ h1 {
     margin-top: 40px;
     margin-bottom: 10px;
 }
+
 h1 {
     margin-top: 20px;
 }
+
 h2 {
     font-size: x-large;
 }
+
 .vl {
     border-left: 1px solid;
     color: lightgray;
@@ -45,14 +51,20 @@ h2 {
     margin-top: 40px;
     margin-right: 20px;
 }
+
 .mat-raised-button {
     width: max-content;
 }
+
 .mat-flat-button {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 4px;
     width: max-content;
+}
+
+.create-button {
+    margin-top: 20px;
 }
 .playButton {
     width: 100%;
