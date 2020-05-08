@@ -1,34 +1,38 @@
 .headers-align .mat-expansion-panel-header-title,
 .headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
+    flex-basis: 0;
 }
 
 .headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
 mat-form-field {
-  margin-right: 12px;
+    margin-right: 12px;
 }
 
 #top-div {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 mat-panel-title {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .wrapper {
-  margin-top: 20px;
-  text-align: center;
+    margin-top: 20px;
+    text-align: center;
 }
 
 mat-panel-description {
-  text-align: right;
+    text-align: right;
+}
+
+.editRow {
+    display: flex;
 }
 
 .nameInput {
-  margin-right: auto;
+    flex: 1;
 }

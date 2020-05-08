@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-content>
             <form (ngSubmit)="onSubmit()">
-                <h3>Login with your Javabog user</h3>
+                <h3>Sing in with your Javabog user</h3>
                 <mat-form-field class="inputWidth">
                     <input
                         matInput
@@ -43,7 +43,12 @@
                         Please enter your password!
                     </mat-error>
                 </mat-form-field>
-                <button type="submit" mat-raised-button class="btn-primary">
+                <button
+                    color="primary"
+                    type="submit"
+                    mat-raised-button
+                    class="btn-primary"
+                >
                     Sign In
                 </button>
             </form>
