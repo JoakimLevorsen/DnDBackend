@@ -31,9 +31,8 @@ h1 {
     flex: 0 50%;
 }
 
-.col-lg-3 {
-    margin-top: 40px;
-    margin-bottom: 10px;
+.col-lg-6 {
+    margin-top: 20px;
 }
 
 h1 {
@@ -64,7 +63,7 @@ h2 {
 }
 
 .create-button {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 .playButton {
     width: 100%;
@@ -76,5 +75,6 @@ h2 {
 .fabHolder {
     display: flex;
     justify-content: space-around;
-    margin-top: 50px;
+    margin-top: 32px;
+    margin-bottom: 15px;
 }
