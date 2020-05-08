@@ -1,84 +1,105 @@
-<div>
-    <h1>{{ currentCampaign.name }}</h1>
-    <h3>
-        Campaign ID: {{ campaignID }} & Password: {{ currentCampaign.password }}
-    </h3>
-    <h3 *ngIf="currentCampaign.password == null">
-        Campaign ID: {{ campaignID }}
-    </h3>
+<div class="outer">
+    <div class="top">
+        <h1>{{ currentCampaign?.name }}</h1>
+        <h3>
+            Campaign ID: {{ campaignID }} & Password:
+            {{ currentCampaign.password }}
+        </h3>
+        <h3 *ngIf="currentCampaign.password == null">
+            Campaign ID: {{ campaignID }}
+        </h3>
 
-    <div class="flexContainer">
-        <div class="flexColumn">
-            <mat-card>
-                <mat-card-title>
-                    Other players
-                </mat-card-title>
-                <mat-expansion-panel
-                    *ngFor="let player of charactersInCampaign"
-                >
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Name: {{ player.name }}
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-card-subtitle>
-                        Health: {{ player.health }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Turn Index: {{ player.turnIndex }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Race: {{ player.cRace }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Class: {{ player.cClass }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Level: {{ player.level }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle> XP: {{ player.xp }} </mat-card-subtitle>
-                </mat-expansion-panel>
-            </mat-card>
-        </div>
-
-        <div class="flexColumn">
-            <mat-card>
-                <mat-card-header>
+        <div class="flexContainer">
+            <div class="flexColumn">
+                <mat-card>
                     <mat-card-title>
-                        Your character: {{ yourOwnCharacter.name }}
+                        Other players
                     </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-card-subtitle>
-                        Health: {{ yourOwnCharacter.health }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Turn Index: {{ yourOwnCharacter.turnIndex }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Race: {{ yourOwnCharacter.cRace }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Class: {{ yourOwnCharacter.cClass }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        Level: {{ yourOwnCharacter.level }}
-                    </mat-card-subtitle>
-                    <mat-card-subtitle>
-                        XP: {{ yourOwnCharacter.xp }}
-                    </mat-card-subtitle>
-                </mat-card-content>
-            </mat-card>
-        </div>
+                    <mat-accordion>
+                        <mat-expansion-panel
+                            *ngFor="let player of charactersInCampaign"
+                        >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Name: {{ player.name }}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-card-subtitle>
+                                Health: {{ player.health }}
+                            </mat-card-subtitle>
+                            <mat-card-subtitle>
+                                Turn Index: {{ player.turnIndex }}
+                            </mat-card-subtitle>
+                            <mat-card-subtitle>
+                                Race: {{ player.cRace }}
+                            </mat-card-subtitle>
+                            <mat-card-subtitle>
+                                Class: {{ player.cClass }}
+                            </mat-card-subtitle>
+                            <mat-card-subtitle>
+                                Level: {{ player.level }}
+                            </mat-card-subtitle>
+                            <mat-card-subtitle>
+                                XP: {{ player.xp }}
+                            </mat-card-subtitle>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card>
+            </div>
 
-        <div class="flexColumn">
-            <mat-card>
-                <h3>Dice roll</h3>
-                <button mat-fab color="primary" (click)="onRoll()">Roll</button>
-                <p *ngIf="diceRollResult != null">
-                    Latest roll: {{ diceRollResult }}
-                </p>
-            </mat-card>
+            <div class="flexColumn">
+                <mat-card *ng-if="player != null">
+                    <mat-card-header>
+                        <mat-card-title>
+                            Your character: {{ player.name }}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-card-subtitle>
+                            Health: {{ player.health }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Turn Index: {{ player.turnIndex }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Race: {{ player.cRace }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Class: {{ player.cClass }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Level: {{ player.level }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            XP: {{ player.xp }}
+                        </mat-card-subtitle>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="flexColumn">
+                <mat-card>
+                    <h3>Dice roll</h3>
+                    <button mat-button color="primary" (click)="onRoll()">
+                        Roll
+                    </button>
+                    <b>Previous</b>
+                    <p *ngFor="let diceRoll of diceRolls">
+                        {{ diceRoll.stringDate }}
+                        {{ diceRoll.roll }} rolled on a
+                        {{ diceRoll.diceType }} sided die
+                    </p>
+                </mat-card>
+            </div>
         </div>
     </div>
+    <mat-form-field appearance="fill" class="log">
+        <mat-label>Adventure log</mat-label>
+        <textarea
+            matInput
+            (input)="logChanged($event)"
+            [value]="log"
+            [disabled]="player != null"
+        ></textarea>
+    </mat-form-field>
 </div>
