@@ -20,3 +20,8 @@ mat-card {
     width: 90%;
     padding-bottom: 6px;
 }
+
+button {
+    width: calc(100% - 32px);
+    margin: 0 16px;
+}

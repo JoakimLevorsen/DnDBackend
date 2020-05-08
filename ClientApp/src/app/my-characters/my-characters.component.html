@@ -18,29 +18,23 @@
             <p *ngIf="character.campaignName">
                 Campaign: {{ character.campaignName }}
             </p>
-            <mat-action-row>
-                <div class="nameInput">
-                    <mat-form-field>
-                        <mat-label>Fill in your character's new name</mat-label>
-                        <input
-                            matInput
-                            placeholder="{{ character.name }}"
-                            [formControl]="name"
-                        />
-                    </mat-form-field>
-                    <button
-                        mat-button
-                        color="accent"
-                        (click)="updateName(character)"
-                    >
-                        Update Name
-                    </button>
-                </div>
+            <mat-action-row class="editRow">
+                <mat-form-field class="nameInput">
+                    <mat-label>New character name</mat-label>
+                    <input
+                        matInput
+                        placeholder="{{ character.name }}"
+                        [formControl]="name"
+                    />
+                </mat-form-field>
                 <button
-                    mat-button
+                    mat-flat-button
                     color="primary"
-                    (click)="deleteCharacter(character.ID)"
+                    (click)="updateName(character)"
                 >
+                    Update Name
+                </button>
+                <button mat-button (click)="deleteCharacter(character.ID)">
                     Delete Character
                 </button>
             </mat-action-row>
