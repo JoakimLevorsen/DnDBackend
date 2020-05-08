@@ -1,25 +1,25 @@
-const type = "Character";
+const type = 'Character';
 
 const wrapPayload = (payload: object) =>
     JSON.stringify({ type, payload: JSON.stringify(payload) });
 
 interface createCharacterProps {
     name: string;
-    class: string;
     race: string;
+    characterClass: string;
 }
 
 const create = (socket: WebSocket) => (payload: createCharacterProps) =>
     socket.send(
         wrapPayload({
-            type: "Create",
+            type: 'Create',
             payload: JSON.stringify(payload),
         })
     );
 
 // We cannot declare the constant as 'delete' since it's reserved
 const deleteC = (socket: WebSocket) => (id: string) =>
-    socket.send(wrapPayload({ type: "Delete", payload: id }));
+    socket.send(wrapPayload({ type: 'Delete', payload: id }));
 
 interface updateNameProps {
     ID: number;
@@ -28,7 +28,7 @@ interface updateNameProps {
 
 const updateName = (socket: WebSocket) => (payload: updateNameProps) =>
     socket.send(
-        wrapPayload({ type: "Update", payload: JSON.stringify(payload) })
+        wrapPayload({ type: 'Update', payload: JSON.stringify(payload) })
     );
 
 interface updateStatsProps {
@@ -40,7 +40,7 @@ interface updateStatsProps {
 
 const updateStats = (socket: WebSocket) => (payload: updateStatsProps) =>
     socket.send(
-        wrapPayload({ type: "Update", payload: JSON.stringify(payload) })
+        wrapPayload({ type: 'Update', payload: JSON.stringify(payload) })
     );
 
 export default (socket: WebSocket) => ({
