@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameState } from 'src/websocket/responses/GameState';
 import { WebSocketService } from 'src/websocket';
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from '@angular/material/dialog';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 class Character {
     public name: string;
@@ -28,9 +34,14 @@ class Character {
 })
 export class MyCharactersComponent implements OnInit {
     panelOpenState = false;
+    name = new FormControl();
     myCharacters: Character[];
 
-    constructor(private router: Router, private socket: WebSocketService) {}
+    constructor(
+        private router: Router,
+        private socket: WebSocketService,
+        public dialog: MatDialog
+    ) {}
 
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
@@ -51,8 +62,20 @@ export class MyCharactersComponent implements OnInit {
         });
     }
 
-    editCharacter() {
-        // TODO
+    updateName(character: Character) {
+        console.log(`New name: ${this.name.value}`);
+        if (this.name.value !== null) {
+            this.socket.requestBuilders.character.updateName({
+                ID: character.ID,
+                name: this.name.value,
+            });
+            console.log('Sent to database');
+        }
+        this.name.reset();
+    }
+
+    deleteCharacter(ID: string) {
+        this.socket.requestBuilders.character.delete(ID);
     }
 
     createNewCharacter() {

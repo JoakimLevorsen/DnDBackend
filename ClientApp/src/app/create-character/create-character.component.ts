@@ -8,11 +8,6 @@ import {
     AbstractControl,
 } from '@angular/forms';
 
-export interface Race {
-    value: string;
-    viewValue: string;
-}
-
 @Component({
     selector: 'new-character',
     templateUrl: './create-character.component.html',
@@ -59,38 +54,17 @@ export class CreateCharacterComponent implements OnInit {
         });
     }
 
-    getCharacterInfo() {
-        return `Name: ${
-            this.createCharacterFormGroup.get('name.nameCtrl').value
-        },
-                Race: ${
-                    this.createCharacterFormGroup.get('race.raceCtrl').value
-                },
-                Class: ${
-                    this.createCharacterFormGroup.get('class.classCtrl').value
-                }`;
-    }
-
-    onSelectClass(selectedClass: any) {
-        this.createCharacterFormGroup
-            .get('class.classCtrl')
-            .setValue(selectedClass);
-    }
-
-    onSelectRace(selectedRace: any) {
-        this.createCharacterFormGroup
-            .get('race.raceCtrl')
-            .setValue(selectedRace);
+    cancel() {
+        this.router.navigate(['my-characters']);
     }
 
     onSubmit() {
-        /*this.socket.requestBuilders.campaign.create({
-            name: this.campaignName.value,
-            joinable: this.joinable.value,
-            maxPlayers: this.maxPlayers.value,
-            password: this.password.value,
-        });*/
-        // var test = this.nameFormGroup.value.nameCtrl; FYI
-        // this.router.navigate(['my-characters']);
+        this.socket.requestBuilders.character.create({
+            name: this.createCharacterFormGroup.get('name.nameCtrl').value,
+            race: this.createCharacterFormGroup.get('race.raceCtrl').value,
+            characterClass: this.createCharacterFormGroup.get('class.classCtrl')
+                .value,
+        });
+        this.router.navigate(['my-characters']);
     }
 }

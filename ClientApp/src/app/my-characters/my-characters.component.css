@@ -21,9 +21,14 @@ mat-panel-title {
 }
 
 .wrapper {
+  margin-top: 20px;
   text-align: center;
 }
 
 mat-panel-description {
   text-align: right;
+}
+
+.nameInput {
+  margin-right: auto;
 }

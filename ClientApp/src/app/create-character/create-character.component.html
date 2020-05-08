@@ -20,7 +20,7 @@
           <mat-form-field>
             <mat-select matInput placeholder="Race" (change)="onSelectClass($event.target.value)"
               formControlName="raceCtrl" required>
-              <mat-option *ngFor="let race of races" value="race">{{ race }}</mat-option>
+              <mat-option *ngFor="let race of races" [value]="race">{{ race }}</mat-option>
             </mat-select>
           </mat-form-field>
           <div>
@@ -34,7 +34,7 @@
           <mat-form-field>
             <mat-select matInput placeholder="Class" (change)="onSelectClass($event.target.value)"
               formControlName="classCtrl" required>
-              <mat-option *ngFor="let class of classes" value="class">{{ class }}</mat-option>
+              <mat-option *ngFor="let class of classes" [value]="class">{{ class }}</mat-option>
             </mat-select>
           </mat-form-field>
           <div>
@@ -46,15 +46,19 @@
         <mat-step>
           <ng-template matStepLabel>Save Character</ng-template>
           Your character will have the following custom attributes:<br /><br />
-          <div>
+          Name: {{ createCharacterFormGroup.get('name.nameCtrl').value }}<br />
+          Race: {{ createCharacterFormGroup.get('race.raceCtrl').value }}<br />
+          Class: {{ createCharacterFormGroup.get('class.classCtrl').value }}
+          <div id="step-four-div">
             <button mat-button matStepperPrevious type="button">Back</button>
             <button mat-button type="submit" [disabled]="createCharacterFormGroup.invalid">Save</button>
           </div>
         </mat-step>
       </mat-vertical-stepper>
     </form>
-    <div>
-      <p>Form values: {{ createCharacterFormGroup.value | json }}</p>
-      <p>Character Info: {{ getCharacterInfo() }}</p>
+    <div class="wrapper">
+      <button mat-flat-button color="primary" (click)="cancel()">
+        Cancel
+      </button>
     </div>
   </div>
