@@ -37,3 +37,8 @@ p {
     flex: 0;
     position: relative;
 }
+
+.diceContainer {
+    display: flex;
+    flex-direction: column;
+}
