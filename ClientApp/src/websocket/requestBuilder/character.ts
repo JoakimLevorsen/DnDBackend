@@ -35,7 +35,6 @@ interface updateStatsProps {
     ID: number;
     xp?: number;
     health?: number;
-    turnIndex?: number;
 }
 
 const updateStats = (socket: WebSocket) => (payload: updateStatsProps) =>

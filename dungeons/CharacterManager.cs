@@ -135,7 +135,6 @@ namespace dungeons
             public string? name;
             public int? xp;
             public int? health;
-            public int? turnIndex;
         }
 
         private static async Task<string> update(string payload, Client client)
@@ -187,7 +186,6 @@ namespace dungeons
                     }
                     characterToUpdate.xp = updatePayload.xp ?? characterToUpdate.xp;
                     characterToUpdate.health = updatePayload.health ?? characterToUpdate.health;
-                    characterToUpdate.turnIndex = updatePayload.turnIndex ?? characterToUpdate.turnIndex;
                     context.characters.Update(characterToUpdate);
                     await context.SaveChangesAsync();
                 }
