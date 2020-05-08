@@ -1,6 +1,6 @@
 <div id="top-div">
   <mat-accordion class="headers-align">
-    <mat-expansion-panel *ngFor="let character of myCharacters">
+    <mat-expansion-panel #thisPanel *ngFor="let character of myCharacters">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ character.name }}
@@ -17,14 +17,23 @@
       </p>
       <p *ngIf="character.campaignName">Campaign: {{ character.campaignName }}</p>
       <mat-action-row>
-        <button mat-button color="accent" (click)="editCharacter()">
-          Edit
+        <div class="nameInput">
+          <mat-form-field>
+            <mat-label>Fill in your character's new name</mat-label>
+            <input matInput placeholder="{{ character.name }}" [formControl]="name" />
+          </mat-form-field>
+          <button mat-button color="accent" (click)="updateName(character)">
+            Update Name
+          </button>
+        </div>
+        <button mat-button color="primary" (click)="deleteCharacter(character.ID)">
+          Delete Character
         </button>
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
   <div class="wrapper">
-    <button class="btn-primary" (click)="createNewCharacter()">
+    <button mat-flat-button color="primary" (click)="createNewCharacter()">
       Create New Character
     </button>
   </div>

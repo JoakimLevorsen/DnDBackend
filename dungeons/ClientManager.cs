@@ -128,16 +128,16 @@ namespace dungeons
                     switch (message.type)
                     {
                         case MessagePayloadType.Campaign:
-                            await sendPayload(await CampaignManager.accept(message.payload, client), socket);
+                            await sendPayload(await CampaignManager.accept(message.payload, client), client.user.ID);
                             break;
                         case MessagePayloadType.Character:
-                            await sendPayload(await CharacterManager.accept(message.payload, client), socket);
+                            await sendPayload(await CharacterManager.accept(message.payload, client), client.user.ID);
                             break;
                         case MessagePayloadType.DiceRoll:
-                            await sendPayload(await DiceRollManager.accept(message.payload, client), socket);
+                            await sendPayload(await DiceRollManager.accept(message.payload, client), client.user.ID);
                             break;
                         case MessagePayloadType.Update:
-                            await sendPayload(await GameState.gameStateFor(client), socket);
+                            await sendPayload(await GameState.gameStateFor(client), client.user.ID);
                             break;
                         default:
                             await sendPayload($"ClientManager recivedMessage 0: Invalid message type { message.type }", socket);

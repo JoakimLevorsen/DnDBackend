@@ -1,38 +1,50 @@
 mat-card {
-    margin-top: 15px;
-    min-width: 200px;
-    width: max-content;
+  margin-top: 15px;
+  min-width: 200px;
+  width: 350px;
 }
+
 mat-card-content {
-    margin-left: 17.5px;
+  margin-left: 17.5px;
 }
+
 .row {
-    margin-left: 22px;
-    margin-right: 40px;
+  margin-left: 22px;
+  margin-right: 40px;
 }
+
 .col-lg-3 {
-    margin-top: 40px;
-    margin-bottom: 10px;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
+
 h1 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
+
 h2 {
-    font-size: x-large;
+  font-size: x-large;
 }
+
 .vl {
-    border-left: 1px solid;
-    color: lightgray;
-    height: auto;
-    margin-top: 40px;
-    margin-right: 20px;
+  border-left: 1px solid;
+  color: lightgray;
+  height: auto;
+  margin-top: 40px;
+  margin-right: 20px;
 }
+
 .mat-raised-button {
-    width: max-content;
+  width: max-content;
 }
+
 .mat-flat-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 4px;
-    width: max-content;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 4px;
+  width: max-content;
+}
+
+.create-button {
+  margin-top: 20px;
 }

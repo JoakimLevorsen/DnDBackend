@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace dungeons
 {
@@ -115,6 +116,19 @@ namespace dungeons
                 await context.SaveChangesAsync();
             }
             else return "CampaignManager update 8: You are not the Dungeon Master for this campaign.";
+            // We also send a new gameState to the other players (we know it's everyone but the dungeon master)
+            List<string> clientIdsToUpdate = new List<string>();
+            clientIdsToUpdate.Add(campaignToUpdate.dungeonMaster.ID);
+            var charactersInCampaign = await context.characters
+                .Include("owner")
+                .Where(c => c.campaign != null && c.campaign.ID == campaignToUpdate.ID)
+                .Select(c => c.owner.ID)
+                .ToListAsync();
+            clientIdsToUpdate.Concat(charactersInCampaign);
+            foreach (var clientID in clientIdsToUpdate)
+            {
+                await ClientManager.GetInstance().sendGameState(clientID);
+            }
             return await GameState.gameStateFor(client);
         }
 

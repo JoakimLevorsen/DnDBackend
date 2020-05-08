@@ -1,6 +1,14 @@
+.outer,
 .flexContainer {
     display: flex;
-    flex-direction: row;
+}
+
+.outer {
+    flex-direction: column;
+    height: 100%;
+}
+
+.flexContainer {
     justify-content: space-between;
     align-items: center;
 }
@@ -19,4 +27,13 @@ h5,
 h6,
 p {
     text-align: center;
+}
+
+.top {
+    flex: 1;
+}
+
+.log {
+    flex: 0;
+    position: relative;
 }
