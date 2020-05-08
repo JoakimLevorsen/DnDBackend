@@ -16,7 +16,11 @@
     flex-direction: column;
 }
 
-h1,
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
 h2,
 h3,
 h4,
@@ -27,4 +31,5 @@ p {
 }
 mat-card {
     text-align: center;
+    margin-left: 25px;
 }
