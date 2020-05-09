@@ -1,4 +1,4 @@
-const type = "DiceRoll";
+const type = 'DiceRoll';
 
 const wrapPayload = (payload: object) =>
     JSON.stringify({ type, payload: JSON.stringify(payload) });

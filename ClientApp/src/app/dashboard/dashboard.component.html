@@ -1,39 +1,63 @@
-<div class="flexContainer">
-    <mat-card>
-        <div class="flexItem">
-            <h3>Your last played campaign</h3>
-        </div>
-    </mat-card>
-    <mat-card class="customMatCard">
-        <div class="flexItem">
-            <h3>Join new campaign</h3>
-            <p>
-                Join a campaign by entering an ID and password below and choose
-                a character.
-            </p>
-            <button mat-raised-button (click)="openDialog()">
-                Join campaign!
-            </button>
-        </div>
-    </mat-card>
-    <mat-card>
-        <div class="flexItem">
-            <h3>Joinable campaigns</h3>
-            <mat-card *ngFor="let c of joinableCampaigns">
-                <mat-card-header>
-                    <mat-card-title> {{ campaign.name }}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>Participants:</p>
-                    <mat-card-subtitle>
-                        <p>players:</p>
-                    </mat-card-subtitle>
-                    <p>You are playing with:</p>
-                    <mat-card-subtitle>
-                        <p>characterName</p>
-                    </mat-card-subtitle>
-                </mat-card-content>
+<div>
+    <h1>Dashboard</h1>
+    <div class="flexContainer">
+        <div class="flexColoumn">
+            <mat-card class="main-mat-card">
+                <h3>Info!</h3>
+                <p>
+                    Welcome to this DND Site. Its purpose is to help you and
+                    your friends keep track of your DnD game. Here, you can
+                    create campaigns and characters and view and edit their
+                    stats. You can even roll a cool D20 type dice
+                </p>
+                <p>
+                    To view all your characters and to create new ones, go to My
+                    Characters
+                </p>
+                <p>
+                    To view all your campaigns and to create a new one (and be
+                    the Dungeon Master), go to My Campaigns
+                </p>
+                <p>
+                    Once you have created a character, join a campaign to your
+                    right!
+                </p>
+                <p>Click "PLAY" from My Campaigns!</p>
             </mat-card>
         </div>
-    </mat-card>
+        <div class="flexColoumn">
+            <mat-card class="main-mat-card">
+                <h3>Join new campaign</h3>
+                <p>
+                    Join a campaign by entering an ID and password below and
+                    choose a character.
+                </p>
+                <button
+                    mat-raised-button
+                    (click)="openDialog()"
+                    color="primary"
+                >
+                    Join campaign!
+                </button>
+            </mat-card>
+        </div>
+        <div class="flexColoumn">
+            <mat-card
+                class="main-mat-card"
+                *ngIf="joinableCampaigns.length != 0"
+            >
+                <h3>Joinable campaigns</h3>
+                <div *ngFor="let c of joinableCampaigns; let i = index">
+                    <div class="joinableCampaign">
+                        <b>{{ c.name }}</b>
+                        <p>ID: {{ c.ID }}</p>
+                    </div>
+                    <div
+                        class="vl"
+                        *ngIf="i + 1 != joinableCampaigns.length"
+                    ></div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
 </div>

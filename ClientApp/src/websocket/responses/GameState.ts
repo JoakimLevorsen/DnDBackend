@@ -5,7 +5,19 @@ export interface GameStateCampaign extends Campaign {
 }
 
 export interface GameState {
-    characters: Array<{
+    myCharacters: Array<{
+        owner: string;
+        campaign: number;
+        cRace: string;
+        cClass: string;
+        name: string;
+        ID: number;
+        health: number;
+        xp: number;
+        level: number;
+        turnIndex: number;
+    }>;
+    encounteredCharacters: Array<{
         owner: string;
         campaign: number;
         cRace: string;
@@ -19,7 +31,7 @@ export interface GameState {
     }>;
     diceRolls: {
         [index: number]: Array<{
-            ID: number;
+            ID?: number;
             diceType: number;
             roll: number;
             date: string;

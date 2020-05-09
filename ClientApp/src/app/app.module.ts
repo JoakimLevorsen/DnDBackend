@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, CanActivate, Router } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -9,17 +9,16 @@ import {
     DashboardComponent,
     DashboardComponentDialog,
 } from './dashboard/dashboard.component';
-import { MyCampaignsComponent } from './myCampaigns/myCampaigns.component';
-import { MyCharactersComponent } from './myCharacters/myCharacters.component';
+import { MyCampaignsComponent } from './my-campaigns/my-campaigns.component';
+import { MyCharactersComponent } from './my-characters/my-characters.component';
 import { WebSocketService } from 'src/websocket';
 import { LoginComponent } from './login/login.component';
 import { PlayComponent } from './play/play.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { MatCardModule } from '@angular/material/card';
-import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { CreateCharacterComponent } from './create-character/create-character.component';
+import { NewCampaignComponent } from './new-campaign/new-campaign.component';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -29,7 +28,7 @@ export class AuthGuardService implements CanActivate {
         if (this.socket.auth$.value) {
             return true;
         }
-        //return true;
+        // return true;
         this.router.navigate(['/login']);
         return false;
     }
@@ -45,7 +44,8 @@ export class AuthGuardService implements CanActivate {
         MyCharactersComponent,
         LoginComponent,
         PlayComponent,
-        CreateCampaignComponent,
+        CreateCharacterComponent,
+        NewCampaignComponent,
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,7 +55,6 @@ export class AuthGuardService implements CanActivate {
         BrowserAnimationsModule,
         AppMaterialModule,
         MatCardModule,
-        MatExpansionModule,
         RouterModule.forRoot([
             {
                 path: '',
@@ -74,8 +73,21 @@ export class AuthGuardService implements CanActivate {
                 canActivate: [AuthGuardService],
             },
             { path: 'login', component: LoginComponent },
-            { path: 'play', component: PlayComponent },
-            { path: 'new', component: CreateCampaignComponent },
+            {
+                path: 'play',
+                component: PlayComponent,
+                canActivate: [AuthGuardService],
+            },
+            {
+                path: 'new-character',
+                component: CreateCharacterComponent,
+                canActivate: [AuthGuardService],
+            },
+            {
+                path: 'new',
+                component: NewCampaignComponent,
+                canActivate: [AuthGuardService],
+            },
         ]),
     ],
     entryComponents: [DashboardComponentDialog],

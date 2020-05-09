@@ -13,7 +13,7 @@ import { Campaign } from 'src/websocket/responses/Campaigns';
 export interface DialogData {
     campaignToJoinID: number;
     password: string;
-    charactersOwnedByMe: GameState['characters'];
+    charactersOwnedByMe: GameState['myCharacters'];
     joiningCharacterID: number;
 }
 @Component({
@@ -34,7 +34,6 @@ export class DashboardComponent {
         this.socket.requestBuilders.campaign.getJoinable();
         this.socket.joinableCampaigns$.subscribe(c => {
             this.joinableCampaigns = c;
-            console.log('joinableCampaigns:', this.joinableCampaigns); //FIX: Length 0
         });
     }
 
@@ -50,9 +49,7 @@ export class DashboardComponent {
         );
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result);
-
+            console.log('Dialog Results: ', result);
             if (result.length === 3 && result.every(r => r != null)) {
                 this.joinCampaign(result[0], result[1], result[2]);
             }
@@ -84,12 +81,12 @@ export class DashboardComponentDialog {
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {}
 
-    charactersOwnedByMe: GameState['characters'];
+    charactersOwnedByMe: GameState['myCharacters'];
 
     ngOnInit() {
         this.socket.gameState$.subscribe(s => {
             this.charactersOwnedByMe =
-                s?.characters?.filter(
+                s?.myCharacters?.filter(
                     c => c.owner === s.me && c.campaign === -1
                 ) ?? [];
         });

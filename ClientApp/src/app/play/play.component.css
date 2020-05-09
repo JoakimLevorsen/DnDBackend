@@ -1,11 +1,49 @@
+.outer,
 .flexContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
 }
-h1 {
-    text-align: center;
+
+.outer {
+  flex-direction: column;
+  height: 100%;
 }
-h2 {
-    text-align: center;
+
+.flexContainer {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexColoumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-align: center;
+}
+
+.top {
+  flex: 1;
+}
+
+.log {
+  flex: 0;
+  position: relative;
+}
+
+.diceContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.editContainer {
+  display: flex;
+  flex-direction: column;
 }

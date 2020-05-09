@@ -1,0 +1,74 @@
+<div class="basicFlex">
+    <mat-card>
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()">
+                <mat-card-title>Create your new Campaign</mat-card-title>
+                <mat-form-field class="inputWidth">
+                    <input
+                        matInput
+                        type="text"
+                        [formControl]="campaignName"
+                        placeholder="Campaign Name"
+                        required
+                    />
+                    <mat-error
+                        *ngIf="!campaignName.hasError('required')"
+                    ></mat-error>
+                    <mat-error *ngIf="campaignName.hasError('required')">
+                        Please enter a Campaign Name!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-radio-group class="joinable" [formControl]="joinable">
+                    <mat-label> Joinable: </mat-label>
+                    <mat-radio-button class="joinable" value="true"
+                        >True</mat-radio-button
+                    >
+                    <mat-radio-button class="joinable" value="false"
+                        >False</mat-radio-button
+                    >
+                </mat-radio-group>
+
+                <mat-form-field class="inputWidth">
+                    <input
+                        matInput
+                        type="number"
+                        [formControl]="maxPlayers"
+                        placeholder="Max Players"
+                        required
+                    />
+                    <mat-error
+                        *ngIf="!maxPlayers.hasError('required')"
+                    ></mat-error>
+                    <mat-error *ngIf="maxPlayers.hasError('required')">
+                        Please enter a number!
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="inputWidth">
+                    <input
+                        matInput
+                        type="text"
+                        [formControl]="password"
+                        placeholder="Password"
+                        required
+                    />
+                    <mat-error
+                        *ngIf="!password.hasError('required')"
+                    ></mat-error>
+                    <mat-error *ngIf="password.hasError('required')">
+                        Please enter a Password!
+                    </mat-error>
+                </mat-form-field>
+
+                <button
+                    type="submit"
+                    mat-raised-button
+                    color="primary"
+                    [disabled]="password.hasError('required')"
+                >
+                    Save
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

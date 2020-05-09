@@ -135,7 +135,6 @@ namespace dungeons
             public string? name;
             public int? xp;
             public int? health;
-            public int? turnIndex;
         }
 
         private static async Task<string> update(string payload, Client client)
@@ -155,15 +154,15 @@ namespace dungeons
                 try
                 {
                     characterToUpdate = await context.characters
-                        .Include("owner")
-                        .Include("campaign")
-                        .Include("dungeonMaster")
                         .Where(c => c.ID == updatePayload.ID)
+                        .Include(c => c.owner)
+                        .Include(c => c.campaign)
+                        .ThenInclude(campaign => campaign.dungeonMaster)
                         .SingleAsync();
                 }
                 catch
                 {
-                    return $"CharacterManager update 9: Character for ID { updatePayload.ID } does not exist";
+                    return $"CharacterManager update 9: Character with ID { updatePayload.ID } does not exist";
                 }
                 if (updatePayload.name != null)
                 {
@@ -182,13 +181,14 @@ namespace dungeons
                         return "CharacterManager update 11: Can't change these things yet man";
                     }
                     var dungeonMasterID = characterToUpdate.campaign.dungeonMaster.ID;
+
+
                     if (dungeonMasterID != client.user.ID)
                     {
                         return "CharacterManager update 12: You have no power here";
                     }
                     characterToUpdate.xp = updatePayload.xp ?? characterToUpdate.xp;
                     characterToUpdate.health = updatePayload.health ?? characterToUpdate.health;
-                    characterToUpdate.turnIndex = updatePayload.turnIndex ?? characterToUpdate.turnIndex;
                     context.characters.Update(characterToUpdate);
                     await context.SaveChangesAsync();
                 }

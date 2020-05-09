@@ -1,0 +1,77 @@
+<h1>My Campaigns</h1>
+<div class="row">
+    <div class="col-lg-6">
+        <h2>Campaigns you are playing in:</h2>
+        <div class="cardContainer">
+            <mat-card *ngFor="let campaign of myCampaigns">
+                <mat-card-header>
+                    <mat-card-title>{{ campaign.name }}</mat-card-title>
+                    <mat-card-subtitle>
+                        ID: {{ campaign.ID }} / Password:
+                        {{ campaign.password }}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Joinable:
+
+                        {{ campaign.joinable }}
+                    </p>
+
+                    <button
+                        mat-raised-button
+                        class="playButton"
+                        color="primary"
+                        (click)="onPlay(campaign.ID)"
+                    >
+                        Play
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="vl"></div>
+
+    <div class="col-lg-6">
+        <h2>Campaigns where you are the DM:</h2>
+        <div class="cardContainer">
+            <mat-card *ngFor="let dmCampaign of myDmCampaigns">
+                <mat-card-header>
+                    <mat-card-title> {{ dmCampaign.name }}</mat-card-title>
+                    <mat-card-subtitle>
+                        ID: {{ dmCampaign.ID }} / Password:
+                        {{ dmCampaign.password }}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        Max players:
+                        {{ dmCampaign.maxPlayers }}
+                    </p>
+                    <p>Joinable: {{ dmCampaign.joinable }}</p>
+
+                    <button
+                        mat-raised-button
+                        class="playButton"
+                        color="primary"
+                        (click)="onPlay(dmCampaign.ID)"
+                    >
+                        Play
+                    </button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="fabHolder">
+            <button
+                class="fab"
+                mat-fab
+                color="primary"
+                (click)="onCreateNewCampaign()"
+            >
+                +
+            </button>
+        </div>
+    </div>
+</div>

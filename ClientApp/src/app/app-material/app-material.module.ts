@@ -15,6 +15,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     declarations: [],
@@ -35,6 +38,9 @@ import { FormsModule } from '@angular/forms';
         MatCardModule,
         FormsModule,
         MatRadioModule,
+        MatExpansionModule,
+        MatStepperModule,
+        MatSelectModule,
     ],
     exports: [
         MatButtonModule,
@@ -51,6 +57,9 @@ import { FormsModule } from '@angular/forms';
         MatTabsModule,
         MatCardModule,
         MatRadioModule,
+        MatExpansionModule,
+        MatStepperModule,
+        MatSelectModule,
     ],
 })
 export class AppMaterialModule {}
