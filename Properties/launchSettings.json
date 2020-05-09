@@ -18,7 +18,7 @@
         "D_D_Backend": {
             "commandName": "Project",
             "launchBrowser": true,
-            "applicationUrl": "https://*:80",
+            "applicationUrl": "https://*:80;http://*:*",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
