@@ -22,11 +22,7 @@ namespace D_D_Backend
                 {
                     webBuilder
                     .UseUrls(
-                        "http://localhost:5000",
-                        "http://localhost:5001",
-                        "http://130.225.170.238:5000",
-                        "http://130.225.170.238:5001",
-                        "http://130.225.170.238:80"
+                        "http://*:80"
                     )
                     .UseStartup<Startup>();
                 });
