@@ -22,7 +22,7 @@ export interface DialogData {
     styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-    joinableCampaigns: Campaign[];
+    joinableCampaigns: Campaign[] = [];
 
     constructor(
         private socket: WebSocketService,
