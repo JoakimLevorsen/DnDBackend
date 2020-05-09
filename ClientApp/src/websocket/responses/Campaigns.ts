@@ -17,6 +17,8 @@ export const isCampaign = (input: any): input is Campaign =>
             case 'turnIndex':
             case 'maxPlayers':
                 return typeof value === 'number';
+            case 'dungeonMaster':
+                if (value === null) return true;
             case 'name':
             case 'log':
             case 'password':
