@@ -33,7 +33,7 @@ namespace dungeons
                 try
                 {
                     campaign = await context.campaigns
-                        .Include("dungeonMaster")
+                        .Include(c => c.dungeonMaster)
                         .Where(c => c.ID == message.campaignID)
                         .SingleAsync();
                 }
@@ -56,8 +56,8 @@ namespace dungeons
                 await context.diceRolls.AddAsync(roll);
                 await context.SaveChangesAsync();
                 var charactersInCampaign = await context.characters
-                    .Include("campaign")
-                    .Include("owner")
+                    .Include(c => c.campaign)
+                    .Include(c => c.owner)
                     .Where(c => c.campaign != null && c.campaign.ID == campaign.ID)
                     .Select(c => c.owner.ID)
                     .ToListAsync();

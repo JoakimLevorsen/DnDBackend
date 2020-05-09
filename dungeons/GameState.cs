@@ -17,10 +17,10 @@ namespace dungeons
                 var me = await context.users.FindAsync(client.user.ID);
 
                 var myCharacters = await context.characters
-                    .Include("owner")
-                    .Include("campaign")
-                    .Include("cClass")
-                    .Include("cRace")
+                    .Include(c => c.owner)
+                    .Include(c => c.campaign)
+                    .Include(c => c.cClass)
+                    .Include(c => c.cRace)
                     .Where(c => c.owner.ID == me.ID)
                     .ToListAsync();
 
@@ -30,22 +30,22 @@ namespace dungeons
                     .ToList();
 
                 var joinedCampaigns = await context.campaigns
-                    .Include("dungeonMaster")
+                    .Include(c => c.dungeonMaster)
                     .Where(c => campaignIDs.Contains(c.ID))
                     .ToListAsync();
 
                 var ownedCampaigns = await context.campaigns
-                    .Include("dungeonMaster")
+                    .Include(c => c.dungeonMaster)
                     .Where(c => c.dungeonMaster.ID == me.ID)
                     .ToListAsync();
 
                 campaignIDs.AddRange(ownedCampaigns.Select(c => c.ID));
 
                 var allCharactersEncountered = await context.characters
-                    .Include("owner")
-                    .Include("campaign")
-                    .Include("cClass")
-                    .Include("cRace")
+                    .Include(c => c.owner)
+                    .Include(c => c.campaign)
+                    .Include(c => c.cClass)
+                    .Include(c => c.cRace)
                     .Where(c => campaignIDs.Contains(c.campaign == null ? -1 : c.campaign.ID))
                     .ToListAsync();
 
@@ -53,7 +53,7 @@ namespace dungeons
                 foreach (var c in ownedCampaigns)
                 {
                     rolls[c.ID] = await context.diceRolls
-                        .Include("campaign")
+                        .Include(c => c.campaign)
                         .Where(d => d.campaign.ID == c.ID)
                         .OrderByDescending(d => d.date)
                         .Take(5)
@@ -63,7 +63,7 @@ namespace dungeons
                 foreach (var c in joinedCampaigns)
                 {
                     rolls[c.ID] = await context.diceRolls
-                        .Include("campaign")
+                        .Include(c => c.campaign)
                         .Where(d => d.campaign.ID == c.ID)
                         .OrderByDescending(d => d.date)
                         .Take(5)

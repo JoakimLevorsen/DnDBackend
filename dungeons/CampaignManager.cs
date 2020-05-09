@@ -96,7 +96,7 @@ namespace dungeons
             try
             {
                 campaignToUpdate = await context.campaigns
-                    .Include("dungeonMaster")
+                    .Include(c => c.dungeonMaster)
                     .SingleAsync(c => c.ID == message.ID);
             }
             catch
@@ -120,7 +120,7 @@ namespace dungeons
             List<string> clientIdsToUpdate = new List<string>();
             clientIdsToUpdate.Add(campaignToUpdate.dungeonMaster.ID);
             var charactersInCampaign = await context.characters
-                .Include("owner")
+                .Include(c => c.owner)
                 .Where(c => c.campaign != null && c.campaign.ID == campaignToUpdate.ID)
                 .Select(c => c.owner.ID)
                 .ToListAsync();
@@ -139,7 +139,7 @@ namespace dungeons
             try
             {
                 campaignToDelete = await context.campaigns
-                    .Include("dungeonMaster")
+                    .Include(c => c.dungeonMaster)
                     .SingleAsync(c => c.ID == IDToUse);
             }
             catch
@@ -173,9 +173,25 @@ namespace dungeons
 
         private static async Task<string> getJoinable(Client client, GameContext context)
         {
-            var joinableCampaigns = await context.campaigns.Where(c => c.joinable == true).ToListAsync();
-            if (joinableCampaigns.Count() == 0) return "CampaignManager getJoinable 13: No joinable campaigns.";
-            else return JsonConvert.SerializeObject(joinableCampaigns);
+            var joinableCampaigns = await context.campaigns
+                .Where(c =>
+                    c.joinable == true
+                    // We should also filter out campaigns with too many players
+                    && c.dungeonMaster.ID != client.user.ID
+                    && context.characters
+                        .Include(c => c.campaign)
+                        .Include(c => c.owner)
+                        .Where(character =>
+                            character.campaign != null
+                            && character.campaign.ID == c.ID
+                            && character.owner.ID == client.user.ID
+                        )
+                        .Count() == 0
+                )
+                .OrderByDescending(c => c.modificationDate)
+                .Take(10)
+                .ToListAsync();
+            return JsonConvert.SerializeObject(joinableCampaigns);
         }
 
         private static async Task<string> joinCampaign(string payload, Client client, GameContext context)
@@ -224,7 +240,13 @@ namespace dungeons
                     return "CampaignManager joinCampaign 20: Wrong password.";
                 }
             }
-            var numOfCharactersInCampaign = await context.characters.Include("campaign").Where(c => c.campaign != null && c.campaign.ID == campaignToJoin.ID).CountAsync();
+            var numOfCharactersInCampaign = await context.characters
+                .Include(c => c.campaign)
+                .Where(c =>
+                    c.campaign != null
+                    && c.campaign.ID == campaignToJoin.ID
+                )
+                .CountAsync();
             // If we were to join, would there be too many?
             if (numOfCharactersInCampaign + 1 > campaignToJoin.maxPlayers)
             {
