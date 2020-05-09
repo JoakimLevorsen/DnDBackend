@@ -41,3 +41,20 @@ p {
     text-align: left;
     margin-bottom: 10px;
 }
+
+.vl {
+    border-top: 1px solid;
+    color: lightgray;
+    width: auto;
+    margin: 5px 8px;
+}
+
+.joinableCampaign {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 8px;
+}
+
+.joinableCampaign > * {
+    margin: 0;
+}

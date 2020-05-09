@@ -47,19 +47,16 @@
                 *ngIf="joinableCampaigns.length != 0"
             >
                 <h3>Joinable campaigns</h3>
-                <mat-card
-                    class="sub-mat-card"
-                    *ngFor="let c of joinableCampaigns"
-                >
-                    <mat-card-header>
-                        <mat-card-title>
-                            {{ c.name }}
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <mat-card-subtitle> ID: {{ c.ID }} </mat-card-subtitle>
-                    </mat-card-content>
-                </mat-card>
+                <div *ngFor="let c of joinableCampaigns; let i = index">
+                    <div class="joinableCampaign">
+                        <b>{{ c.name }}</b>
+                        <p>ID: {{ c.ID }}</p>
+                    </div>
+                    <div
+                        class="vl"
+                        *ngIf="i + 1 != joinableCampaigns.length"
+                    ></div>
+                </div>
             </mat-card>
         </div>
     </div>
