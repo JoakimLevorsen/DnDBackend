@@ -20,15 +20,15 @@ export class WebSocketService {
     private _newestCampaign?: GameStateCampaign;
 
     startSocket() {
-        this.socket = new WebSocket('wss://localhost:5001/ws');
+        this.socket = new WebSocket('wss://130.225.170.238:5001/ws');
         this.socket.addEventListener('open', o => {
             console.log('did open', o);
             this.announcement$.next('Opened');
         });
         this.socket.addEventListener('message', r => this.onMessage(r));
-        this.socket.addEventListener('error', o => console.log('e', o));
-        this.socket.addEventListener('close', o =>
-            console.log('server closed', o)
+        this.socket.addEventListener('error', e => console.log('error', e));
+        this.socket.addEventListener('close', c =>
+            console.log('server closed', c)
         );
     }
 
