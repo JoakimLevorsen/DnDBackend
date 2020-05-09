@@ -12,14 +12,12 @@ import { isDiceRoll } from './responses/DiceRoll';
 export class WebSocketService {
     private socket: WebSocket;
     private _username?: string;
-    announcement$: BehaviorSubject<string> = new BehaviorSubject('');
-    auth$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-    joinableCampaigns$: BehaviorSubject<Campaign[]> = new BehaviorSubject([]);
-    fetchedCampaigns$: BehaviorSubject<
-        Map<number, Campaign>
-    > = new BehaviorSubject(new Map());
+    announcement$ = new BehaviorSubject('');
+    auth$ = new BehaviorSubject(false);
+    joinableCampaigns$ = new BehaviorSubject<Campaign[]>([]);
+    fetchedCampaigns$ = new BehaviorSubject(new Map<number, Campaign>());
+    gameState$ = new BehaviorSubject<GameState | null>(null);
     private _newestCampaign?: GameStateCampaign;
-    gameState$: BehaviorSubject<GameState | null> = new BehaviorSubject(null);
 
     startSocket() {
         this.socket = new WebSocket('wss://localhost:5001/ws');
