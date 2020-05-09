@@ -2,7 +2,7 @@
     <h1>Dashboard</h1>
     <div class="flexContainer">
         <div class="flexColoumn">
-            <mat-card>
+            <mat-card class="main-mat-card">
                 <h3>Info!</h3>
                 <p>
                     Welcome to this DND Site. Its purpose is to help you and
@@ -26,7 +26,7 @@
             </mat-card>
         </div>
         <div class="flexColoumn">
-            <mat-card>
+            <mat-card class="main-mat-card">
                 <h3>Join new campaign</h3>
                 <p>
                     Join a campaign by entering an ID and password below and
@@ -42,9 +42,15 @@
             </mat-card>
         </div>
         <div class="flexColoumn">
-            <mat-card *ngIf="joinableCampaigns.length != 0">
+            <mat-card
+                class="main-mat-card"
+                *ngIf="joinableCampaigns.length != 0"
+            >
                 <h3>Joinable campaigns</h3>
-                <mat-card *ngFor="let c of joinableCampaigns">
+                <mat-card
+                    class="sub-mat-card"
+                    *ngFor="let c of joinableCampaigns"
+                >
                     <mat-card-header>
                         <mat-card-title>
                             {{ c.name }}

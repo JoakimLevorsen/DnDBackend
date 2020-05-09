@@ -21,15 +21,23 @@ h1 {
     margin-top: 20px;
 }
 
+h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
 h2,
-h3,
 h4,
 h5,
 h6,
 p {
     text-align: center;
 }
-mat-card {
+.main-mat-card {
     text-align: center;
     margin-left: 25px;
+}
+
+.sub-mat-card {
+    text-align: left;
+    margin-bottom: 10px;
 }
