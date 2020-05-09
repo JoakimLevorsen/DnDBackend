@@ -29,6 +29,10 @@ p {
   text-align: center;
 }
 
+h1 {
+  font-family: critical-role-play;
+}
+
 .top {
   flex: 1;
 }
@@ -38,12 +42,26 @@ p {
   position: relative;
 }
 
-.diceContainer {
+.diceContainer,
+.editContainer {
   display: flex;
   flex-direction: column;
 }
 
-.editContainer {
+.turnContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.buttonWrapper {
+  margin-top: 10px;
 }
