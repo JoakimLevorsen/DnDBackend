@@ -155,9 +155,9 @@ namespace dungeons
                 {
                     characterToUpdate = await context.characters
                         .Where(c => c.ID == updatePayload.ID)
-                        .Include("owner")
-                        .Include("campaign")
-                        .Include("dungeonMaster")
+                        .Include(c => c.owner)
+                        .Include(c => c.campaign)
+                        .ThenInclude(campaign => campaign.dungeonMaster)
                         .SingleAsync();
                 }
                 catch
@@ -181,6 +181,8 @@ namespace dungeons
                         return "CharacterManager update 11: Can't change these things yet man";
                     }
                     var dungeonMasterID = characterToUpdate.campaign.dungeonMaster.ID;
+
+
                     if (dungeonMasterID != client.user.ID)
                     {
                         return "CharacterManager update 12: You have no power here";
