@@ -29,4 +29,7 @@ export class NewCampaignComponent implements OnInit {
         });
         this.router.navigate(['my-campaigns']);
     }
+    onCancel() {
+        this.router.navigate(['my-campaigns']);
+    }
 }

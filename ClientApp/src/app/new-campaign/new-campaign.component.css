@@ -11,6 +11,7 @@ mat-card {
     align-items: baseline;
     padding: 28px;
     max-width: 350px;
+    margin-bottom: -32px;
 }
 
 .basicFlex {
@@ -36,4 +37,13 @@ mat-label {
     margin-right: 20px;
     margin-left: -34px;
     font-size: 15px;
+}
+.wrapper {
+    margin-top: 48px;
+    margin-left: 50px;
+    text-align: center;
+    width: 1008px;
+}
+.mat-flat-button {
+    width: 110px;
 }

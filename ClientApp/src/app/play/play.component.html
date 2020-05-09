@@ -1,86 +1,107 @@
 <div class="outer">
-  <div class="top">
-    <h1>{{ currentCampaign?.name }}</h1>
-    <h3>
-      Campaign ID: {{ campaignID }} & Password:
-      {{ currentCampaign.password }}
-    </h3>
-    <h3 *ngIf="currentCampaign.password == null">
-      Campaign ID: {{ campaignID }}
-    </h3>
+    <div class="top">
+        <h1>{{ currentCampaign?.name }}</h1>
+        <h3>
+            Campaign ID: {{ campaignID }} & Password:
+            {{ currentCampaign.password }}
+        </h3>
+        <h3 *ngIf="currentCampaign.password == null">
+            Campaign ID: {{ campaignID }}
+        </h3>
 
-    <div class="flexContainer">
-      <div class="flexColumn">
-        <mat-card>
-          <mat-card-title>
-            Other players
-          </mat-card-title>
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let player of charactersInCampaign">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{ player.name }}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-card-subtitle>
-                Level: {{ player.level }}
-              </mat-card-subtitle>
-              Race: {{ player.cRace }}<br />
-              Class: {{ player.cClass }}<br /><br />
-              XP: {{ player.xp }}<br />
-              Health: {{ player.health }}
-              <mat-action-row *ngIf="isDungeonMaster">
-                <button mat-button (click)="editCharacterStats(player)">Edit Stats</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </mat-card>
-      </div>
+        <div class="flexContainer">
+            <div class="flexColumn">
+                <mat-card>
+                    <mat-card-title>
+                        Other players
+                    </mat-card-title>
+                    <mat-accordion>
+                        <mat-expansion-panel
+                            *ngFor="let player of charactersInCampaign"
+                        >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{ player.name }}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-card-subtitle>
+                                Level: {{ player.level }}
+                            </mat-card-subtitle>
+                            Race: {{ player.cRace }}<br />
+                            Class: {{ player.cClass }}<br /><br />
+                            XP: {{ player.xp }}<br />
+                            Health: {{ player.health }}
+                            <mat-action-row *ngIf="isDungeonMaster">
+                                <button
+                                    mat-button
+                                    (click)="editCharacterStats(player)"
+                                >
+                                    Edit Stats
+                                </button>
+                            </mat-action-row>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card>
+            </div>
 
-      <div class="flexColumn">
-        <mat-card *ngIf="player != null">
-          <mat-card-header>
-            <mat-card-title>
-              Your character: {{ player.name }}
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-card-subtitle>
-              Health: {{ player.health }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Turn Index: {{ player.turnIndex }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Race: {{ player.cRace }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Class: {{ player.cClass }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Level: {{ player.level }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              XP: {{ player.xp }}
-            </mat-card-subtitle>
-          </mat-card-content>
-        </mat-card>
-        <mat-card *ngIf="characterToEdit != null" class="editContainer">
-          <h3>Edit {{ characterToEdit.name }}'s stats</h3>
-          <mat-form-field>
-            <mat-label>XP</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.XP }}" [formControl]="xpCtrl">
-            <mat-error *ngIf="xpCtrl.invalid">XP must be positive</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Health</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.health }}" [formControl]="healthCtrl">
-            <mat-error *ngIf="healthCtrl.invalid">Health must be positive</mat-error>
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="saveNewStats()">
-            Save
-          </button>
-          <!-- <mat-card-title>
+            <div class="flexColumn">
+                <mat-card *ngIf="player != null">
+                    <mat-card-header>
+                        <mat-card-title>
+                            Your character: {{ player.name }}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-card-subtitle>
+                            Health: {{ player.health }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Turn Index: {{ player.turnIndex }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Race: {{ player.cRace }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Class: {{ player.cClass }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Level: {{ player.level }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            XP: {{ player.xp }}
+                        </mat-card-subtitle>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card *ngIf="characterToEdit != null" class="editContainer">
+                    <h3>Edit {{ characterToEdit.name }}'s stats</h3>
+                    <mat-form-field>
+                        <mat-label>XP</mat-label>
+                        <input
+                            matInput
+                            type="number"
+                            placeholder="{{ characterToEdit.XP }}"
+                            [formControl]="xpCtrl"
+                            min="0"
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Health</mat-label>
+                        <input
+                            matInput
+                            type="number"
+                            placeholder="{{ characterToEdit.health }}"
+                            [formControl]="healthCtrl"
+                            min="0"
+                        />
+                    </mat-form-field>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="saveNewStats()"
+                    >
+                        Save
+                    </button>
+                    <!-- <mat-card-title>
             Edit {{ characterToEdit.name }}'s stats
           </mat-card-title>
           <mat-card-content>
@@ -98,26 +119,35 @@
           <mat-card-actions>
             <button mat-raised-button color="primary" (click)="saveNewStats()">Save</button>
           </mat-card-actions> -->
-        </mat-card>
-      </div>
-      <div class="flexColumn">
-        <mat-card class="diceContainer">
-          <h3>Dice roll</h3>
-          <b>Previous</b>
-          <p *ngFor="let diceRoll of diceRolls">
-            {{ diceRoll.stringDate }}
-            {{ diceRoll.roll }} rolled on a
-            {{ diceRoll.diceType }} sided die
-          </p>
-          <button mat-raised-button color="primary" (click)="onRoll()">
-            Roll
-          </button>
-        </mat-card>
-      </div>
+                </mat-card>
+            </div>
+            <div class="flexColumn">
+                <mat-card class="diceContainer">
+                    <h3>Dice roll</h3>
+                    <b>Previous</b>
+                    <p *ngFor="let diceRoll of diceRolls">
+                        {{ diceRoll.stringDate }}
+                        {{ diceRoll.roll }} rolled on a
+                        {{ diceRoll.diceType }} sided die
+                    </p>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="onRoll()"
+                    >
+                        Roll
+                    </button>
+                </mat-card>
+            </div>
+        </div>
     </div>
-  </div>
-  <mat-form-field appearance="fill" class="log">
-    <mat-label>Adventure log</mat-label>
-    <textarea matInput (input)="logChanged($event)" [value]="log" [disabled]="player != null"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="log">
+        <mat-label>Adventure log</mat-label>
+        <textarea
+            matInput
+            (input)="logChanged($event)"
+            [value]="log"
+            [disabled]="player != null"
+        ></textarea>
+    </mat-form-field>
 </div>

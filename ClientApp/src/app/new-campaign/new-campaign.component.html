@@ -35,6 +35,7 @@
                         type="number"
                         [formControl]="maxPlayers"
                         placeholder="Max Players"
+                        min="1"
                         required
                     />
                     <mat-error
@@ -71,4 +72,9 @@
             </form>
         </mat-card-content>
     </mat-card>
+    <div class="wrapper">
+        <button mat-flat-button (click)="onCancel()">
+            Cancel
+        </button>
+    </div>
 </div>
