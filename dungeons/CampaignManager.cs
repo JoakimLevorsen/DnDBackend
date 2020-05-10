@@ -110,7 +110,7 @@ namespace dungeons
                 campaignToUpdate.turnIndex = message.turnIndex;
                 campaignToUpdate.joinable = message.joinable;
                 campaignToUpdate.maxPlayers = message.maxPlayers;
-                campaignToUpdate.password = message.password;
+                campaignToUpdate.password = message.password ?? campaignToUpdate.password;
                 campaignToUpdate.modificationDate = DateTime.Now;
                 context.campaigns.Update(campaignToUpdate);
                 await context.SaveChangesAsync();
