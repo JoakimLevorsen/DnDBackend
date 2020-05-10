@@ -20,7 +20,7 @@ export class WebSocketService {
     private _newestCampaign?: GameStateCampaign;
 
     startSocket() {
-        this.socket = new WebSocket('wss://130.225.170.238:5001/ws');
+        this.socket = new WebSocket('ws://130.225.170.238:5001/ws');
         this.socket.addEventListener('open', o => {
             console.log('did open', o);
             this.announcement$.next('Opened');
