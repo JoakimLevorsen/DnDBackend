@@ -25,12 +25,8 @@ export class AuthGuardService implements CanActivate {
     constructor(private socket: WebSocketService, private router: Router) {}
 
     canActivate(): boolean {
-        if (this.socket.auth$.value) {
-            return true;
-        }
-        // return true;
-        this.router.navigate(['/login']);
-        return false;
+        if (!this.socket.auth$.value) this.router.navigate(['/login']);
+        return this.socket.auth$.value;
     }
 }
 

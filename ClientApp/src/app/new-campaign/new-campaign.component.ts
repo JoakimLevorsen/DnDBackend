@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebSocketService } from 'src/websocket';
 import { FormControl, Validators } from '@angular/forms';
@@ -8,22 +8,17 @@ import { FormControl, Validators } from '@angular/forms';
     templateUrl: './new-campaign.component.html',
     styleUrls: ['./new-campaign.component.css'],
 })
-export class NewCampaignComponent implements OnInit {
+export class NewCampaignComponent {
     campaignName = new FormControl('', Validators.required);
-    joinable = new FormControl();
     maxPlayers = new FormControl('', Validators.required);
     password = new FormControl('', Validators.required);
 
     constructor(private router: Router, private socket: WebSocketService) {}
 
-    ngOnInit() {
-        this.joinable = new FormControl('true');
-    }
-
     onSubmit() {
         this.socket.requestBuilders.campaign.create({
             name: this.campaignName.value,
-            joinable: this.joinable.value,
+            joinable: true,
             maxPlayers: this.maxPlayers.value,
             password: this.password.value,
         });

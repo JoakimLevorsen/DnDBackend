@@ -35,9 +35,11 @@
     </mat-radio-group>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button style="flex: 1;" mat-button (click)="onNoClick()">No Thanks</button>
     <button
-        mat-button
+        style="flex: 1;"
+        mat-flat-button
+        color="primary"
         [mat-dialog-close]="[campaignToJoinID, password, selectedCharacterID]"
         cdkFocusInitial
     >
