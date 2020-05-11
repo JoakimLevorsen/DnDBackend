@@ -96,7 +96,7 @@ namespace D_D_Backend
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
-                //spa.Options.StartupTimeout = new TimeSpan(20);
+                spa.Options.StartupTimeout = new TimeSpan(20);
 
                 if (env.IsDevelopment())
                 {
