@@ -1,13 +1,24 @@
 <div class="outer">
   <div class="top">
-    <h1>{{ currentCampaign?.name }}</h1>
-    <h3>
-      Campaign ID: {{ campaignID }} & Password:
-      {{ currentCampaign.password }}
-    </h3>
-    <h3 *ngIf="currentCampaign.password == null">
-      Campaign ID: {{ campaignID }}
-    </h3>
+    <div class="wrapper">
+      <h1>{{ currentCampaign?.name }}</h1>
+      <h4>Dungeon Master: {{ currentCampaign?.dungeonMaster }}</h4>
+      <h4 *ngIf="currentCampaign.password != null">
+        Campaign ID: {{ campaignID }} | Password:
+        {{ currentCampaign.password }}
+      </h4>
+      <h4 *ngIf="currentCampaign.password == null">
+        Campaign ID: {{ campaignID }}
+      </h4>
+    </div>
+
+    <div class="turnContainer">
+      <h4>It is currently {{ currentPlayer.name }}'s turn
+      </h4>
+      <div class="buttonWrapper" *ngIf="isDungeonMaster">
+        <button mat-raised-button color="primary" (click)="incrementTurn()">End Current Turn</button>
+      </div>
+    </div>
 
     <div class="flexContainer">
       <div class="flexColumn">
@@ -30,7 +41,9 @@
               XP: {{ player.xp }}<br />
               Health: {{ player.health }}
               <mat-action-row *ngIf="isDungeonMaster">
-                <button mat-button (click)="editCharacterStats(player)">Edit Stats</button>
+                <button mat-button (click)="editCharacterStats(player)">
+                  Edit Stats
+                </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
@@ -69,35 +82,16 @@
           <h3>Edit {{ characterToEdit.name }}'s stats</h3>
           <mat-form-field>
             <mat-label>XP</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.XP }}" [formControl]="xpCtrl">
-            <mat-error *ngIf="xpCtrl.invalid">XP must be positive</mat-error>
+            <input matInput type="number" placeholder="{{ characterToEdit.XP }}" [formControl]="xpCtrl" min="0" />
           </mat-form-field>
           <mat-form-field>
             <mat-label>Health</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.health }}" [formControl]="healthCtrl">
-            <mat-error *ngIf="healthCtrl.invalid">Health must be positive</mat-error>
+            <input matInput type="number" placeholder="{{ characterToEdit.health }}" [formControl]="healthCtrl"
+              min="0" />
           </mat-form-field>
           <button mat-raised-button color="primary" (click)="saveNewStats()">
             Save
           </button>
-          <!-- <mat-card-title>
-            Edit {{ characterToEdit.name }}'s stats
-          </mat-card-title>
-          <mat-card-content>
-            <mat-form-field>
-              <mat-label>XP</mat-label>
-              <input matInput type="number" placeholder="{{ characterToEdit.XP }}" [formControl]="xpCtrl">
-              <mat-error *ngIf="xpCtrl.invalid">XP must be positive</mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Health</mat-label>
-              <input matInput type="number" placeholder="{{ characterToEdit.health }}" [formControl]="healthCtrl">
-              <mat-error *ngIf="healthCtrl.invalid">Health must be positive</mat-error>
-            </mat-form-field>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" (click)="saveNewStats()">Save</button>
-          </mat-card-actions> -->
         </mat-card>
       </div>
       <div class="flexColumn">

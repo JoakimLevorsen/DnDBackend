@@ -19,22 +19,13 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-radio-group class="joinable" [formControl]="joinable">
-                    <mat-label> Joinable: </mat-label>
-                    <mat-radio-button class="joinable" value="true"
-                        >True</mat-radio-button
-                    >
-                    <mat-radio-button class="joinable" value="false"
-                        >False</mat-radio-button
-                    >
-                </mat-radio-group>
-
                 <mat-form-field class="inputWidth">
                     <input
                         matInput
                         type="number"
                         [formControl]="maxPlayers"
                         placeholder="Max Players"
+                        min="1"
                         required
                     />
                     <mat-error
@@ -71,4 +62,9 @@
             </form>
         </mat-card-content>
     </mat-card>
+    <div class="wrapper">
+        <button mat-flat-button (click)="onCancel()">
+            Cancel
+        </button>
+    </div>
 </div>

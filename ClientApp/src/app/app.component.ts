@@ -9,12 +9,6 @@ export class AppComponent {
     title = 'app';
 
     constructor(private socketService: WebSocketService) {
-        this.socketService.announcement$.subscribe(m => {
-            console.log('a', m);
-            if (m === 'Opened') {
-                // this.socketService.sendSomething();
-            }
-        });
         this.socketService.auth$.subscribe(s => {
             if (s) {
                 console.log("We're signed in as", this.socketService.username);

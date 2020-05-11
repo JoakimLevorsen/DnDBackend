@@ -31,6 +31,8 @@ export class PlayComponent implements OnInit {
     diceRollResult: number;
     log = '';
     characterToEdit: Editable;
+    completeCharacterList: GameState['encounteredCharacters'] = [];
+    currentPlayer: GameState['encounteredCharacters'][number];
 
     xpCtrl: FormControl;
     healthCtrl: FormControl;
@@ -73,8 +75,46 @@ export class PlayComponent implements OnInit {
                 this.diceRollResult = this.diceRolls[
                     this.diceRolls.length === 0 ? 0 : this.diceRolls.length - 1
                 ].roll;
+                this.completeCharacterList = this.charactersInCampaign;
+                if (this.player != null) {
+                    this.completeCharacterList.push(this.player);
+                }
+                this.currentPlayer = this.completeCharacterList.find(
+                    c => c.turnIndex === this.currentCampaign.turnIndex
+                );
             }
         });
+    }
+
+    incrementTurn() {
+        if (this.currentCampaign) {
+            this.currentCampaign.turnIndex++;
+            if (
+                this.currentCampaign.turnIndex ===
+                this.charactersInCampaign.length
+            ) {
+                this.currentCampaign.turnIndex = 0;
+            }
+            const {
+                ID,
+                name,
+                log,
+                turnIndex,
+                joinable,
+                maxPlayers,
+            } = this.currentCampaign;
+            this.socket.requestBuilders.campaign.update({
+                ID,
+                name,
+                log,
+                turnIndex,
+                joinable,
+                maxPlayers,
+            });
+            this.currentPlayer = this.completeCharacterList.find(
+                c => c.turnIndex === this.currentCampaign.turnIndex
+            );
+        }
     }
 
     editCharacterStats(toEdit) {
