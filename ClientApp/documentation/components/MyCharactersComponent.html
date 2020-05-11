@@ -1,0 +1,881 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>d_d_backend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">d_d_backend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>MyCharactersComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/my-characters/my-characters.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>my-characters</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./my-characters.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./my-characters.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dialog">dialog</a>
+                            </li>
+                            <li>
+                                <a href="#myCharacters">myCharacters</a>
+                            </li>
+                            <li>
+                                <a href="#name">name</a>
+                            </li>
+                            <li>
+                                <a href="#panelOpenState">panelOpenState</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createNewCharacter">createNewCharacter</a>
+                            </li>
+                            <li>
+                                <a href="#deleteCharacter">deleteCharacter</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#updateName">updateName</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, socket: <a href="../injectables/WebSocketService.html">WebSocketService</a>, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/my-characters/my-characters.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>socket</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WebSocketService.html" target="_self" >WebSocketService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createNewCharacter"></a>
+                    <span class="name">
+                        <b>
+                            createNewCharacter
+                        </b>
+                        <a href="#createNewCharacter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createNewCharacter()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="79"
+                            class="link-to-prism">src/app/my-characters/my-characters.component.ts:79</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteCharacter"></a>
+                    <span class="name">
+                        <b>
+                            deleteCharacter
+                        </b>
+                        <a href="#deleteCharacter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteCharacter(ID: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/app/my-characters/my-characters.component.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/my-characters/my-characters.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateName"></a>
+                    <span class="name">
+                        <b>
+                            updateName
+                        </b>
+                        <a href="#updateName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateName(character: <a href="../classes/Character.html">Character</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/my-characters/my-characters.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>character</td>
+                                    <td>
+                                                <code><a href="../classes/Character.html" target="_self" >Character</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dialog"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dialog</b>
+                            <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatDialog</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/my-characters/my-characters.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="myCharacters"></a>
+                        <span class="name">
+                            <b>
+                            myCharacters</b>
+                            <a href="#myCharacters"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Character.html" target="_self" >Character[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/my-characters/my-characters.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <span class="name">
+                            <b>
+                            name</b>
+                            <a href="#name"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new FormControl()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/my-characters/my-characters.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="panelOpenState"></a>
+                        <span class="name">
+                            <b>
+                            panelOpenState</b>
+                            <a href="#panelOpenState"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/my-characters/my-characters.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Inject } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { GameState } from &#x27;src/websocket/responses/GameState&#x27;;
+import { WebSocketService } from &#x27;src/websocket&#x27;;
+import {
+    MAT_DIALOG_DATA,
+    MatDialog,
+    MatDialogRef,
+} from &#x27;@angular/material/dialog&#x27;;
+import { FormBuilder, FormGroup, FormControl } from &#x27;@angular/forms&#x27;;
+
+class Character {
+    public name: string;
+    public ID: number;
+    public level: number;
+    public health: number;
+    public xp: number;
+    public cRace: string;
+    public cClass: string;
+    public campaignName?: string;
+    constructor(
+        character: GameState[&#x27;myCharacters&#x27;][number],
+        campaignName: string
+    ) {
+        Object.assign(this, character);
+        this.campaignName &#x3D; campaignName;
+    }
+}
+
+@Component({
+    selector: &#x27;my-characters&#x27;,
+    templateUrl: &#x27;./my-characters.component.html&#x27;,
+    styleUrls: [&#x27;./my-characters.component.css&#x27;],
+})
+export class MyCharactersComponent implements OnInit {
+    panelOpenState &#x3D; false;
+    name &#x3D; new FormControl();
+    myCharacters: Character[];
+
+    constructor(
+        private router: Router,
+        private socket: WebSocketService,
+        public dialog: MatDialog
+    ) {}
+
+    ngOnInit() {
+        this.socket.gameState$.subscribe(s &#x3D;&gt; {
+            if (s) {
+                this.myCharacters &#x3D;
+                    s?.myCharacters
+                        ?.filter(c &#x3D;&gt; c.owner &#x3D;&#x3D;&#x3D; s.me) // Maybe delete?
+                        .map(
+                            character &#x3D;&gt;
+                                new Character(
+                                    character,
+                                    s?.joinedCampaigns.find(
+                                        c &#x3D;&gt; c.ID &#x3D;&#x3D;&#x3D; character.campaign
+                                    )?.name
+                                )
+                        ) ?? [];
+            }
+        });
+    }
+
+    updateName(character: Character) {
+        if (this.name.value !&#x3D;&#x3D; null) {
+            this.socket.requestBuilders.character.updateName({
+                ID: character.ID,
+                name: this.name.value,
+            });
+        }
+        this.name.reset();
+    }
+
+    deleteCharacter(ID: string) {
+        this.socket.requestBuilders.character.delete(ID);
+    }
+
+    createNewCharacter() {
+        this.router.navigate([&#x27;new-character&#x27;]);
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;top-div&quot;&gt;
+    &lt;mat-accordion class&#x3D;&quot;headers-align&quot;&gt;
+        &lt;mat-expansion-panel #thisPanel *ngFor&#x3D;&quot;let character of myCharacters&quot;&gt;
+            &lt;mat-expansion-panel-header&gt;
+                &lt;mat-panel-title&gt;
+                    {{ character.name }}
+                &lt;/mat-panel-title&gt;
+                &lt;mat-panel-description&gt;
+                    Level {{ character.level }}
+                &lt;/mat-panel-description&gt;
+            &lt;/mat-expansion-panel-header&gt;
+            &lt;p&gt;
+                Health: {{ character.health }}&lt;br /&gt;
+                XP: {{ character.xp }}&lt;br /&gt;
+                Race: {{ character.cRace }}&lt;br /&gt;
+                Class: {{ character.cClass }}
+            &lt;/p&gt;
+            &lt;p *ngIf&#x3D;&quot;character.campaignName&quot;&gt;
+                Campaign: {{ character.campaignName }}
+            &lt;/p&gt;
+            &lt;mat-action-row class&#x3D;&quot;editRow&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;nameInput&quot;&gt;
+                    &lt;mat-label&gt;New character name&lt;/mat-label&gt;
+                    &lt;input
+                        matInput
+                        placeholder&#x3D;&quot;{{ character.name }}&quot;
+                        [formControl]&#x3D;&quot;name&quot;
+                    /&gt;
+                &lt;/mat-form-field&gt;
+                &lt;button
+                    mat-flat-button
+                    color&#x3D;&quot;primary&quot;
+                    (click)&#x3D;&quot;updateName(character)&quot;
+                &gt;
+                    Update Name
+                &lt;/button&gt;
+                &lt;button mat-button (click)&#x3D;&quot;deleteCharacter(character.ID)&quot;&gt;
+                    Delete Character
+                &lt;/button&gt;
+            &lt;/mat-action-row&gt;
+        &lt;/mat-expansion-panel&gt;
+    &lt;/mat-accordion&gt;
+    &lt;div class&#x3D;&quot;wrapper&quot;&gt;
+        &lt;button
+            mat-raised-button
+            color&#x3D;&quot;primary&quot;
+            (click)&#x3D;&quot;createNewCharacter()&quot;
+        &gt;
+            Create New Character
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./my-characters.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-form-field {
+    margin-right: 12px;
+}
+
+#top-div {
+    margin-top: 50px;
+}
+
+mat-panel-title {
+    font-size: 16px;
+}
+
+.wrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+
+mat-panel-description {
+    text-align: right;
+}
+
+.editRow {
+    display: flex;
+}
+
+.nameInput {
+    flex: 1;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div id="top-div">    <mat-accordion class="headers-align">        <mat-expansion-panel #thisPanel *ngFor="let character of myCharacters">            <mat-expansion-panel-header>                <mat-panel-title>                    {{ character.name }}                </mat-panel-title>                <mat-panel-description>                    Level {{ character.level }}                </mat-panel-description>            </mat-expansion-panel-header>            <p>                Health: {{ character.health }}<br />                XP: {{ character.xp }}<br />                Race: {{ character.cRace }}<br />                Class: {{ character.cClass }}            </p>            <p *ngIf="character.campaignName">                Campaign: {{ character.campaignName }}            </p>            <mat-action-row class="editRow">                <mat-form-field class="nameInput">                    <mat-label>New character name</mat-label>                    <input                        matInput                        placeholder="{{ character.name }}"                        [formControl]="name"                    />                </mat-form-field>                <button                    mat-flat-button                    color="primary"                    (click)="updateName(character)"                >                    Update Name                </button>                <button mat-button (click)="deleteCharacter(character.ID)">                    Delete Character                </button>            </mat-action-row>        </mat-expansion-panel>    </mat-accordion>    <div class="wrapper">        <button            mat-raised-button            color="primary"            (click)="createNewCharacter()"        >            Create New Character        </button>    </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CreateCharacterComponent', 'selector': 'new-character'},{'name': 'DashboardComponent', 'selector': 'dashboard'},{'name': 'DashboardComponentDialog', 'selector': 'dashboard-dialog'},{'name': 'LoginComponent', 'selector': 'Login'},{'name': 'MyCampaignsComponent', 'selector': 'my-campaigns'},{'name': 'MyCharactersComponent', 'selector': 'my-characters'},{'name': 'NavMenuComponent', 'selector': 'app-nav-menu'},{'name': 'NewCampaignComponent', 'selector': 'NewCampaign'},{'name': 'PlayComponent', 'selector': 'play'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MyCharactersComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MyCharactersComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

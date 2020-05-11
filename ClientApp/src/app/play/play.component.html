@@ -1,117 +1,151 @@
 <div class="outer">
-  <div class="top">
-    <div class="wrapper">
-      <h1>{{ currentCampaign?.name }}</h1>
-      <h4>Dungeon Master: {{ currentCampaign?.dungeonMaster }}</h4>
-      <h4 *ngIf="currentCampaign.password != null">
-        Campaign ID: {{ campaignID }} | Password:
-        {{ currentCampaign.password }}
-      </h4>
-      <h4 *ngIf="currentCampaign.password == null">
-        Campaign ID: {{ campaignID }}
-      </h4>
-    </div>
+    <div class="top">
+        <div class="wrapper">
+            <h1>{{ currentCampaign?.name }}</h1>
+            <h4>Dungeon Master: {{ currentCampaign?.dungeonMaster }}</h4>
+            <h4 *ngIf="currentCampaign.password != null">
+                Campaign ID: {{ campaignID }} | Password:
+                {{ currentCampaign.password }}
+            </h4>
+            <h4 *ngIf="currentCampaign.password == null">
+                Campaign ID: {{ campaignID }}
+            </h4>
+        </div>
 
-    <div class="turnContainer">
-      <h4>It is currently {{ currentPlayer.name }}'s turn
-      </h4>
-      <div class="buttonWrapper" *ngIf="isDungeonMaster">
-        <button mat-raised-button color="primary" (click)="incrementTurn()">End Current Turn</button>
-      </div>
-    </div>
-
-    <div class="flexContainer">
-      <div class="flexColumn">
-        <mat-card>
-          <mat-card-title>
-            Other players
-          </mat-card-title>
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let player of charactersInCampaign">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{ player.name }}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-card-subtitle>
-                Level: {{ player.level }}
-              </mat-card-subtitle>
-              Race: {{ player.cRace }}<br />
-              Class: {{ player.cClass }}<br /><br />
-              XP: {{ player.xp }}<br />
-              Health: {{ player.health }}
-              <mat-action-row *ngIf="isDungeonMaster">
-                <button mat-button (click)="editCharacterStats(player)">
-                  Edit Stats
+        <div class="turnContainer" *ngIf="currentPlayer != null">
+            <h4>It is currently {{ currentPlayer.name }}'s turn</h4>
+            <div class="buttonWrapper" *ngIf="isDungeonMaster">
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="incrementTurn()"
+                >
+                    End Current Turn
                 </button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </mat-card>
-      </div>
+            </div>
+        </div>
 
-      <div class="flexColumn">
-        <mat-card *ngIf="player != null">
-          <mat-card-header>
-            <mat-card-title>
-              Your character: {{ player.name }}
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-card-subtitle>
-              Health: {{ player.health }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Turn Index: {{ player.turnIndex }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Race: {{ player.cRace }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Class: {{ player.cClass }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              Level: {{ player.level }}
-            </mat-card-subtitle>
-            <mat-card-subtitle>
-              XP: {{ player.xp }}
-            </mat-card-subtitle>
-          </mat-card-content>
-        </mat-card>
-        <mat-card *ngIf="characterToEdit != null" class="editContainer">
-          <h3>Edit {{ characterToEdit.name }}'s stats</h3>
-          <mat-form-field>
-            <mat-label>XP</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.XP }}" [formControl]="xpCtrl" min="0" />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Health</mat-label>
-            <input matInput type="number" placeholder="{{ characterToEdit.health }}" [formControl]="healthCtrl"
-              min="0" />
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="saveNewStats()">
-            Save
-          </button>
-        </mat-card>
-      </div>
-      <div class="flexColumn">
-        <mat-card class="diceContainer">
-          <h3>Dice roll</h3>
-          <b>Previous</b>
-          <p *ngFor="let diceRoll of diceRolls">
-            {{ diceRoll.stringDate }}
-            {{ diceRoll.roll }} rolled on a
-            {{ diceRoll.diceType }} sided die
-          </p>
-          <button mat-raised-button color="primary" (click)="onRoll()">
-            Roll
-          </button>
-        </mat-card>
-      </div>
+        <div class="flexContainer">
+            <div class="flexColumn">
+                <mat-card>
+                    <mat-card-title>
+                        Other players
+                    </mat-card-title>
+                    <mat-accordion>
+                        <mat-expansion-panel
+                            *ngFor="let player of charactersInCampaign"
+                        >
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    {{ player.name }}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-card-subtitle>
+                                Level: {{ player.level }}
+                            </mat-card-subtitle>
+                            Race: {{ player.cRace }}<br />
+                            Class: {{ player.cClass }}<br /><br />
+                            XP: {{ player.xp }}<br />
+                            Health: {{ player.health }}
+                            <mat-action-row *ngIf="isDungeonMaster">
+                                <button
+                                    mat-button
+                                    (click)="editCharacterStats(player)"
+                                >
+                                    Edit Stats
+                                </button>
+                            </mat-action-row>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card>
+            </div>
+
+            <div class="flexColumn">
+                <mat-card *ngIf="player != null">
+                    <mat-card-header>
+                        <mat-card-title>
+                            Your character: {{ player.name }}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-card-subtitle>
+                            Health: {{ player.health }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Turn Index: {{ player.turnIndex }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Race: {{ player.cRace }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Class: {{ player.cClass }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            Level: {{ player.level }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            XP: {{ player.xp }}
+                        </mat-card-subtitle>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card *ngIf="characterToEdit != null" class="editContainer">
+                    <h3>Edit {{ characterToEdit.name }}'s stats</h3>
+                    <mat-form-field>
+                        <mat-label>XP</mat-label>
+                        <input
+                            matInput
+                            type="number"
+                            placeholder="{{ characterToEdit.XP }}"
+                            [formControl]="xpCtrl"
+                            min="0"
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Health</mat-label>
+                        <input
+                            matInput
+                            type="number"
+                            placeholder="{{ characterToEdit.health }}"
+                            [formControl]="healthCtrl"
+                            min="0"
+                        />
+                    </mat-form-field>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="saveNewStats()"
+                    >
+                        Save
+                    </button>
+                </mat-card>
+            </div>
+            <div class="flexColumn">
+                <mat-card class="diceContainer">
+                    <h3>Dice roll</h3>
+                    <b>Previous</b>
+                    <p *ngFor="let diceRoll of diceRolls">
+                        {{ diceRoll.stringDate }}
+                        {{ diceRoll.roll }} rolled on a
+                        {{ diceRoll.diceType }} sided die
+                    </p>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="onRoll()"
+                    >
+                        Roll
+                    </button>
+                </mat-card>
+            </div>
+        </div>
     </div>
-  </div>
-  <mat-form-field appearance="fill" class="log">
-    <mat-label>Adventure log</mat-label>
-    <textarea matInput (input)="logChanged($event)" [value]="log" [disabled]="player != null"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="log">
+        <mat-label>Adventure log</mat-label>
+        <textarea
+            matInput
+            (input)="logChanged($event)"
+            [value]="log"
+            [disabled]="player != null"
+        ></textarea>
+    </mat-form-field>
 </div>
