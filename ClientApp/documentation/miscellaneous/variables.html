@@ -1,0 +1,925 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>d_d_backend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">d_d_backend documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#context" title="src/test.ts"><b>context</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#create" title="src/websocket/requestBuilder/campaign.ts"><b>create</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#create" title="src/websocket/requestBuilder/character.ts"><b>create</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#deleteC" title="src/websocket/requestBuilder/character.ts"><b>deleteC</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.prod.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.prod.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts"><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getJoinable" title="src/websocket/requestBuilder/campaign.ts"><b>getJoinable</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isCampaign" title="src/websocket/responses/Campaigns.ts"><b>isCampaign</b>&nbsp;&nbsp;&nbsp;(src/.../Campaigns.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isCampaignArray" title="src/websocket/responses/Campaigns.ts"><b>isCampaignArray</b>&nbsp;&nbsp;&nbsp;(src/.../Campaigns.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isDiceRoll" title="src/websocket/responses/DiceRoll.ts"><b>isDiceRoll</b>&nbsp;&nbsp;&nbsp;(src/.../DiceRoll.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isLoginInfo" title="src/websocket/responses/LoginInfo.ts"><b>isLoginInfo</b>&nbsp;&nbsp;&nbsp;(src/.../LoginInfo.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#join" title="src/websocket/requestBuilder/campaign.ts"><b>join</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#providers" title="src/main.ts"><b>providers</b>&nbsp;&nbsp;&nbsp;(src/.../main.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#require" title="src/test.ts"><b>require</b>&nbsp;&nbsp;&nbsp;(src/.../test.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#type" title="src/websocket/requestBuilder/campaign.ts"><b>type</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#type" title="src/websocket/requestBuilder/character.ts"><b>type</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#type" title="src/websocket/requestBuilder/diceroll.ts"><b>type</b>&nbsp;&nbsp;&nbsp;(src/.../diceroll.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#type" title="src/websocket/requestBuilder/login.ts"><b>type</b>&nbsp;&nbsp;&nbsp;(src/.../login.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#type" title="src/websocket/requestBuilder/update.ts"><b>type</b>&nbsp;&nbsp;&nbsp;(src/.../update.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#update" title="src/websocket/requestBuilder/campaign.ts"><b>update</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateName" title="src/websocket/requestBuilder/character.ts"><b>updateName</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#updateStats" title="src/websocket/requestBuilder/character.ts"><b>updateStats</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#wrapPayload" title="src/websocket/requestBuilder/campaign.ts"><b>wrapPayload</b>&nbsp;&nbsp;&nbsp;(src/.../campaign.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#wrapPayload" title="src/websocket/requestBuilder/character.ts"><b>wrapPayload</b>&nbsp;&nbsp;&nbsp;(src/.../character.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#wrapPayload" title="src/websocket/requestBuilder/diceroll.ts"><b>wrapPayload</b>&nbsp;&nbsp;&nbsp;(src/.../diceroll.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#wrapPayload" title="src/websocket/requestBuilder/login.ts"><b>wrapPayload</b>&nbsp;&nbsp;&nbsp;(src/.../login.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#wrapPayload" title="src/websocket/requestBuilder/update.ts"><b>wrapPayload</b>&nbsp;&nbsp;&nbsp;(src/.../update.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/test.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="context"></a>
+                        <span class="name">
+                            <b>
+                            context</b>
+                            <a href="#context"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>require.context(&#x27;./&#x27;, true, /\.spec\.ts$/)</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="require"></a>
+                        <span class="name">
+                            <b>
+                            require</b>
+                            <a href="#require"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/requestBuilder/campaign.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="create"></a>
+                        <span class="name">
+                            <b>
+                            create</b>
+                            <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: createCampaignProps) &#x3D;&gt;
+    socket.send(
+        wrapPayload({ type: &#x27;Create&#x27;, payload: JSON.stringify(payload) })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getJoinable"></a>
+                        <span class="name">
+                            <b>
+                            getJoinable</b>
+                            <a href="#getJoinable"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; () &#x3D;&gt;
+    socket.send(wrapPayload({ type: &#x27;getJoinable&#x27; }))</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="join"></a>
+                        <span class="name">
+                            <b>
+                            join</b>
+                            <a href="#join"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: JoinCampaignPayload) &#x3D;&gt;
+    socket.send(
+        wrapPayload({ type: &#x27;JoinCampaign&#x27;, payload: JSON.stringify(payload) })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;Campaign&#x27;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="update"></a>
+                        <span class="name">
+                            <b>
+                            update</b>
+                            <a href="#update"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: updateCampaignProps) &#x3D;&gt;
+    socket.send(
+        wrapPayload({ type: &#x27;Update&#x27;, payload: JSON.stringify(payload) })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapPayload"></a>
+                        <span class="name">
+                            <b>
+                            wrapPayload</b>
+                            <a href="#wrapPayload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(payload: object) &#x3D;&gt;
+    JSON.stringify({ type, payload: JSON.stringify(payload) })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/requestBuilder/character.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="create"></a>
+                        <span class="name">
+                            <b>
+                            create</b>
+                            <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: createCharacterProps) &#x3D;&gt;
+    socket.send(
+        wrapPayload({
+            type: &#x27;Create&#x27;,
+            payload: JSON.stringify(payload),
+        })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteC"></a>
+                        <span class="name">
+                            <b>
+                            deleteC</b>
+                            <a href="#deleteC"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (id: string) &#x3D;&gt;
+    socket.send(wrapPayload({ type: &#x27;Delete&#x27;, payload: id }))</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;Character&#x27;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateName"></a>
+                        <span class="name">
+                            <b>
+                            updateName</b>
+                            <a href="#updateName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: updateNameProps) &#x3D;&gt;
+    socket.send(
+        wrapPayload({ type: &#x27;Update&#x27;, payload: JSON.stringify(payload) })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="updateStats"></a>
+                        <span class="name">
+                            <b>
+                            updateStats</b>
+                            <a href="#updateStats"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(socket: WebSocket) &#x3D;&gt; (payload: updateStatsProps) &#x3D;&gt;
+    socket.send(
+        wrapPayload({ type: &#x27;Update&#x27;, payload: JSON.stringify(payload) })
+    )</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapPayload"></a>
+                        <span class="name">
+                            <b>
+                            wrapPayload</b>
+                            <a href="#wrapPayload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(payload: object) &#x3D;&gt;
+    JSON.stringify({ type, payload: JSON.stringify(payload) })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/environments/environment.prod.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="environment"></a>
+                        <span class="name">
+                            <b>
+                            environment</b>
+                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+  production: true
+}</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="environment"></a>
+                        <span class="name">
+                            <b>
+                            environment</b>
+                            <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+  production: false
+}</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/responses/Campaigns.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isCampaign"></a>
+                        <span class="name">
+                            <b>
+                            isCampaign</b>
+                            <a href="#isCampaign"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(input: any): input is Campaign &#x3D;&gt;
+    typeof input &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+    Object.entries(input).every(([key, value]) &#x3D;&gt; {
+        switch (key) {
+            case &#x27;ID&#x27;:
+            case &#x27;turnIndex&#x27;:
+            case &#x27;maxPlayers&#x27;:
+                return typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27;;
+            case &#x27;dungeonMaster&#x27;:
+                if (value &#x3D;&#x3D;&#x3D; null) return true;
+            case &#x27;name&#x27;:
+            case &#x27;log&#x27;:
+            case &#x27;password&#x27;:
+            case &#x27;modificationDate&#x27;:
+                return typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;;
+            case &#x27;joinable&#x27;:
+                return typeof value &#x3D;&#x3D;&#x3D; &#x27;boolean&#x27;;
+            default:
+                return false;
+        }
+    })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isCampaignArray"></a>
+                        <span class="name">
+                            <b>
+                            isCampaignArray</b>
+                            <a href="#isCampaignArray"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(input: any): input is Campaign[] &#x3D;&gt;
+    typeof input &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+    input instanceof Array &amp;&amp;
+    input.every(v &#x3D;&gt; isCampaign(v))</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/responses/DiceRoll.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isDiceRoll"></a>
+                        <span class="name">
+                            <b>
+                            isDiceRoll</b>
+                            <a href="#isDiceRoll"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(input: any): input is DiceRoll &#x3D;&gt;
+    typeof input &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+    Object.entries(input).every(([key, value]) &#x3D;&gt; {
+        switch (key) {
+            case &#x27;diceType&#x27;:
+            case &#x27;roll&#x27;:
+            case &#x27;campaign&#x27;:
+                return typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27;;
+            case &#x27;date&#x27;:
+                return typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;;
+            default:
+                return false;
+        }
+    })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/responses/LoginInfo.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoginInfo"></a>
+                        <span class="name">
+                            <b>
+                            isLoginInfo</b>
+                            <a href="#isLoginInfo"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(input: any): input is LoginInfo &#x3D;&gt;
+    typeof input &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+    Object.keys(input).length &#x3D;&#x3D;&#x3D; 2 &amp;&amp;
+    typeof input.username &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp;
+    typeof input.password &#x3D;&#x3D;&#x3D; &#x27;string&#x27;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/main.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="providers"></a>
+                        <span class="name">
+                            <b>
+                            providers</b>
+                            <a href="#providers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[
+  { provide: &#x27;BASE_URL&#x27;, useFactory: getBaseUrl, deps: [] }
+]</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/requestBuilder/diceroll.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;DiceRoll&#x27;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapPayload"></a>
+                        <span class="name">
+                            <b>
+                            wrapPayload</b>
+                            <a href="#wrapPayload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(payload: object) &#x3D;&gt;
+    JSON.stringify({ type, payload: JSON.stringify(payload) })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/requestBuilder/login.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;Login&quot;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapPayload"></a>
+                        <span class="name">
+                            <b>
+                            wrapPayload</b>
+                            <a href="#wrapPayload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>(payload: object) &#x3D;&gt;
+    JSON.stringify({ type, payload: JSON.stringify(payload) })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+    <h3>src/websocket/requestBuilder/update.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;Update&quot;</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapPayload"></a>
+                        <span class="name">
+                            <b>
+                            wrapPayload</b>
+                            <a href="#wrapPayload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>() &#x3D;&gt; JSON.stringify({ type })</code>
+                        </td>
+                    </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
