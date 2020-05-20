@@ -15,5 +15,26 @@ namespace dungeons.database
         public CharacterClass cClass { get; set; }
         public CharacterRace cRace { get; set; }
         public Campaign? campaign { get; set; }
+
+        public Character(
+            string name,
+            int health,
+            int xp,
+            int? turnIndex,
+            User owner,
+            CharacterClass cClass,
+            CharacterRace cRace,
+            Campaign? campaign
+        )
+        {
+            this.name = name;
+            this.health = health;
+            this.xp = xp;
+            this.turnIndex = turnIndex;
+            this.owner = owner;
+            this.cClass = cClass;
+            this.cRace = cRace;
+            this.campaign = campaign;
+        }
     }
 }

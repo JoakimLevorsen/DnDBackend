@@ -1,23 +1,32 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace dungeons {
-    public class LoginManager {
-        public static async Task<LoginClientPayload?> login(string payload) {
-            try {
+namespace dungeons
+{
+    public class LoginManager
+    {
+        public static async Task<LoginClientPayload?> login(string payload)
+        {
+            try
+            {
                 var loginInfo = JsonConvert.DeserializeObject<LoginClientPayload>(payload);
                 var response = await Javabog.Login(loginInfo.username, loginInfo.password);
-                if (response) {
+                if (response)
+                {
                     return loginInfo;
                 }
                 return null;
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }
     }
 
-    public class LoginClientPayload {
+    public class LoginClientPayload
+    {
+#nullable disable warnings
         public string username;
         public string password;
     }

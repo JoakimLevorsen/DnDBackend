@@ -71,8 +71,9 @@ namespace dungeons
                 }
                 Console.WriteLine("Socket closed");
                 await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
-                connections.Remove(socketId, out socket);
-                Client outClient = null;
+                WebSocket? s;
+                connections.Remove(socketId, out s);
+                Client? outClient = null;
                 clients.Remove(socketId, out outClient);
             }
             catch (Exception e)
@@ -111,7 +112,7 @@ namespace dungeons
                         catch { }
                         if (currentUser == null)
                         {
-                            var user = new database.User { ID = newStatus.username };
+                            var user = new database.User(newStatus.username);
                             context.users.Add(user);
                             await context.SaveChangesAsync();
                             currentUser = user;

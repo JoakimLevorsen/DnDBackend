@@ -27,5 +27,26 @@ namespace dungeons.database
                 return await context.characters.Where(c => c.campaign != null && c.campaign.ID == this.ID).ToListAsync();
             }
         }
+
+        public Campaign(
+            string name,
+            string log,
+            int turnIndex,
+            bool joinable,
+            int maxPlayers,
+            string? password,
+            DateTime modificationDate,
+            User dungeonMaster
+            )
+        {
+            this.name = name;
+            this.log = log;
+            this.turnIndex = turnIndex;
+            this.joinable = joinable;
+            this.maxPlayers = maxPlayers;
+            this.password = password;
+            this.modificationDate = modificationDate;
+            this.dungeonMaster = dungeonMaster;
+        }
     }
 }

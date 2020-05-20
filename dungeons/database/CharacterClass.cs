@@ -6,5 +6,10 @@ namespace dungeons.database
     {
         [Key]
         public string name { get; set; }
+
+        public CharacterClass(string name)
+        {
+            this.name = name;
+        }
     }
 }

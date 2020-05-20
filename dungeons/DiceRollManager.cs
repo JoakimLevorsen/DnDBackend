@@ -47,12 +47,12 @@ namespace dungeons
                 }
                 var rnd = new Random();
                 var roll = new DiceRoll
-                {
-                    diceType = message.diceType,
-                    roll = rnd.Next(1, message.diceType + 1),
-                    date = DateTime.Now,
-                    campaign = campaign
-                };
+                (
+                    message.diceType,
+                    rnd.Next(1, message.diceType + 1),
+                    DateTime.Now,
+                    campaign
+                );
                 await context.diceRolls.AddAsync(roll);
                 await context.SaveChangesAsync();
                 var charactersInCampaign = await context.characters

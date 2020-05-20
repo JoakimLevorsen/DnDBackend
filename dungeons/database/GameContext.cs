@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+#nullable disable warnings
 namespace dungeons.database
 {
     public class GameContext : DbContext

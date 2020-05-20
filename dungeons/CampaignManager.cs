@@ -24,6 +24,10 @@ namespace dungeons
                 {
                     return "CampaignManager accept 0: Invalid JSON.";
                 }
+                if (message == null)
+                {
+                    return "CampaignManager accept 0: Invalid JSON.";
+                }
                 switch (message.type)
                 {
                     case CampaignMessagePayloadType.Create:
@@ -62,16 +66,16 @@ namespace dungeons
             // We get the client user again because it is from another context
             var user = await context.users.FindAsync(client.user.ID);
             var newCampaign = new Campaign
-            {
-                name = message.name,
-                log = $"Campaign {message.name} was created.",
-                turnIndex = 0,
-                joinable = message.joinable,
-                maxPlayers = message.maxPlayers,
-                password = message.password,
-                modificationDate = DateTime.Now,
-                dungeonMaster = user
-            };
+            (
+                message.name,
+                $"Campaign {message.name} was created.",
+                0,
+                message.joinable,
+                message.maxPlayers,
+                message.password,
+                DateTime.Now,
+                user
+            );
             context.campaigns.Add(newCampaign);
             await context.SaveChangesAsync();
             return await GameState.gameStateFor(client);
@@ -286,6 +290,7 @@ namespace dungeons
 
     class CreateCampaignPayload
     {
+#nullable disable warnings
         public string name;
         public bool joinable;
         public int maxPlayers;

@@ -18,8 +18,10 @@ namespace dungeons
 
     class CharacterMessage
     {
+#nullable disable warnings
         public CharacterMessageType type;
         public string payload;
+#nullable enable warnings
     }
 
     class CharacterManager
@@ -54,9 +56,11 @@ namespace dungeons
 
         private class CreatePayload
         {
+#nullable disable warnings
             public string name;
             public string race;
             public string characterClass;
+#nullable enable warnings
         }
 
         private static async Task<string> create(string payload, Client client)
@@ -85,14 +89,16 @@ namespace dungeons
                 // We get the client user again because it is from another context
                 var user = await context.users.FindAsync(client.user.ID);
                 var newCharacter = new Character
-                {
-                    name = message.name,
-                    health = 10,
-                    xp = 0,
-                    cClass = cClass,
-                    cRace = race,
-                    owner = user
-                };
+                (
+                    message.name,
+                    10,
+                    0,
+                    null,
+                    user,
+                    cClass,
+                    race,
+                    null
+                );
                 context.characters.Add(newCharacter);
                 await context.SaveChangesAsync();
                 return await GameState.gameStateFor(client);
@@ -157,7 +163,7 @@ namespace dungeons
                         .Where(c => c.ID == updatePayload.ID)
                         .Include(c => c.owner)
                         .Include(c => c.campaign)
-                        .ThenInclude(campaign => campaign.dungeonMaster)
+                        .ThenInclude(campaign => campaign!.dungeonMaster)
                         .SingleAsync();
                 }
                 catch
